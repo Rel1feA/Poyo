@@ -6,10 +6,15 @@ public class BomberMan : MonoBehaviour, IOperator
 {
     public StateMachine stateMachine;
     public BomberManState patrolState;
+    public BomberManState IdleState;
+    public BomberManState controlState;
     public Rigidbody2D rb2D;
 
     public float patrolDistance;
     public float patrolSpeed;
+
+    public float moveSpeed;
+
 
     private void Start()
     {
@@ -24,7 +29,7 @@ public class BomberMan : MonoBehaviour, IOperator
 
     public void EnterOperator()
     {
-        
+        stateMachine.Changestate(controlState);
     }
 
     public void OnOperator()
@@ -41,6 +46,7 @@ public class BomberMan : MonoBehaviour, IOperator
     {
         stateMachine = new StateMachine();
         patrolState = new BombPatrol(stateMachine,this);
+        controlState=new BombControl(stateMachine,this);
         stateMachine.Init(patrolState);
     }
 }

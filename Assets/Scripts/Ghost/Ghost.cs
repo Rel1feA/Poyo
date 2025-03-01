@@ -9,6 +9,8 @@ public class Ghost : MonoBehaviour, IOperator
     public Player player;
     private float timer;
 
+    public float CheckEnemyRadius;
+
     private void Awake()
     {
         player=FindObjectOfType<Player>();
@@ -28,12 +30,13 @@ public class Ghost : MonoBehaviour, IOperator
             Destroy(gameObject);
         }
         Move();
+        CheckEnemy();
     }
 
 
     public void ExitOperator()
     {
-        
+        Destroy(gameObject);
     }
 
     public void Move()
@@ -42,5 +45,24 @@ public class Ghost : MonoBehaviour, IOperator
         float moveY = Input.GetAxis("Vertical");
         Vector3 moveDir = new Vector3(moveX, moveY, 0);
         transform.position += moveDir* moveSpeed*Time.deltaTime;
+    }
+    
+    public void CheckEnemy()
+    {
+        Collider2D collider= Physics2D.OverlapCircle(transform.position, CheckEnemyRadius,LayerMask.GetMask("Enemy"));
+        if (collider!=null)
+        {
+            if (collider.TryGetComponent<IOperator>(out IOperator _operator))
+            {
+                Debug.Log("HasEnemy");
+                OperatorManager.Instance.ChangeOperator(_operator);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, CheckEnemyRadius);
     }
 }
