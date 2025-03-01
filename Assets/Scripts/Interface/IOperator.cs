@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IOperator
 {
-    void Move();
-    void Jump();
-    void UseSkill();
+    void EnterOperator();
+    void OnOperator();
+    void ExitOperator();
 }

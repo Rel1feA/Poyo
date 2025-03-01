@@ -2,26 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OperatorManager : MonoBehaviour
+public class OperatorManager : Singleton<OperatorManager>
 {
     private IOperator currentOperator;
 
     private void Update()
     {
         if (currentOperator == null) return;
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            currentOperator.Jump();
-        }
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            currentOperator.UseSkill();
-        }
-        currentOperator.Move();
+        currentOperator.OnOperator();
     }
 
     public void ChangeOperator(IOperator _operator)
     {
+        if(currentOperator!=null)
+        {
+            currentOperator.ExitOperator();
+        }
         currentOperator= _operator;
+        currentOperator.EnterOperator();
     }
 }

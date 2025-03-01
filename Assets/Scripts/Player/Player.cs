@@ -4,35 +4,33 @@ using UnityEngine;
 
 public class Player : MonoBehaviour,IOperator
 {
-    public float moveSpeed;
-    public float jumpHeight;
-    public OperatorManager operatorManager;
-    public Ghost ghost;
+    public PlayerData playerData;
 
     private Rigidbody2D rb2D;
 
     private void Start()
     {
         rb2D= GetComponent<Rigidbody2D>();
-        operatorManager.ChangeOperator(this);
+        OperatorManager.Instance.ChangeOperator(this);
     }
 
     public void Move()
     {
         float inputX = Input.GetAxis("Horizontal");
-        rb2D.velocity=new Vector2(inputX*moveSpeed,rb2D.velocity.y);
+        rb2D.velocity=new Vector2(inputX*playerData.moveSpeed,rb2D.velocity.y);
     }
 
     public void Jump()
     {
-        if(!CheckGround()) return;
-        float speedY = Mathf.Sqrt((-Physics2D.gravity.y)*rb2D.gravityScale * 2 * jumpHeight);
+        float speedY = Mathf.Sqrt((-Physics2D.gravity.y)*rb2D.gravityScale * 2 * playerData.jumpHeight);
         rb2D.velocity += Vector2.up * speedY;
     }
 
     public void UseSkill()
     {
-        operatorManager.ChangeOperator(ghost);
+        GameObject ghost = ResourcesManager.Instance.Load<GameObject>("Prefabs/ghost");
+        ghost.transform.position=transform.position;
+        OperatorManager.Instance.ChangeOperator(ghost.GetComponent<Ghost>());
     }
 
     public bool CheckGround()
@@ -44,5 +42,28 @@ public class Player : MonoBehaviour,IOperator
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position - Vector3.up * 0.25f, Vector2.one);
+    }
+
+    public void EnterOperator()
+    {
+        
+    }
+
+    public void OnOperator()
+    {
+        Move();
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            UseSkill();
+        }
+        if(Input.GetKeyDown(KeyCode.Space)&&CheckGround())
+        {
+            Jump();
+        }
+    }
+
+    public void ExitOperator()
+    {
+        
     }
 }
