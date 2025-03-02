@@ -54,7 +54,6 @@ public class Ghost : MonoBehaviour, IOperator
         {
             if (collider.TryGetComponent<IOperator>(out IOperator _operator))
             {
-                Debug.Log("HasEnemy");
                 OperatorManager.Instance.ChangeOperator(_operator);
             }
         }

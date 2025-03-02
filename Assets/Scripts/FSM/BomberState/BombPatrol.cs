@@ -5,9 +5,7 @@ using UnityEngine;
 public class BombPatrol : BomberManState
 {
     private float patrolDir;
-    private Vector2 startPos;
-    private Vector2 endPos;
-    private Vector2 targetPos;
+    private Vector3 targetPos;
 
     public BombPatrol(StateMachine _stateMachine, BomberMan bomberMan) : base(_stateMachine, bomberMan)
     {
@@ -16,10 +14,14 @@ public class BombPatrol : BomberManState
 
     public override void EnterState()
     {
-        patrolDir = bomberMan.transform.right.x;
-        startPos=bomberMan.transform.position;
-        endPos=startPos+(Vector2)bomberMan.transform.right*bomberMan.patrolDistance;
-        targetPos = endPos;
+        if(Vector2.Distance(bomberMan.transform.position,bomberMan.pointA.position)> Vector2.Distance(bomberMan.transform.position, bomberMan.pointB.position))
+        {
+            targetPos = bomberMan.pointA.position;
+        }
+        else
+        {
+            targetPos = bomberMan.pointB.position;
+        }
     }
 
     public override void ExitState()
@@ -30,22 +32,26 @@ public class BombPatrol : BomberManState
     public override void FrameUpdate()
     {
         Patrol();
+        if (bomberMan.CheckAttackPlayer())
+        {
+            stateMachine.Changestate(bomberMan.attackState);
+        }
     }
 
     public void Patrol()
     {
-        bomberMan.rb2D.velocity=new Vector2(bomberMan.patrolSpeed*patrolDir,bomberMan.rb2D.velocity.y);
-        if (Vector2.Distance(bomberMan.transform.position, targetPos) < 0.1f)
+        if(Vector3.Distance(bomberMan.transform.position,targetPos)<0.5f)
         {
-            patrolDir = -patrolDir;
-            if(targetPos==startPos)
+            if(targetPos==bomberMan.pointA.position)
             {
-                targetPos = endPos;
+                targetPos=bomberMan.pointB.position;
             }
-            else if(targetPos==endPos)
+            else if(targetPos == bomberMan.pointB.position)
             {
-                targetPos= startPos;
+                targetPos = bomberMan.pointA.position;
             }
         }
+        Vector3 newPos = Vector3.MoveTowards(bomberMan.transform.position, targetPos, bomberMan.patrolSpeed * Time.fixedDeltaTime);
+        bomberMan.rb2D.MovePosition(newPos);
     }
 }

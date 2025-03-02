@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Player : MonoBehaviour,IOperator
+public class Player : MonoBehaviour,IOperator,ITakeDamge
 {
     public PlayerData playerData;
 
@@ -65,5 +66,10 @@ public class Player : MonoBehaviour,IOperator
     public void ExitOperator()
     {
         
+    }
+
+    public void TakeDamge(UnityAction callback = null)
+    {
+        callback?.Invoke();
     }
 }

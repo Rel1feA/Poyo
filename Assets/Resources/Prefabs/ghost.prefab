@@ -100,4 +100,4 @@ MonoBehaviour:
   moveSpeed: 9
   lifeTime: 3
   player: {fileID: 0}
-  CheckEnemyRadius: 3
+  CheckEnemyRadius: 1
