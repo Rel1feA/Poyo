@@ -6,11 +6,9 @@ public class Bomb : MonoBehaviour
 {
     public float bombRadius;
     public float explosionForce;
-    private bool hasExplosion;
 
     public void Explosion()
     {
-        if(hasExplosion)return;
        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, bombRadius);
        foreach(Collider2D collider in colliders)
        {
@@ -21,6 +19,7 @@ public class Bomb : MonoBehaviour
                     if (collider.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2D))
                     {
                         Vector2 forceDir=(rb2D.transform.position- transform.position).normalized;
+                        forceDir = (forceDir + Vector2.up * 0.5f).normalized;
                         rb2D.AddForce(forceDir*explosionForce,ForceMode2D.Impulse);
                     }
                 });
@@ -31,7 +30,6 @@ public class Bomb : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Explosion();
-        hasExplosion = true;
         Destroy(gameObject);
     }
 

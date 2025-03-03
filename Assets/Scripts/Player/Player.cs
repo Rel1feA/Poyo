@@ -18,7 +18,18 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
     public void Move()
     {
         float inputX = Input.GetAxis("Horizontal");
-        rb2D.velocity=new Vector2(inputX*playerData.moveSpeed,rb2D.velocity.y);
+        if(inputX!=0)
+        {
+            rb2D.velocity = new Vector2(inputX * playerData.moveSpeed, rb2D.velocity.y);
+        }
+        if (inputX > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (inputX < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     public void Jump()

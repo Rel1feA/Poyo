@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BombControl : BomberManState
 {
+    private float timer;
+
     public BombControl(StateMachine _stateMachine, BomberMan bomberMan) : base(_stateMachine, bomberMan)
     {
 
@@ -11,7 +13,7 @@ public class BombControl : BomberManState
 
     public override void EnterState()
     {
-        
+        timer = bomberMan.useCoolTime;
     }
 
     public override void ExitState()
@@ -21,15 +23,17 @@ public class BombControl : BomberManState
 
     public override void FrameUpdate()
     {
+        timer += Time.deltaTime;
         Move();
         if(Input.GetKeyDown(KeyCode.Q))
         {
             OperatorManager.Instance.ChangeOperator(bomberMan.player);
             stateMachine.Changestate(bomberMan.patrolState);
         }
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E)&&timer>=bomberMan.useCoolTime)
         {
-            UseSkill();
+            timer = 0;
+            bomberMan.ThrowBomb();
         }
     }
 
@@ -45,15 +49,5 @@ public class BombControl : BomberManState
         {
             bomberMan.transform.localScale = new Vector3(-1, 1, 1);
         }
-    }
-
-    public void UseSkill()
-    {
-        ResourcesManager.Instance.LoadAsync<GameObject>("Prefabs/Bomb",(obj)=>
-        {
-            Vector3 throwDir = new Vector3(bomberMan.transform.localScale.x, 1,0);
-            obj.transform.position = bomberMan.transform.position + throwDir;
-            obj.GetComponent<Rigidbody2D>().AddForce(throwDir*6,ForceMode2D.Impulse);
-        });
     }
 }

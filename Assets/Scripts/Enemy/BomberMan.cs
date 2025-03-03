@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,13 +17,21 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     [HideInInspector]
     public Player player;
 
+    [Header("巡逻相关")]
     public Transform pointA;
     public Transform pointB;
     public float patrolSpeed;
 
+    [Header("控制相关")]
     public float moveSpeed;
+    public float useCoolTime;
 
+    [Header("攻击相关")]
     public float attackRadius;
+
+    [Header("技能相关")]
+    public float throwForce;
+    public float attackCoolTime;
 
 
     private void Start()
@@ -76,6 +84,28 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
             return true;
         }
         return false;
+    }
+
+    public void ThrowBomb()
+    {
+        ResourcesManager.Instance.LoadAsync<GameObject>("Prefabs/Bomb", (obj) =>
+        {
+            Vector3 throwDir = new Vector3(transform.localScale.x, 1, 0);
+            obj.transform.position = transform.position + throwDir;
+            obj.GetComponent<Rigidbody2D>().AddForce(throwDir * throwForce, ForceMode2D.Impulse);
+        });
+    }
+
+    public void LookAtPlayer()
+    {
+        if (player.transform.position.x > transform.position.x)
+        {
+            transform.localScale = Vector3.one;
+        }
+        else if (player.transform.position.x < transform.position.x)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     private void OnDrawGizmos()

@@ -22,6 +22,14 @@ public class BombPatrol : BomberManState
         {
             targetPos = bomberMan.pointB.position;
         }
+        if(targetPos.x>bomberMan.transform.position.x)
+        {
+            bomberMan.transform.localScale = Vector3.one;
+        }
+        else if(targetPos.x<bomberMan.transform.position.x)
+        {
+            bomberMan.transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     public override void ExitState()
@@ -50,6 +58,7 @@ public class BombPatrol : BomberManState
             {
                 targetPos = bomberMan.pointA.position;
             }
+            bomberMan.transform.localScale = new Vector3(-bomberMan.transform.localScale.x, 1, 1);
         }
         Vector3 newPos = Vector3.MoveTowards(bomberMan.transform.position, targetPos, bomberMan.patrolSpeed * Time.fixedDeltaTime);
         bomberMan.rb2D.MovePosition(newPos);

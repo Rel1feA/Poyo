@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BombAttack : BomberManState
 {
+    private float timer;
+
     public BombAttack(StateMachine _stateMachine, BomberMan bomberMan) : base(_stateMachine, bomberMan)
     {
 
@@ -11,7 +13,8 @@ public class BombAttack : BomberManState
 
     public override void EnterState()
     {
-        
+        bomberMan.LookAtPlayer();
+        timer = bomberMan.attackCoolTime-0.5f;
     }
 
     public override void ExitState()
@@ -21,7 +24,14 @@ public class BombAttack : BomberManState
 
     public override void FrameUpdate()
     {
-        if(!bomberMan.CheckAttackPlayer())
+        timer += Time.deltaTime;
+        if(timer > bomberMan.attackCoolTime)
+        {
+            bomberMan.LookAtPlayer();
+            bomberMan.ThrowBomb();
+            timer= 0;
+        }
+        if(!bomberMan.CheckAttackPlayer()&&timer>1)
         {
             stateMachine.Changestate(bomberMan.patrolState);
         }
