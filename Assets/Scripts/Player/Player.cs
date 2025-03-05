@@ -6,12 +6,14 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour,IOperator,ITakeDamge
 {
     public PlayerData playerData;
+    private float currentHealth;
 
     private Rigidbody2D rb2D;
 
     private void Start()
     {
         rb2D= GetComponent<Rigidbody2D>();
+        currentHealth=playerData.maxHealth;
         OperatorManager.Instance.ChangeOperator(this);
     }
 
@@ -79,8 +81,15 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
         
     }
 
-    public void TakeDamge(UnityAction callback = null)
+    public void TakeDamge(float damage,UnityAction callback = null)
     {
+        currentHealth -= damage;
+        if(currentHealth <= 0)
+        {
+            EventCenter.Instance.EventTrigger("PlayerDead");
+            OperatorManager.Instance.ChangeOperator(null);
+            Destroy(gameObject);
+        }
         callback?.Invoke();
     }
 }

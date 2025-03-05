@@ -5,5 +5,5 @@ using UnityEngine.Events;
 
 public interface ITakeDamge
 {
-    void TakeDamge(UnityAction callback=null);
+    void TakeDamge(float damage,UnityAction callback=null);
 }

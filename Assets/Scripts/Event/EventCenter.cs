@@ -29,7 +29,7 @@ public class EventInfo : IEventInfo
 
 
 
-public class EventCenter : Singleton<EventCenter>
+public class EventCenter : NormalSingleton<EventCenter>
 {
     private Dictionary<string,IEventInfo> eventDic = new Dictionary<string,IEventInfo>();
 

@@ -14,6 +14,11 @@ public class OperatorManager : Singleton<OperatorManager>
 
     public void ChangeOperator(IOperator _operator)
     {
+        if(_operator == null)
+        {
+            currentOperator = null;
+            return;
+        }
         if(currentOperator!=null)
         {
             currentOperator.ExitOperator();

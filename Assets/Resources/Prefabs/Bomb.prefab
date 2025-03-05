@@ -161,5 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90818d0cbe2f3e3438e1505a78d22b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombRadius: 2
-  explosionForce: 7
+  bombRadius: 1.5
+  damage: 1
+  maxLifeTime: 2

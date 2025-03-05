@@ -5,7 +5,18 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public float bombRadius;
-    public float explosionForce;
+    public float damage;
+    public float maxLifeTime;
+    private float timer = 0;
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if(timer>=maxLifeTime)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void Explosion()
     {
@@ -14,15 +25,7 @@ public class Bomb : MonoBehaviour
        {
             if(collider.TryGetComponent<ITakeDamge>(out ITakeDamge damge))
             {
-                damge.TakeDamge(() =>
-                {
-                    if (collider.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2D))
-                    {
-                        Vector2 forceDir=(rb2D.transform.position- transform.position).normalized;
-                        forceDir = (forceDir + Vector2.up * 0.5f).normalized;
-                        rb2D.AddForce(forceDir*explosionForce,ForceMode2D.Impulse);
-                    }
-                });
+                damge.TakeDamge(damage);
             }
        }
     }

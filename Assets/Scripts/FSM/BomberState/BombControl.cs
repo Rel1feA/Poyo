@@ -33,7 +33,7 @@ public class BombControl : BomberManState
         if(Input.GetKeyDown(KeyCode.E)&&timer>=bomberMan.useCoolTime)
         {
             timer = 0;
-            bomberMan.ThrowBomb();
+            bomberMan.ThrowBomb(bomberMan.throwSpeed*new Vector2(bomberMan.transform.localScale.x,0.7f));
         }
     }
 

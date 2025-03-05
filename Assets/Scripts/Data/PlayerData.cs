@@ -8,4 +8,5 @@ public class PlayerData : ScriptableObject
 {
     public float moveSpeed;
     public float jumpHeight;
+    public float maxHealth;
 }

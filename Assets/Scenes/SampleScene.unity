@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 540944892}
   - component: {fileID: 540944891}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: bomberMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,13 +455,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2D: {fileID: 0}
   player: {fileID: 0}
+  maxHealth: 1
   pointA: {fileID: 1065492630}
   pointB: {fileID: 1275036859}
-  patrolSpeed: 4
-  moveSpeed: 4
-  useCoolTime: 2
+  patrolSpeed: 3
+  moveSpeed: 3
+  useCoolTime: 1.5
   attackRadius: 4.5
-  throwForce: 4
+  throwSpeed: 5
   attackCoolTime: 3
 --- !u!70 &540944892
 CapsuleCollider2D:

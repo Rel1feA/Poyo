@@ -11,7 +11,8 @@ public class BombHurt : BomberManState
 
     public override void EnterState()
     {
-        Debug.Log("hurt");
+        OperatorManager.Instance.ChangeOperator(bomberMan.player);
+        GameObject.Destroy(bomberMan.gameObject);
     }
 
     public override void ExitState()

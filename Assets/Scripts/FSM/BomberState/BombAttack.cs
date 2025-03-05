@@ -28,7 +28,7 @@ public class BombAttack : BomberManState
         if(timer > bomberMan.attackCoolTime)
         {
             bomberMan.LookAtPlayer();
-            bomberMan.ThrowBomb();
+            bomberMan.ThrowBomb(bomberMan.GetThrowBombToPlayerSpeed(0.7f));
             timer= 0;
         }
         if(!bomberMan.CheckAttackPlayer()&&timer>1)

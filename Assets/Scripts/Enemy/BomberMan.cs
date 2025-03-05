@@ -17,6 +17,10 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     [HideInInspector]
     public Player player;
 
+    [Header("基本属性")]
+    public float maxHealth;
+    private float currentHealth;
+
     [Header("巡逻相关")]
     public Transform pointA;
     public Transform pointB;
@@ -30,7 +34,7 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     public float attackRadius;
 
     [Header("技能相关")]
-    public float throwForce;
+    public float throwSpeed;
     public float attackCoolTime;
 
 
@@ -39,6 +43,7 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
         player=FindObjectOfType<Player>();
         InitState();
         rb2D = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
     }
 
     private void Update()
@@ -71,14 +76,20 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
         stateMachine.Init(patrolState);
     }
 
-    public void TakeDamge(UnityAction callback)
+    public void TakeDamge(float damage,UnityAction callback)
     {
-        stateMachine.Changestate(hurtState);
+        currentHealth-=damage;
+        if(currentHealth <= 0)
+        {
+            stateMachine.Changestate(hurtState);
+            Debug.Log("怪兽死亡");
+        }
         callback?.Invoke();
     }
 
     public bool CheckAttackPlayer()
     {
+        if (player == null) return false;
         if(Vector3.Distance(player.transform.position,transform.position)<attackRadius)
         {
             return true;
@@ -86,18 +97,27 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
         return false;
     }
 
-    public void ThrowBomb()
+    public void ThrowBomb(Vector2 speed)
     {
         ResourcesManager.Instance.LoadAsync<GameObject>("Prefabs/Bomb", (obj) =>
         {
-            Vector3 throwDir = new Vector3(transform.localScale.x, 1, 0);
-            obj.transform.position = transform.position + throwDir;
-            obj.GetComponent<Rigidbody2D>().AddForce(throwDir * throwForce, ForceMode2D.Impulse);
+            obj.transform.position = (Vector2)transform.position + new Vector2(transform.localScale.x, 0.7f);
+            obj.GetComponent<Rigidbody2D>().velocity= speed;
         });
+    }
+
+    public Vector2 GetThrowBombToPlayerSpeed(float time)
+    {
+        Vector2 throwPos = (Vector2)transform.position + new Vector2(transform.localScale.x, 0.7f);
+        float horizontalSpeed = Mathf.Abs(player.transform.position.x - throwPos.x) / time * transform.localScale.x;
+        float verticalSpeed = Mathf.Abs(player.transform.position.y - throwPos.y) / time - (0.5f * rb2D.gravityScale * Physics2D.gravity.y * time);
+        Vector2 throwSpeed = new Vector2(horizontalSpeed, verticalSpeed);
+        return throwSpeed;
     }
 
     public void LookAtPlayer()
     {
+        if (player == null) return;
         if (player.transform.position.x > transform.position.x)
         {
             transform.localScale = Vector3.one;
