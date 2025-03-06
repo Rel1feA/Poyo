@@ -27,6 +27,7 @@ public class BombControl : BomberManState
         Move();
         if(Input.GetKeyDown(KeyCode.Q))
         {
+            //if (bomberMan.player == null) return;
             OperatorManager.Instance.ChangeOperator(bomberMan.player);
             stateMachine.Changestate(bomberMan.patrolState);
         }

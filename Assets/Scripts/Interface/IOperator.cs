@@ -7,4 +7,6 @@ public interface IOperator
     void EnterOperator();
     void OnOperator();
     void ExitOperator();
+
+    GameObject GetOperatorObject();
 }

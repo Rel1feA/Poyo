@@ -49,13 +49,13 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
 
     public bool CheckGround()
     {
-       return Physics2D.OverlapBox(transform.position-Vector3.up*0.25f, Vector2.one, 0, LayerMask.GetMask("Ground"));
+       return Physics2D.OverlapBox(transform.position-Vector3.up*0.6f, new Vector2(0.5f,0.3f), 0, LayerMask.GetMask("Ground"));
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position - Vector3.up * 0.25f, Vector2.one);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position - Vector3.up * 0.6f, new Vector2(0.5f, 0.3f));
     }
 
     public void EnterOperator()
@@ -91,5 +91,10 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
             Destroy(gameObject);
         }
         callback?.Invoke();
+    }
+
+    public GameObject GetOperatorObject()
+    {
+        return gameObject;
     }
 }

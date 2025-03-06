@@ -80,4 +80,8 @@ public class Ghost : MonoBehaviour, IOperator
         Destroy(gameObject);
     }
 
+    public GameObject GetOperatorObject()
+    {
+        return gameObject;
+    }
 }

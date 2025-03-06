@@ -37,6 +37,16 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     public float throwSpeed;
     public float attackCoolTime;
 
+    private void OnEnable()
+    {
+        EventCenter.Instance.AddListener("PlayerDead",OnPlayerDead);
+    }
+
+    private void OnDisable()
+    {
+        EventCenter.Instance.RemoveListener("PlayerDead",OnPlayerDead);
+    }
+
 
     private void Start()
     {
@@ -65,6 +75,10 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     {
         
     }
+    public GameObject GetOperatorObject()
+    {
+        return gameObject;
+    }
 
     public void InitState()
     {
@@ -82,7 +96,6 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
         if(currentHealth <= 0)
         {
             stateMachine.Changestate(hurtState);
-            Debug.Log("怪兽死亡");
         }
         callback?.Invoke();
     }
@@ -126,6 +139,11 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
+    }
+
+    public void OnPlayerDead()
+    {
+        player = null;
     }
 
     private void OnDrawGizmos()

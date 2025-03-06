@@ -25,5 +25,6 @@ public class OperatorManager : Singleton<OperatorManager>
         }
         currentOperator= _operator;
         currentOperator.EnterOperator();
+        EventCenter.Instance.EventTrigger<IOperator>("ChangeOperator",currentOperator);
     }
 }
