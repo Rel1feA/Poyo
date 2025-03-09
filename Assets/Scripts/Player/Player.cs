@@ -10,6 +10,16 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
 
     private Rigidbody2D rb2D;
 
+    private void OnEnable()
+    {
+        EventCenter.Instance.AddListener<levelData>("LoadLevel", OnLoadLevel);
+    }
+
+    private void OnDisable()
+    {
+        EventCenter.Instance.RemoveListener<levelData>("LoadLevel", OnLoadLevel);
+    }
+
     private void Start()
     {
         rb2D= GetComponent<Rigidbody2D>();
@@ -20,10 +30,7 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
     public void Move()
     {
         float inputX = Input.GetAxis("Horizontal");
-        if(inputX!=0)
-        {
-            rb2D.velocity = new Vector2(inputX * playerData.moveSpeed, rb2D.velocity.y);
-        }
+        rb2D.velocity = new Vector2(inputX * playerData.moveSpeed, rb2D.velocity.y);
         if (inputX > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
@@ -52,6 +59,16 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
        return Physics2D.OverlapBox(transform.position-Vector3.up*0.6f, new Vector2(0.5f,0.3f), 0, LayerMask.GetMask("Ground"));
     }
 
+    public void CheckSwitch()
+    {
+        Collider2D collider2D = Physics2D.OverlapBox(transform.position, Vector2.one * 1.5f, 0,LayerMask.GetMask("Switch"));
+        if(collider2D == null) return;
+        if (collider2D.TryGetComponent<ISwitch>(out ISwitch _switch))
+        {
+            _switch.Trigger();
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -66,9 +83,11 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
     public void OnOperator()
     {
         Move();
+        CheckSwitch();
         if(Input.GetKeyDown(KeyCode.E))
         {
             UseSkill();
+            rb2D.velocity = Vector2.zero;
         }
         if(Input.GetKeyDown(KeyCode.Space)&&CheckGround())
         {
@@ -88,13 +107,21 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
         {
             EventCenter.Instance.EventTrigger("PlayerDead");
             OperatorManager.Instance.ChangeOperator(null);
+            GameManager.Instance.ReStart();
             Destroy(gameObject);
         }
         callback?.Invoke();
     }
 
-    public GameObject GetOperatorObject()
+public GameObject GetOperatorObject()
     {
         return gameObject;
     }
+
+    public void OnLoadLevel(levelData levelDate)
+    {
+        transform.position=levelDate.playerStartPos;
+    }
+
+
 }

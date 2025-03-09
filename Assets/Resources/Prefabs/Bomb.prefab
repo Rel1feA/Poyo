@@ -110,7 +110,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -161,6 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90818d0cbe2f3e3438e1505a78d22b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombRadius: 1.5
+  bombRadius: 1
   damage: 1
   maxLifeTime: 2

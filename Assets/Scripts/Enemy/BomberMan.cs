@@ -28,14 +28,16 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
 
     [Header("控制相关")]
     public float moveSpeed;
-    public float useCoolTime;
+
 
     [Header("攻击相关")]
     public float attackRadius;
+    public float bombToPlayerTime;//投掷炸弹到玩家身旁的炸弹飞行期望时间
+    public float attackCoolTime;
 
     [Header("技能相关")]
     public float throwSpeed;
-    public float attackCoolTime;
+    public float useCoolTime;
 
     private void OnEnable()
     {
@@ -123,7 +125,8 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     {
         Vector2 throwPos = (Vector2)transform.position + new Vector2(transform.localScale.x, 0.7f);
         float horizontalSpeed = Mathf.Abs(player.transform.position.x - throwPos.x) / time * transform.localScale.x;
-        float verticalSpeed = Mathf.Abs(player.transform.position.y - throwPos.y) / time - (0.5f * rb2D.gravityScale * Physics2D.gravity.y * time);
+        //float verticalSpeed = Mathf.Abs(player.transform.position.y - throwPos.y) / time - (0.5f  *2* Physics2D.gravity.y * time);
+        float verticalSpeed = (-2 * Physics2D.gravity.y * time / 2)*0.7f;
         Vector2 throwSpeed = new Vector2(horizontalSpeed, verticalSpeed);
         return throwSpeed;
     }

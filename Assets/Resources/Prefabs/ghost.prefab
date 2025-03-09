@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab55ad8d03f91a44a8f882a0753b19c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 9
-  lifeTime: 3
+  moveSpeed: 6
+  lifeTime: 2
   player: {fileID: 0}
   CheckEnemyRadius: 1

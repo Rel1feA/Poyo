@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-public class LoadSceneManager : Singleton<LoadSceneManager>
+public class LoadSceneManager : NormalSingleton<LoadSceneManager>
 {
     //重新切换当前场景
     public void LoadActiveScene()
@@ -54,7 +54,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
     public void LoadSceneAsync(string sceneName,UnityAction<float> loading=null,UnityAction<AsyncOperation> completed=null,bool setActiveAfterCompleted=true,
         LoadSceneMode mode=LoadSceneMode.Single)
     {
-        StartCoroutine(LoadSceneCoroutine(sceneName,loading,completed,setActiveAfterCompleted,mode));
+        MonoController.Instance.StartCoroutine(LoadSceneCoroutine(sceneName,loading,completed,setActiveAfterCompleted,mode));
     }
 
     IEnumerator LoadSceneCoroutine(string sceneName,UnityAction<float> loading=null,UnityAction<AsyncOperation> completed=null, 
@@ -78,7 +78,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
     public void LoadSceneAsync(int sceneIndex, UnityAction<float> loading = null, UnityAction<AsyncOperation> completed = null, bool setActiveAfterCompleted = true,
     LoadSceneMode mode = LoadSceneMode.Single)
     {
-        StartCoroutine(LoadSceneCoroutine(sceneIndex, loading, completed, setActiveAfterCompleted, mode));
+        MonoController.Instance.StartCoroutine(LoadSceneCoroutine(sceneIndex, loading, completed, setActiveAfterCompleted, mode));
     }
 
     IEnumerator LoadSceneCoroutine(int sceneIndex, UnityAction<float> loading = null, UnityAction<AsyncOperation> completed = null,

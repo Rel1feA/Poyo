@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class BombControl : BomberManState
 {
@@ -25,6 +26,7 @@ public class BombControl : BomberManState
     {
         timer += Time.deltaTime;
         Move();
+        CheckSwitch();
         if(Input.GetKeyDown(KeyCode.Q))
         {
             //if (bomberMan.player == null) return;
@@ -49,6 +51,16 @@ public class BombControl : BomberManState
         else if(inputX < 0)
         {
             bomberMan.transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
+    public void CheckSwitch()
+    {
+        Collider2D collider2D = Physics2D.OverlapBox(bomberMan.transform.position, Vector2.one * 1.5f, 0, LayerMask.GetMask("Switch"));
+        if (collider2D == null) return;
+        if (collider2D.TryGetComponent<ISwitch>(out ISwitch _switch))
+        {
+            _switch.Trigger();
         }
     }
 }

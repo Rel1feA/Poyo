@@ -6,6 +6,11 @@ public class OperatorManager : Singleton<OperatorManager>
 {
     private IOperator currentOperator;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Update()
     {
         if (currentOperator == null) return;

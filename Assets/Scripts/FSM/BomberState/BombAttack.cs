@@ -28,12 +28,13 @@ public class BombAttack : BomberManState
         if(timer > bomberMan.attackCoolTime)
         {
             bomberMan.LookAtPlayer();
-            bomberMan.ThrowBomb(bomberMan.GetThrowBombToPlayerSpeed(0.7f));
+            bomberMan.ThrowBomb(bomberMan.GetThrowBombToPlayerSpeed(bomberMan.bombToPlayerTime));
             timer= 0;
         }
         if(!bomberMan.CheckAttackPlayer()&&timer>1)
         {
             stateMachine.Changestate(bomberMan.patrolState);
         }
+        bomberMan.rb2D.velocity = Vector2.zero;
     }
 }
