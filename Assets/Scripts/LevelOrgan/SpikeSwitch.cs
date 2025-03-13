@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpikeSwitch : MonoBehaviour,ISwitch
 {
-    public Spike[] targetSpikes;
+    public List<Spike> firstSpikes;
+    public List<Spike> secondSpikes;
     private bool isOpen;
 
     private void Start()
@@ -14,9 +15,13 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
 
     public void OnOpen()
     {
-        foreach (Spike spike in targetSpikes)
+        foreach (Spike spike in firstSpikes)
         {
             spike.gameObject.SetActive(false);
+        }
+        foreach(Spike spike in secondSpikes)
+        {
+            spike.gameObject.SetActive(true);
         }
         isOpen = true;
     }
@@ -24,9 +29,13 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
 
     public void OnClose()
     {
-        foreach (Spike spike in targetSpikes)
+        foreach (Spike spike in firstSpikes)
         {
             spike.gameObject.SetActive(true);
+        }
+        foreach(Spike spike in secondSpikes)
+        {
+            spike.gameObject.SetActive(false);
         }
         isOpen = false;
     }

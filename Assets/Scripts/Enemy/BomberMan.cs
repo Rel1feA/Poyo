@@ -6,8 +6,9 @@ using UnityEngine.Events;
 public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
 {
     public StateMachine stateMachine;
+    public BomberManState idleState;
     public BomberManState patrolState;
-    public BomberManState IdleState;
+    public BomberManState dizzyState;
     public BomberManState controlState;
     public BomberManState hurtState;
     public BomberManState attackState;
@@ -19,25 +20,29 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
 
     [Header("基本属性")]
     public float maxHealth;
+    public float dizzyTime;
     private float currentHealth;
+
 
     [Header("巡逻相关")]
     public Transform pointA;
     public Transform pointB;
     public float patrolSpeed;
+    public float waitTime;
 
     [Header("控制相关")]
     public float moveSpeed;
 
 
     [Header("攻击相关")]
-    public float attackRadius;
+    public Vector2 attackCheckBox;
     public float bombToPlayerTime;//投掷炸弹到玩家身旁的炸弹飞行期望时间
     public float attackCoolTime;
 
     [Header("技能相关")]
     public float throwSpeed;
     public float useCoolTime;
+
 
     private void OnEnable()
     {
@@ -85,6 +90,8 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     public void InitState()
     {
         stateMachine = new StateMachine();
+        idleState = new BombIdleState(stateMachine, this);
+        dizzyState = new DizzyState(stateMachine, this);
         patrolState = new BombPatrol(stateMachine,this);
         controlState=new BombControl(stateMachine,this);
         hurtState=new BombHurt(stateMachine,this);
@@ -105,7 +112,8 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     public bool CheckAttackPlayer()
     {
         if (player == null) return false;
-        if(Vector3.Distance(player.transform.position,transform.position)<attackRadius)
+        Collider2D collider2D = Physics2D.OverlapBox(transform.position,attackCheckBox,0,LayerMask.GetMask("Player"));
+        if (collider2D != null)
         {
             return true;
         }
@@ -144,6 +152,23 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
         }
     }
 
+    public bool CheckWallPatrol()
+    {
+        Vector2 checkPos = transform.position + new Vector3(transform.localScale.x*0.5f, 0,0);
+        Vector2 boxSize = new Vector2(0.5f, 0.75f);
+        Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground"));
+        if (collider2D != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void Filp()
+    {
+        transform.localScale = new Vector3(-transform.localScale.x,1,1);
+    }
+
     public void OnPlayerDead()
     {
         player = null;
@@ -151,7 +176,9 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position,attackRadius);
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(transform.position,attackCheckBox);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.5f, 0, 0),new Vector2(0.5f,0.75f));
     }
 }

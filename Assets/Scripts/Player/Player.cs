@@ -7,7 +7,6 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
 {
     public PlayerData playerData;
     private float currentHealth;
-
     private Rigidbody2D rb2D;
 
     private void OnEnable()
@@ -43,6 +42,7 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
 
     public void Jump()
     {
+        rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
         float speedY = Mathf.Sqrt((-Physics2D.gravity.y)*rb2D.gravityScale * 2 * playerData.jumpHeight);
         rb2D.velocity += Vector2.up * speedY;
     }

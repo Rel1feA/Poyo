@@ -14,22 +14,23 @@ public class BombPatrol : BomberManState
 
     public override void EnterState()
     {
-        if(Vector2.Distance(bomberMan.transform.position,bomberMan.pointA.position)> Vector2.Distance(bomberMan.transform.position, bomberMan.pointB.position))
-        {
-            targetPos = bomberMan.pointA.position;
-        }
-        else
-        {
-            targetPos = bomberMan.pointB.position;
-        }
-        if(targetPos.x>bomberMan.transform.position.x)
-        {
-            bomberMan.transform.localScale = Vector3.one;
-        }
-        else if(targetPos.x<bomberMan.transform.position.x)
-        {
-            bomberMan.transform.localScale = new Vector3(-1, 1, 1);
-        }
+        //if(Vector2.Distance(bomberMan.transform.position,bomberMan.pointA.position)> Vector2.Distance(bomberMan.transform.position, bomberMan.pointB.position))
+        //{
+        //    targetPos = bomberMan.pointA.position;
+        //}
+        //else
+        //{
+        //    targetPos = bomberMan.pointB.position;
+        //}
+        //if (targetPos.x > bomberMan.transform.position.x)
+        //{
+        //    bomberMan.transform.localScale = Vector3.one;
+        //}
+        //else if (targetPos.x < bomberMan.transform.position.x)
+        //{
+        //    bomberMan.transform.localScale = new Vector3(-1, 1, 1);
+        //}
+        patrolDir =bomberMan.transform.localScale.x;
     }
 
     public override void ExitState()
@@ -39,7 +40,12 @@ public class BombPatrol : BomberManState
 
     public override void FrameUpdate()
     {
-        Patrol();
+        //Patrol();
+        WallPatrol();
+        if(bomberMan.CheckWallPatrol())
+        {
+            stateMachine.Changestate(bomberMan.idleState);
+        }
         if (bomberMan.CheckAttackPlayer())
         {
             stateMachine.Changestate(bomberMan.attackState);
@@ -62,5 +68,10 @@ public class BombPatrol : BomberManState
         }
         Vector3 newPos = Vector3.MoveTowards(bomberMan.transform.position, targetPos, bomberMan.patrolSpeed * Time.fixedDeltaTime);
         bomberMan.rb2D.MovePosition(newPos);
+    }
+
+    public void WallPatrol()
+    {
+        bomberMan.rb2D.velocity=new Vector2(patrolDir*bomberMan.patrolSpeed,bomberMan.rb2D.velocity.y);
     }
 }

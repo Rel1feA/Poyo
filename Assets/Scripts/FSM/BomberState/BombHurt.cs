@@ -11,7 +11,10 @@ public class BombHurt : BomberManState
 
     public override void EnterState()
     {
-        OperatorManager.Instance.ChangeOperator(bomberMan.player);
+        if(OperatorManager.Instance.currentOperator.GetOperatorObject()==bomberMan.gameObject)
+        {
+            OperatorManager.Instance.ChangeOperator(bomberMan.player);
+        }
         GameObject.Destroy(bomberMan.gameObject);
     }
 

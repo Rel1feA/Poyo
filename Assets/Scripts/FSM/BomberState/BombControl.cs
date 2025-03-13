@@ -31,7 +31,7 @@ public class BombControl : BomberManState
         {
             //if (bomberMan.player == null) return;
             OperatorManager.Instance.ChangeOperator(bomberMan.player);
-            stateMachine.Changestate(bomberMan.patrolState);
+            stateMachine.Changestate(bomberMan.dizzyState);
         }
         if(Input.GetKeyDown(KeyCode.E)&&timer>=bomberMan.useCoolTime)
         {

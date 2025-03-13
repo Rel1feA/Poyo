@@ -5,11 +5,11 @@ using UnityEngine;
 public class Ghost : MonoBehaviour, IOperator
 {
     public float moveSpeed;
-    public float lifeTime;
+    public float moveRadius;
     public Player player;
-    private float timer;
 
     public float CheckEnemyRadius;
+    private Vector2 startPos;
 
     private void OnEnable()
     {
@@ -28,13 +28,12 @@ public class Ghost : MonoBehaviour, IOperator
 
     public void EnterOperator()
     {
-        timer = 0;
+        startPos=player.transform.position;
     }
 
     public void OnOperator()
     {
-        timer += Time.deltaTime;
-        if( timer > lifeTime )
+        if( Vector2.Distance(transform.position,startPos)>moveRadius||Input.GetKeyDown(KeyCode.Q) )
         {
             OperatorManager.Instance.ChangeOperator(player);
             Destroy(gameObject);

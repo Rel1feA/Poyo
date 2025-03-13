@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OperatorManager : Singleton<OperatorManager>
 {
-    private IOperator currentOperator;
+    public IOperator currentOperator;
 
     private void Start()
     {

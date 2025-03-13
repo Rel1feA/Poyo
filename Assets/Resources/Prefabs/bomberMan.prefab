@@ -164,12 +164,14 @@ MonoBehaviour:
   rb2D: {fileID: 0}
   player: {fileID: 0}
   maxHealth: 1
+  dizzyTime: 1.5
   pointA: {fileID: 0}
   pointB: {fileID: 0}
   patrolSpeed: 3
-  moveSpeed: 3
-  attackRadius: 3.5
+  waitTime: 1
+  moveSpeed: 4
+  attackCheckBox: {x: 6, y: 2}
   bombToPlayerTime: 0.7
-  attackCoolTime: 2.5
+  attackCoolTime: 4
   throwSpeed: 5
   useCoolTime: 1.5

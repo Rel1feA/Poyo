@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1164274782885174108}
   - component: {fileID: 5601284246943734612}
   - component: {fileID: 6036410526582409339}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 3
+  m_GravityScale: 2.5
   m_Material: {fileID: 6200000, guid: 68812c8c9c88eae47a41aa119baf01e8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
