@@ -6,7 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     private void Start()
     {
-        LevelManager.Instance.LoadLevel("level1");
+        LevelManager.Instance.LoadLevel("level2");
         DontDestroyOnLoad(gameObject);
     }
 

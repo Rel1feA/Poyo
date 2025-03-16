@@ -14,6 +14,7 @@ public class BombControl : BomberManState
 
     public override void EnterState()
     {
+        bomberMan.spriteRenderer.color = Color.blue;
         timer = bomberMan.useCoolTime;
     }
 

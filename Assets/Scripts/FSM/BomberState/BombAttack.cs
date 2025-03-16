@@ -14,6 +14,7 @@ public class BombAttack : BomberManState
     public override void EnterState()
     {
         bomberMan.LookAtPlayer();
+        bomberMan.spriteRenderer.color = Color.red;
         timer = bomberMan.attackCoolTime-0.5f;
     }
 
@@ -35,6 +36,6 @@ public class BombAttack : BomberManState
         {
             stateMachine.Changestate(bomberMan.patrolState);
         }
-        bomberMan.rb2D.velocity = Vector2.zero;
+        bomberMan.rb2D.velocity = new Vector2(0, bomberMan.rb2D.velocity.y);
     }
 }

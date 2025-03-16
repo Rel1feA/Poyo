@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : MonoBehaviour,IOperator,ITakeDamge
+public class Player : MonoBehaviour,IOperator,ITakeDamge,IClimb
 {
     public PlayerData playerData;
     private float currentHealth;
     private Rigidbody2D rb2D;
+    private SpriteRenderer spriteRenderer;
+
+    private float timer;
+
+    public bool canOperator { get; set; }
+    public bool IsClimb { get; set; }
+    public bool CanClimb { get; set; }
 
     private void OnEnable()
     {
@@ -22,7 +29,9 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
     private void Start()
     {
         rb2D= GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         currentHealth=playerData.maxHealth;
+        rb2D.gravityScale=playerData.gravityScale;
         OperatorManager.Instance.ChangeOperator(this);
     }
 
@@ -77,22 +86,59 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
 
     public void EnterOperator()
     {
-        
+        timer = 0;
+        canOperator = true;
     }
 
     public void OnOperator()
     {
+        //操作前腰（测试用）
+        timer += Time.deltaTime;
+        if(timer<playerData.operatorCoolTime)
+        {
+            spriteRenderer.color = Color.green;
+            return;
+        }
+        //
+        spriteRenderer.color = Color.white;
+        //上楼梯，并且下面的移动等操作不执行
+        if (CanClimb&&!IsClimb)
+        {
+            if(Input.GetKeyDown(KeyCode.W)|| Input.GetKeyDown(KeyCode.S))
+            {
+                EnterClimb();
+            }
+        }
+        if(IsClimb)
+        {
+            OnClimb();
+            return;
+        }
+        //
+
+
+        //移动
         Move();
+        //
+
+        //开关机关
         CheckSwitch();
+        //
+
+        //使用技能
         if(Input.GetKeyDown(KeyCode.E))
         {
             UseSkill();
             rb2D.velocity = Vector2.zero;
         }
+        //
+
+        //跳跃
         if(Input.GetKeyDown(KeyCode.Space)&&CheckGround())
         {
             Jump();
         }
+        //
     }
 
     public void ExitOperator()
@@ -113,7 +159,7 @@ public class Player : MonoBehaviour,IOperator,ITakeDamge
         callback?.Invoke();
     }
 
-public GameObject GetOperatorObject()
+    public GameObject GetOperatorObject()
     {
         return gameObject;
     }
@@ -123,5 +169,23 @@ public GameObject GetOperatorObject()
         transform.position=levelDate.playerStartPos;
     }
 
+    public void EnterClimb()
+    {
+        IsClimb = true;
+        rb2D.gravityScale = 0;
+    }
 
+    public void OnClimb()
+    {
+        float inputX = Input.GetAxis("Horizontal");
+        float inputY = Input.GetAxis("Vertical");
+        Vector2 speed=new Vector2(inputX, inputY)*playerData.climbSpeed;
+        rb2D.velocity = speed;
+    }
+
+    public void ExitClimb()
+    {
+        IsClimb = false;
+        rb2D.gravityScale = playerData.gravityScale;
+    }
 }

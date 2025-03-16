@@ -11,6 +11,8 @@ public class Ghost : MonoBehaviour, IOperator
     public float CheckEnemyRadius;
     private Vector2 startPos;
 
+    public bool canOperator { get; set; }
+
     private void OnEnable()
     {
         EventCenter.Instance.AddListener("PlayerDead", OnPlayerDead);
@@ -29,6 +31,7 @@ public class Ghost : MonoBehaviour, IOperator
     public void EnterOperator()
     {
         startPos=player.transform.position;
+        canOperator=true;
     }
 
     public void OnOperator()
@@ -72,6 +75,8 @@ public class Ghost : MonoBehaviour, IOperator
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, CheckEnemyRadius);
+        Gizmos.color= Color.blue;
+        Gizmos.DrawWireSphere(player.transform.position, moveRadius);
     }
 
     public void OnPlayerDead()

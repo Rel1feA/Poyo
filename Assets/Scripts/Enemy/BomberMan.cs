@@ -17,6 +17,8 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     public Rigidbody2D rb2D;
     [HideInInspector]
     public Player player;
+    [HideInInspector]
+    public SpriteRenderer spriteRenderer;
 
     [Header("基本属性")]
     public float maxHealth;
@@ -43,6 +45,7 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     public float throwSpeed;
     public float useCoolTime;
 
+    public bool canOperator { get; set; }
 
     private void OnEnable()
     {
@@ -58,8 +61,9 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     private void Start()
     {
         player=FindObjectOfType<Player>();
-        InitState();
         rb2D = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        InitState();
         currentHealth = maxHealth;
     }
 
@@ -71,6 +75,7 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     public void EnterOperator()
     {
         stateMachine.Changestate(controlState);
+        canOperator = true;
     }
 
     public void OnOperator()

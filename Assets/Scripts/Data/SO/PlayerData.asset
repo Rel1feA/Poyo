@@ -15,3 +15,6 @@ MonoBehaviour:
   moveSpeed: 6
   jumpHeight: 1.4
   maxHealth: 1
+  operatorCoolTime: 0.6
+  gravityScale: 2.5
+  climbSpeed: 4

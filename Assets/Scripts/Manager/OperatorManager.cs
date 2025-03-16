@@ -14,6 +14,7 @@ public class OperatorManager : Singleton<OperatorManager>
     private void Update()
     {
         if (currentOperator == null) return;
+        if (!currentOperator.canOperator)return;
         currentOperator.OnOperator();
     }
 

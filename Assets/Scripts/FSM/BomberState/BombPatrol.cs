@@ -30,6 +30,7 @@ public class BombPatrol : BomberManState
         //{
         //    bomberMan.transform.localScale = new Vector3(-1, 1, 1);
         //}
+        bomberMan.spriteRenderer.color = Color.white;
         patrolDir =bomberMan.transform.localScale.x;
     }
 

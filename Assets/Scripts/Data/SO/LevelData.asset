@@ -19,5 +19,5 @@ MonoBehaviour:
     levelIndex: 1
   - levelName: level2
     levelSceneName: Level2
-    playerStartPos: {x: -8, y: -3, z: 0}
+    playerStartPos: {x: -9.3, y: -3, z: 0}
     levelIndex: 2
