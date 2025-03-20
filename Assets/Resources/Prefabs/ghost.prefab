@@ -98,6 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  moveRadius: 7
+  moveRadius: 6.5
   player: {fileID: 0}
   CheckEnemyRadius: 0.5

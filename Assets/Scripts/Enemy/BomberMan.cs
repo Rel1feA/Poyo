@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
+public class BomberMan : Enemy,ITakeDamge
 {
     public StateMachine stateMachine;
     public BomberManState idleState;
@@ -45,7 +45,6 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     public float throwSpeed;
     public float useCoolTime;
 
-    public bool canOperator { get; set; }
 
     private void OnEnable()
     {
@@ -70,24 +69,15 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     private void Update()
     {
         stateMachine.currentState.FrameUpdate();
+        CheckSwitch();
     }
 
-    public void EnterOperator()
+    public override void EnterOperator()
     {
         stateMachine.Changestate(controlState);
         canOperator = true;
     }
-
-    public void OnOperator()
-    {
-
-    }
-
-    public void ExitOperator()
-    {
-        
-    }
-    public GameObject GetOperatorObject()
+    public override GameObject GetOperatorObject()
     {
         return gameObject;
     }
@@ -104,7 +94,7 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
         stateMachine.Init(patrolState);
     }
 
-    public void TakeDamge(float damage,UnityAction callback)
+    public override void TakeDamge(float damage,UnityAction callback)
     {
         currentHealth-=damage;
         if(currentHealth <= 0)
@@ -144,6 +134,16 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
         return throwSpeed;
     }
 
+    public void CheckSwitch()
+    {
+        Collider2D collider2D = Physics2D.OverlapBox(transform.position, Vector2.one, 0, LayerMask.GetMask("Switch"));
+        if (collider2D == null) return;
+        if (collider2D.TryGetComponent<ISwitch>(out ISwitch _switch))
+        {
+            _switch.CanTrigger(this);
+        }
+    }
+
     public void LookAtPlayer()
     {
         if (player == null) return;
@@ -161,7 +161,7 @@ public class BomberMan : MonoBehaviour, IOperator,ITakeDamge
     {
         Vector2 checkPos = transform.position + new Vector3(transform.localScale.x*0.5f, 0,0);
         Vector2 boxSize = new Vector2(0.5f, 0.75f);
-        Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground"));
+        Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground","Obstacle"));
         if (collider2D != null)
         {
             return true;

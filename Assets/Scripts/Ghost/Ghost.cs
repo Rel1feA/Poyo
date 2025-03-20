@@ -38,7 +38,7 @@ public class Ghost : MonoBehaviour, IOperator
     {
         if( Vector2.Distance(transform.position,startPos)>moveRadius||Input.GetKeyDown(KeyCode.Q) )
         {
-            OperatorManager.Instance.ChangeOperator(player);
+            OperatorManager.Instance.ChangeOperator(player.controller);
             Destroy(gameObject);
         }
         Move();
@@ -61,7 +61,7 @@ public class Ghost : MonoBehaviour, IOperator
     
     public void CheckEnemy()
     {
-        Collider2D collider= Physics2D.OverlapCircle(transform.position, CheckEnemyRadius,LayerMask.GetMask("Enemy"));
+        Collider2D collider= Physics2D.OverlapCircle(transform.position, CheckEnemyRadius,LayerMask.GetMask("Enemy","Tool"));
         if (collider!=null)
         {
             if (collider.TryGetComponent<IOperator>(out IOperator _operator))

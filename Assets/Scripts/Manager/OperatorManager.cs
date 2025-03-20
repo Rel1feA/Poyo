@@ -33,4 +33,16 @@ public class OperatorManager : Singleton<OperatorManager>
         currentOperator.EnterOperator();
         EventCenter.Instance.EventTrigger<IOperator>("ChangeOperator",currentOperator);
     }
+
+    public GameObject GetCurrentOperatorObj()
+    {
+        if(currentOperator!=null)
+        {
+            return currentOperator.GetOperatorObject();
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

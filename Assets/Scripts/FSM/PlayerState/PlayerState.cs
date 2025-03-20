@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerState : State
 {
-    private Player player;
+    private PlayerController player;
 
-    public PlayerState(StateMachine _stateMachine,Player player) : base(_stateMachine)
+    public PlayerState(StateMachine _stateMachine,PlayerController player) : base(_stateMachine)
     {
         this.player = player;
     }

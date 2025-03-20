@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISwitch
 {
-   public void Trigger();
+   public void CanTrigger(IOperator _operator);
 }
