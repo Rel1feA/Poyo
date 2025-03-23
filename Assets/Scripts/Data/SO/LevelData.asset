@@ -15,9 +15,13 @@ MonoBehaviour:
   levelDates:
   - levelName: level1
     levelSceneName: Level1
-    playerStartPos: {x: -7.5, y: -3.5, z: 0}
+    playerStartPos: {x: -6, y: -2, z: 0}
     levelIndex: 1
   - levelName: level2
     levelSceneName: Level2
-    playerStartPos: {x: -9.3, y: -3, z: 0}
+    playerStartPos: {x: -6, y: -2, z: 0}
     levelIndex: 2
+  - levelName: level3
+    levelSceneName: Level3
+    playerStartPos: {x: -9, y: -2, z: 0}
+    levelIndex: 3

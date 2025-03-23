@@ -16,15 +16,6 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     public bool IsClimb { get; set; }
     public bool CanClimb { get; set; }
 
-    private void OnEnable()
-    {
-        EventCenter.Instance.AddListener<levelData>("LoadLevel", OnLoadLevel);
-    }
-
-    private void OnDisable()
-    {
-        EventCenter.Instance.RemoveListener<levelData>("LoadLevel", OnLoadLevel);
-    }
 
     private void Start()
     {
@@ -33,6 +24,11 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
         currentHealth=playerData.maxHealth;
         rb2D.gravityScale=playerData.gravityScale;
         OperatorManager.Instance.ChangeOperator(this);
+    }
+
+    private void Update()
+    {
+        CheckSwitch();
     }
 
     public void Move()
@@ -58,7 +54,7 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
 
     public bool CheckGround()
     {
-       return Physics2D.OverlapBox(transform.position-Vector3.up*0.6f, new Vector2(0.5f,0.3f), 0, LayerMask.GetMask("Ground"));
+       return Physics2D.OverlapBox(transform.position-Vector3.up*0.6f, new Vector2(0.8f,0.3f), 0, LayerMask.GetMask("Ground","Tool"));
     }
 
     public void CheckSwitch()
@@ -86,7 +82,7 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position - Vector3.up * 0.6f, new Vector2(0.5f, 0.3f));
+        Gizmos.DrawWireCube(transform.position - Vector3.up * 0.6f, new Vector2(0.8f, 0.3f));
     }
 
     public void EnterOperator()
@@ -126,10 +122,6 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
         Move();
         //
 
-        //开关机关
-        CheckSwitch();
-        //
-
         //使用技能
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -167,11 +159,6 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     public GameObject GetOperatorObject()
     {
         return gameObject;
-    }
-
-    public void OnLoadLevel(levelData levelDate)
-    {
-        transform.position=levelDate.playerStartPos;
     }
 
     public void EnterClimb()

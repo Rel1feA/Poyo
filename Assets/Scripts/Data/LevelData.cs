@@ -16,7 +16,6 @@ public class levelData
 {
     public string levelName;
     public string levelSceneName;
-    public Vector3 playerStartPos;
     public int levelIndex;
 }
 

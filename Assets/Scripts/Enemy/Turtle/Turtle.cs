@@ -15,10 +15,10 @@ public class Turtle : Enemy
     [HideInInspector]
     public Player player;
 
-    [Header("¿ØÖÆÏà¹Ø")]
+    [Header("ç§»åŠ¨ç›¸å…³")]
     public float moveSpeed;
 
-    [Header("»ù±¾ÊôĞÔ")]
+    [Header("åŸºæœ¬å±æ€§")]
     public float maxHealth;
     private float health;
 
