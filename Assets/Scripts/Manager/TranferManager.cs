@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class TranferManager : Singleton<TranferManager>
 {
-    public RoomDataSO roomDataSO;
+    public LevelData levelDataSO;
 
     public RoomData currentRoomData;
 
     private void Start()
     {
-        TranferRoom(1);
+        TranferRoom(1,1);
         DontDestroyOnLoad(gameObject);
     }
 
-    public RoomData GetRoomData(int roomId)
+    public RoomData GetRoomData(int levelIndex, int roomID)
     {
-        foreach(RoomData roomData in roomDataSO.roomDatas)
+        foreach(levelData levelData in levelDataSO.levelDates)
         {
-            if(roomData.roomID == roomId)
+            if(levelData.levelIndex == levelIndex)
             {
-                return roomData;
+                foreach(RoomData roomData in levelData.roomData.roomDatas)
+                {
+                    if(roomData.roomID== roomID)
+                    {
+                        return roomData;
+                    }
+                }
             }
         }
         return null;
@@ -28,7 +34,14 @@ public class TranferManager : Singleton<TranferManager>
 
     public void TranferRoom(int roomId)
     {
-        RoomData roomData = GetRoomData(roomId);
+        RoomData roomData = GetRoomData(LevelManager.Instance.currentLevel.levelIndex,roomId);
+        currentRoomData = roomData;
+        EventCenter.Instance.EventTrigger<RoomData>("TranferRoom", roomData);
+    }
+
+    public void TranferRoom(int levelIndex, int roomId)
+    {
+        RoomData roomData = GetRoomData(levelIndex, roomId);
         currentRoomData = roomData;
         EventCenter.Instance.EventTrigger<RoomData>("TranferRoom", roomData);
     }

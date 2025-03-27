@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     private float currentHealth;
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     private float timer;
 
@@ -20,15 +21,17 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     private void Start()
     {
         rb2D= GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentHealth=playerData.maxHealth;
-        rb2D.gravityScale=playerData.gravityScale;
-        OperatorManager.Instance.ChangeOperator(this);
+        rb2D.gravityScale=playerData.normalGravityScale;
+        OperatorManager.Instance.InitOperator(this);
     }
 
     private void Update()
     {
         CheckSwitch();
+        ChangeGravityScale();
     }
 
     public void Move()
@@ -36,6 +39,14 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
         float inputX = Input.GetAxis("Horizontal");
         rb2D.velocity = new Vector2(inputX * playerData.moveSpeed, rb2D.velocity.y);
         ChangeSpriteDir(inputX);
+        if(inputX!=0)
+        {
+            animator.Play("Move");
+        }
+        else
+        {
+            animator.Play("Idle");
+        }
     }
 
     public void Jump()
@@ -45,16 +56,29 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
         rb2D.velocity += Vector2.up * speedY;
     }
 
+    public void ChangeGravityScale()
+    {
+        if (IsClimb) return;
+        if(!CheckGround()&&rb2D.velocity.y<0)
+        {
+            rb2D.gravityScale = playerData.fallGravityScale;
+        }
+        else
+        {
+            rb2D.gravityScale = playerData.normalGravityScale;
+        }
+    }
+
     public void UseSkill()
     {
         GameObject ghost = ResourcesManager.Instance.Load<GameObject>("Prefabs/ghost");
-        ghost.transform.position=transform.position;
+        ghost.transform.position = transform.position + new Vector3(transform.localScale.x, 1, 0);
         OperatorManager.Instance.ChangeOperator(ghost.GetComponent<Ghost>());
     }
 
     public bool CheckGround()
     {
-       return Physics2D.OverlapBox(transform.position-Vector3.up*0.6f, new Vector2(0.8f,0.3f), 0, LayerMask.GetMask("Ground","Tool"));
+       return Physics2D.OverlapBox(transform.position, new Vector2(0.8f,0.3f), 0, LayerMask.GetMask("Ground","Tool"));
     }
 
     public void CheckSwitch()
@@ -82,7 +106,7 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position - Vector3.up * 0.6f, new Vector2(0.8f, 0.3f));
+        Gizmos.DrawWireCube(transform.position +new Vector3(0.1f,0,0), new Vector2(0.8f, 0.3f));
     }
 
     public void EnterOperator()
@@ -140,7 +164,7 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
 
     public void ExitOperator()
     {
-        
+        animator.Play("Idle");
     }
 
     public void TakeDamge(float damage,UnityAction callback = null)
@@ -179,6 +203,6 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     public void ExitClimb()
     {
         IsClimb = false;
-        rb2D.gravityScale = playerData.gravityScale;
+        rb2D.gravityScale = playerData.normalGravityScale;
     }
 }

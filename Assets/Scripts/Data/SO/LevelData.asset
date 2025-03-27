@@ -15,13 +15,13 @@ MonoBehaviour:
   levelDates:
   - levelName: level1
     levelSceneName: Level1
-    playerStartPos: {x: -6, y: -2, z: 0}
     levelIndex: 1
+    roomData: {fileID: 11400000, guid: 9114f60007be85d4e827e3fa0944b83f, type: 2}
   - levelName: level2
     levelSceneName: Level2
-    playerStartPos: {x: -6, y: -2, z: 0}
     levelIndex: 2
+    roomData: {fileID: 0}
   - levelName: level3
     levelSceneName: Level3
-    playerStartPos: {x: -9, y: -2, z: 0}
     levelIndex: 3
+    roomData: {fileID: 0}

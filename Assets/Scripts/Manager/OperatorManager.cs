@@ -20,9 +20,15 @@ public class OperatorManager : Singleton<OperatorManager>
 
     public void ChangeOperator(IOperator _operator)
     {
+        if(currentOperator==null)
+        {
+            InitOperator(_operator); 
+            return;
+        }
         if(_operator == null)
         {
-            currentOperator = null;
+            currentOperator.ExitOperator();
+            currentOperator= null;
             return;
         }
         if(currentOperator!=null)
@@ -32,6 +38,17 @@ public class OperatorManager : Singleton<OperatorManager>
         currentOperator= _operator;
         currentOperator.EnterOperator();
         EventCenter.Instance.EventTrigger<IOperator>("ChangeOperator",currentOperator);
+    }
+
+    public void InitOperator(IOperator _operator)
+    {
+        if(_operator == null)
+        {
+            currentOperator = null;
+            return;
+        }
+        _operator.EnterOperator();
+        currentOperator = _operator;
     }
 
     public GameObject GetCurrentOperatorObj()

@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Turtle : Enemy
+public class Crab : Enemy
 {
     public StateMachine stateMachine;
-    public TurtleState idleState;
-    public TurtleState onControllState;
-    public TurtleState DeadState;
+    public CrabState idleState;
+    public CrabState onControllState;
+    public CrabState DeadState;
 
     [HideInInspector]
     public Rigidbody2D rb2D;
     [HideInInspector]
     public Player player;
+    [HideInInspector]
+    public Animator animator;
 
     [Header("移动相关")]
     public float moveSpeed;
@@ -26,6 +28,7 @@ public class Turtle : Enemy
     {
         player = FindObjectOfType<Player>();
         rb2D = GetComponent<Rigidbody2D>();
+        animator=GetComponent<Animator>();
         health = maxHealth;
         InitState();
     }
@@ -36,9 +39,14 @@ public class Turtle : Enemy
         CheckSwitch();
     }
 
+    private void LateUpdate()
+    {
+        stateMachine.CheckChangeState();
+    }
+
     public override void EnterOperator()
     {
-        stateMachine.Changestate(onControllState);
+        animator.SetTrigger("EnterControl");
         canOperator = true;
     }
 
@@ -56,15 +64,47 @@ public class Turtle : Enemy
     public void InitState()
     {
         stateMachine = new StateMachine();
-        idleState = new TurtleIdle(stateMachine,this);
-        onControllState = new TurtleContro(stateMachine, this);
+        idleState = new CrabIdle(stateMachine,this);
+        onControllState = new CrabContro(stateMachine, this);
         stateMachine.Init(idleState);
+    }
+
+    public void ChangeState(CrabStateType type)
+    {
+        switch (type)
+        {
+            case CrabStateType.Idle:
+                stateMachine.Changestate(idleState);
+                break;
+            case CrabStateType.Control:
+                stateMachine.Changestate(onControllState);
+                break;
+            default:
+                break;
+        }
     }
 
     public void Move()
     {
         float inputX = Input.GetAxis("Horizontal");
         SetVelocity(inputX*moveSpeed);
+        if(Mathf.Abs(rb2D.velocity.x) > 0)
+        {
+            animator.Play("Move");
+        }
+        else
+        {
+            animator.SetTrigger("Idle");
+        }
+        //翻转精灵图片
+        if(inputX>0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if(inputX<0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     public override void TakeDamge(float damage, UnityAction callback = null)
@@ -115,4 +155,10 @@ public class Turtle : Enemy
         rb2D.velocity = new Vector2(speedX,rb2D.velocity.y);
     }
 
+    public void Init()
+    {
+        transform.position = new Vector3(46.5f, -6, 0);
+        SetVelocity(0);
+        ChangeState(CrabStateType.Idle);
+    }
 }

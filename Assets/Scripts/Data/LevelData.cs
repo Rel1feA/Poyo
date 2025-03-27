@@ -17,5 +17,6 @@ public class levelData
     public string levelName;
     public string levelSceneName;
     public int levelIndex;
+    public RoomDataSO roomData;
 }
 

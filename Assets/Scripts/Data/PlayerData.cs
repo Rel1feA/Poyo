@@ -10,6 +10,7 @@ public class PlayerData : ScriptableObject
     public float jumpHeight;
     public float maxHealth;
     public float operatorCoolTime;
-    public float gravityScale;
+    public float normalGravityScale;
+    public float fallGravityScale;
     public float climbSpeed;
 }

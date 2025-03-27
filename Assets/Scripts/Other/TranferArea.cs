@@ -1,24 +1,55 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum TranferAreaType
+{
+    horizontal,
+    vertical
+}
 
 public class TranferArea : MonoBehaviour
 {
     public int leftRoomID;
     public int rightRoomID;
+    public TranferAreaType type;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+
+    }
+  
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
-            if(TranferManager.Instance.currentRoomData.roomID == leftRoomID)
+            switch(type)
             {
-                TranferManager.Instance.TranferRoom(rightRoomID);
+                case TranferAreaType.horizontal:
+                    if (collision.transform.position.x < transform.position.x)
+                    {
+                        TranferManager.Instance.TranferRoom(leftRoomID);
+                    }
+                    else if (collision.transform.position.x > transform.position.x)
+                    {
+                        TranferManager.Instance.TranferRoom(rightRoomID);
+                    }
+                    break;
+                case TranferAreaType.vertical:
+                    if (collision.transform.position.y < transform.position.y)
+                    {
+                        TranferManager.Instance.TranferRoom(leftRoomID);
+                    }
+                    else if (collision.transform.position.y > transform.position.y)
+                    {
+                        TranferManager.Instance.TranferRoom(rightRoomID);
+                    }
+                    break;
+                default:
+                    break;
             }
-            else if(TranferManager.Instance.currentRoomData.roomID == rightRoomID)
-            {
-                TranferManager.Instance.TranferRoom(leftRoomID);
-            }
+
         }
     }
 }

@@ -157,6 +157,7 @@ MonoBehaviour:
     levelName: 
     levelSceneName: 
     levelIndex: 0
+    roomData: {fileID: 0}
 --- !u!4 &91415906
 Transform:
   m_ObjectHideFlags: 0
@@ -289,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2932dcebb143443ad62dfed35f82fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomDataSO: {fileID: 11400000, guid: 9114f60007be85d4e827e3fa0944b83f, type: 2}
+  levelDataSO: {fileID: 11400000, guid: 3d048eb178b70b9418d01b703e77b0b3, type: 2}
   currentRoomData:
     roomID: 0
     roomCameraID: 0
