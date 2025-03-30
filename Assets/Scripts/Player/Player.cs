@@ -9,9 +9,10 @@ public class Player : MonoBehaviour
 
     public bool hasKey;
 
+
     private void Start()
     {
         controller= GetComponent<PlayerController>();
-
     }
+
 }

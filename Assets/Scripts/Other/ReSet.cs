@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class ReSet : MonoBehaviour
 {
     public int inRoomID;
-    public UnityEvent ResetAction;
 
     private void OnEnable()
     {
@@ -20,8 +19,11 @@ public class ReSet : MonoBehaviour
 
     public void CheckRetSet(RoomData roomData)
     {
-        if (roomData.roomID != inRoomID) return;
         if (TranferManager.Instance.currentRoomData.roomID == inRoomID) return;
-        ResetAction?.Invoke();
+        if (roomData.roomID != inRoomID)
+        {
+            Destroy(gameObject,0.5f);
+            Instantiate(roomData.assetData);
+        }
     }
 }

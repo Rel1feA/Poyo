@@ -20,7 +20,7 @@ MonoBehaviour:
   - levelName: level2
     levelSceneName: Level2
     levelIndex: 2
-    roomData: {fileID: 0}
+    roomData: {fileID: 11400000, guid: 69bb0cd3525614c4f9134903c206d42f, type: 2}
   - levelName: level3
     levelSceneName: Level3
     levelIndex: 3

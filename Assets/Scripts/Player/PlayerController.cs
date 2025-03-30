@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
 
     public bool CheckGround()
     {
-       return Physics2D.OverlapBox(transform.position, new Vector2(0.8f,0.3f), 0, LayerMask.GetMask("Ground","Tool"));
+       return Physics2D.OverlapBox(transform.position + new Vector3(transform.localScale.x * 0.1f, 0, 0), new Vector2(0.8f,0.3f), 0, LayerMask.GetMask("Ground","Tool"));
     }
 
     public void CheckSwitch()
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position +new Vector3(0.1f,0,0), new Vector2(0.8f, 0.3f));
+        Gizmos.DrawWireCube(transform.position +new Vector3(transform.localScale.x*0.1f,0,0), new Vector2(0.8f, 0.3f));
     }
 
     public void EnterOperator()

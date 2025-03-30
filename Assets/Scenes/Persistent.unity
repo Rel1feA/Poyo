@@ -294,6 +294,7 @@ MonoBehaviour:
   currentRoomData:
     roomID: 0
     roomCameraID: 0
+    assetData: {fileID: 0}
 --- !u!4 &1452037484
 Transform:
   m_ObjectHideFlags: 0

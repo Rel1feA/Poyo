@@ -16,4 +16,5 @@ public class RoomData
 {
     public int roomID;
     public int roomCameraID;
+    public GameObject assetData;
 }

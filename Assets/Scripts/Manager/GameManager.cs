@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+
     private void Start()
     {
         LevelManager.Instance.LoadLevel("level1");

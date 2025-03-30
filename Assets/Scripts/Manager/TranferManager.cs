@@ -8,6 +8,7 @@ public class TranferManager : Singleton<TranferManager>
 
     public RoomData currentRoomData;
 
+
     private void Start()
     {
         TranferRoom(1,1);

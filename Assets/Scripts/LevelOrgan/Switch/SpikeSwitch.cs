@@ -7,9 +7,11 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
     public List<Spike> firstSpikes;
     public List<Spike> secondSpikes;
     private bool isOpen;
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         OnClose();
     }
 
@@ -24,6 +26,7 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
             spike.gameObject.SetActive(true);
         }
         isOpen = true;
+        animator.SetTrigger("Open");
     }
 
 
@@ -38,6 +41,7 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
             spike.gameObject.SetActive(false);
         }
         isOpen = false;
+        animator.SetTrigger("Close");
     }
 
     public void CanTrigger(IOperator _operator)
