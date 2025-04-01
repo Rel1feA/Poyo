@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
+public class PlayerController : MonoBehaviour,IOperator,IClimb
 {
     public PlayerData playerData;
-    private float currentHealth;
+
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
     private float timer;
+    public float inputX;
 
     public bool canOperator { get; set; }
     public bool IsClimb { get; set; }
@@ -23,7 +24,6 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
         rb2D= GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        currentHealth=playerData.maxHealth;
         rb2D.gravityScale=playerData.normalGravityScale;
         OperatorManager.Instance.InitOperator(this);
     }
@@ -36,17 +36,9 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
 
     public void Move()
     {
-        float inputX = Input.GetAxis("Horizontal");
+        inputX = Input.GetAxis("Horizontal");
         rb2D.velocity = new Vector2(inputX * playerData.moveSpeed, rb2D.velocity.y);
         ChangeSpriteDir(inputX);
-        if(inputX!=0)
-        {
-            animator.Play("Move");
-        }
-        else
-        {
-            animator.Play("Idle");
-        }
     }
 
     public void Jump()
@@ -113,10 +105,16 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     {
         timer = 0;
         canOperator = true;
+
+        Debug.Log("EnterOperator");
     }
 
     public void OnOperator()
     {
+        //设置动画
+        SetAni();
+        Debug.Log("OnOperator");
+
         //操作前腰（测试用）
         timer += Time.deltaTime;
         if(timer<playerData.operatorCoolTime)
@@ -150,7 +148,7 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
         if (Input.GetKeyDown(KeyCode.E))
         {
             UseSkill();
-            rb2D.velocity = Vector2.zero;
+            SetVel(Vector2.zero);
         }
         //
 
@@ -164,20 +162,10 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
 
     public void ExitOperator()
     {
-        animator.Play("Idle");
-    }
-
-    public void TakeDamge(float damage,UnityAction callback = null)
-    {
-        currentHealth -= damage;
-        if(currentHealth <= 0)
-        {
-            EventCenter.Instance.EventTrigger("PlayerDead");
-            OperatorManager.Instance.ChangeOperator(null);
-            GameManager.Instance.ReStart();
-            Destroy(gameObject);
-        }
-        callback?.Invoke();
+        inputX = 0;
+        SetVel(0);
+        animator.SetTrigger("Idle");
+        Debug.Log("ExitOperator");
     }
 
     public GameObject GetOperatorObject()
@@ -204,5 +192,45 @@ public class PlayerController : MonoBehaviour,IOperator,ITakeDamge,IClimb
     {
         IsClimb = false;
         rb2D.gravityScale = playerData.normalGravityScale;
+    }
+
+    public void SetVel(Vector2 newVel)
+    {
+        rb2D.velocity = newVel;
+    }
+
+    public void SetVel(float newVelX)
+    {
+        rb2D.velocity=new Vector2(newVelX, rb2D.velocity.y);
+    }
+
+    /// <summary>
+    /// 游戏主角设置动画逻辑
+    /// </summary>
+    public void SetAni()
+    {
+        if(inputX!=0&&CheckGround())
+        {
+            //Debug.Log("MoveAni");
+            animator.SetTrigger("Move");
+        }
+        else if(!CheckGround())
+        {
+            if(rb2D.velocity.y > 0)
+            {
+                //Debug.Log("JumpAni");
+                animator.SetTrigger("Jump");
+            }
+            else
+            {
+                //Debug.Log("FallAni");
+                animator.SetTrigger("Fall");
+            }
+        }
+        else
+        {
+            //Debug.Log("IdleAni");
+            animator.SetTrigger("Idle");
+        }
     }
 }

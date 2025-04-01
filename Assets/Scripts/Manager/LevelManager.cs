@@ -43,7 +43,7 @@ public class LevelManager : Singleton<LevelManager>
         levelData targetLevel = GetLevelData(levelName);
         LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, null, (value) =>
         {
-            EventCenter.Instance.EventTrigger<levelData>("LoadLevel", targetLevel);
+            EventCenter.Instance.EventTrigger<levelData>("CompletedLoadLevel", targetLevel);
         });
         currentLevel = targetLevel;
     }
@@ -54,7 +54,7 @@ public class LevelManager : Singleton<LevelManager>
         levelData targetLevel = GetLevelData(levelIndex);
         LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, null, (value) =>
         {
-            EventCenter.Instance.EventTrigger<levelData>("LoadLevel", targetLevel);
+            EventCenter.Instance.EventTrigger<levelData>("CompletedLoadLevel", targetLevel);
         });
         currentLevel = targetLevel;
     }

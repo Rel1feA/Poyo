@@ -16,6 +16,6 @@ MonoBehaviour:
   jumpHeight: 1.9
   maxHealth: 1
   operatorCoolTime: 0.6
-  normalGravityScale: 3.5
-  fallGravityScale: 5
+  normalGravityScale: 2.5
+  fallGravityScale: 6
   climbSpeed: 4

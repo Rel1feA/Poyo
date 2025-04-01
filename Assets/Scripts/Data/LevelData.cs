@@ -18,5 +18,6 @@ public class levelData
     public string levelSceneName;
     public int levelIndex;
     public RoomDataSO roomData;
+    public Vector3 playerStartPos;
 }
 

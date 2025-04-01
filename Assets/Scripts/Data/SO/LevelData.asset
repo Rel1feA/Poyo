@@ -17,11 +17,14 @@ MonoBehaviour:
     levelSceneName: Level1
     levelIndex: 1
     roomData: {fileID: 11400000, guid: 9114f60007be85d4e827e3fa0944b83f, type: 2}
+    playerStartPos: {x: 0.5, y: -5.5, z: 0}
   - levelName: level2
     levelSceneName: Level2
     levelIndex: 2
     roomData: {fileID: 11400000, guid: 69bb0cd3525614c4f9134903c206d42f, type: 2}
+    playerStartPos: {x: -6, y: -5.5, z: 0}
   - levelName: level3
     levelSceneName: Level3
     levelIndex: 3
     roomData: {fileID: 0}
+    playerStartPos: {x: 0, y: 0, z: 0}

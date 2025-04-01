@@ -176,7 +176,7 @@ public class BomberMan : Enemy,ITakeDamge
 
     public void OnPlayerDead()
     {
-        player = null;
+        
     }
 
     private void OnDrawGizmos()

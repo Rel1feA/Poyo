@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public CheckPoint checkPoint;
+
+    private void OnEnable()
+    {
+        EventCenter.Instance.AddListener<levelData>("CompletedLoadLevel", OnCompletedLoadLevel);
+    }
+
+    private void OnDisable()
+    {
+        EventCenter.Instance.RemoveListener<levelData>("CompletedLoadLevel", OnCompletedLoadLevel);
+    }
 
     private void Start()
     {
@@ -13,6 +24,19 @@ public class GameManager : Singleton<GameManager>
 
     public void ReStart()
     {
-        LevelManager.Instance.ReLoadLevel();
+        if(checkPoint==null)
+        {
+            TranferManager.Instance.TranferRoom(1);
+        }
+        else
+        {
+            TranferManager.Instance.TranferRoom(checkPoint.inRoomID);
+        }
+        EventCenter.Instance.EventTrigger<CheckPoint>("RestartGame", checkPoint);
+    }
+
+    public void OnCompletedLoadLevel(levelData levelData)
+    {
+        checkPoint = null;
     }
 }

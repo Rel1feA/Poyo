@@ -44,6 +44,17 @@ public class Crab : Enemy
         stateMachine.CheckChangeState();
     }
 
+    private void OnDestroy()
+    {
+        if (OperatorManager.Instance.GetCurrentOperatorObj() != null)
+        {
+            if (OperatorManager.Instance.GetCurrentOperatorObj() == gameObject)
+            {
+                OperatorManager.Instance.ChangeOperator(player.controller);
+            }
+        }
+    }
+
     public override void EnterOperator()
     {
         animator.SetTrigger("EnterControl");

@@ -162,8 +162,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1, y: 0.46}
-  m_Size: {x: 0.78, y: 0.9}
+  m_Offset: {x: 0.10029459, y: 0.4959219}
+  m_Size: {x: 0.8102703, y: 0.93945754}
   m_Direction: 0
 --- !u!114 &4295769249608860970
 MonoBehaviour:
@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 90822552602ac1843a2141873937d58e, type: 2}
   hasKey: 0
 --- !u!61 &6087586966870162027
 BoxCollider2D:
