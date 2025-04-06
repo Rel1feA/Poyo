@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BomberMan : Enemy,ITakeDamge
+public class BomberMan : Enemy,ITakeDamge,IOperator
 {
     public StateMachine stateMachine;
     public BomberManState idleState;
@@ -45,18 +45,6 @@ public class BomberMan : Enemy,ITakeDamge
     public float throwSpeed;
     public float useCoolTime;
 
-
-    private void OnEnable()
-    {
-        EventCenter.Instance.AddListener("PlayerDead",OnPlayerDead);
-    }
-
-    private void OnDisable()
-    {
-        EventCenter.Instance.RemoveListener("PlayerDead",OnPlayerDead);
-    }
-
-
     private void Start()
     {
         player=FindObjectOfType<Player>();
@@ -72,68 +60,91 @@ public class BomberMan : Enemy,ITakeDamge
         CheckSwitch();
     }
 
+    private void LateUpdate()
+    {
+        stateMachine.CheckChangeState();
+    }
+
+    #region 实现进入操控模式的方法
     public override void EnterOperator()
     {
         stateMachine.Changestate(controlState);
         canOperator = true;
     }
+    #endregion
+
+    #region 实现操控接口返回obj的方法
     public override GameObject GetOperatorObject()
     {
         return gameObject;
-    }
+    } 
+    #endregion
 
+    #region 初始化状态
     public void InitState()
     {
         stateMachine = new StateMachine();
         idleState = new BombIdleState(stateMachine, this);
         dizzyState = new DizzyState(stateMachine, this);
-        patrolState = new BombPatrol(stateMachine,this);
-        controlState=new BombControl(stateMachine,this);
-        hurtState=new BombHurt(stateMachine,this);
-        attackState=new BombAttack(stateMachine,this);
+        patrolState = new BombPatrol(stateMachine, this);
+        controlState = new BombControl(stateMachine, this);
+        hurtState = new BombHurt(stateMachine, this);
+        attackState = new BombAttack(stateMachine, this);
         stateMachine.Init(patrolState);
     }
+    #endregion
 
-    public override void TakeDamge(float damage,UnityAction callback)
+    #region 实现ITakeDamge接口方法
+    public override void TakeDamge(float damage, UnityAction callback)
     {
-        currentHealth-=damage;
-        if(currentHealth <= 0)
+        if (hasDead) return;
+        currentHealth -= damage;
+        if (currentHealth <= 0)
         {
             stateMachine.Changestate(hurtState);
+            hasDead = true;
         }
         callback?.Invoke();
     }
+    #endregion
 
+    #region 检测玩家是否在攻击范围内的方法
     public bool CheckAttackPlayer()
     {
         if (player == null) return false;
-        Collider2D collider2D = Physics2D.OverlapBox(transform.position,attackCheckBox,0,LayerMask.GetMask("Player"));
+        Collider2D collider2D = Physics2D.OverlapBox(transform.position, attackCheckBox, 0, LayerMask.GetMask("Player"));
         if (collider2D != null)
         {
             return true;
         }
         return false;
     }
+    #endregion
 
+    #region 投掷炸弹的方法
     public void ThrowBomb(Vector2 speed)
     {
         ResourcesManager.Instance.LoadAsync<GameObject>("Prefabs/Bomb", (obj) =>
         {
             obj.transform.position = (Vector2)transform.position + new Vector2(transform.localScale.x, 0.7f);
-            obj.GetComponent<Rigidbody2D>().velocity= speed;
+            obj.GetComponent<Rigidbody2D>().velocity = speed;
         });
     }
+    #endregion
 
+    #region 计算炸弹跟踪玩家所需要的初速度的方法
     public Vector2 GetThrowBombToPlayerSpeed(float time)
     {
         Vector2 throwPos = (Vector2)transform.position + new Vector2(transform.localScale.x, 0.7f);
         float horizontalSpeed = Mathf.Abs(player.transform.position.x - throwPos.x) / time * transform.localScale.x;
         //float verticalSpeed = Mathf.Abs(player.transform.position.y - throwPos.y) / time - (0.5f  *2* Physics2D.gravity.y * time);
-        float verticalSpeed = (-2 * Physics2D.gravity.y * time / 2)*0.7f;
+        float verticalSpeed = (-2 * Physics2D.gravity.y * time / 2) * 0.7f;
         Vector2 throwSpeed = new Vector2(horizontalSpeed, verticalSpeed);
         return throwSpeed;
     }
+    #endregion
 
+    #region 检测是否在开关范围内的方法
     public void CheckSwitch()
     {
         Collider2D collider2D = Physics2D.OverlapBox(transform.position, Vector2.one, 0, LayerMask.GetMask("Switch"));
@@ -143,7 +154,9 @@ public class BomberMan : Enemy,ITakeDamge
             _switch.CanTrigger(this);
         }
     }
+    #endregion
 
+    #region 让面朝向向玩家的方向转的方法
     public void LookAtPlayer()
     {
         if (player == null) return;
@@ -156,28 +169,29 @@ public class BomberMan : Enemy,ITakeDamge
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }
+    #endregion
 
+    #region 检测前方是否有障碍物或者墙壁的方法
     public bool CheckWallPatrol()
     {
-        Vector2 checkPos = transform.position + new Vector3(transform.localScale.x*0.5f, 0,0);
+        Vector2 checkPos = transform.position + new Vector3(transform.localScale.x * 0.5f, 0, 0);
         Vector2 boxSize = new Vector2(0.5f, 0.75f);
-        Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground","Obstacle"));
+        Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground", "Obstacle","Tool"));
         if (collider2D != null)
         {
             return true;
         }
         return false;
     }
+    #endregion
 
+    #region 水平翻转精灵图片的方法
     public void Filp()
     {
-        transform.localScale = new Vector3(-transform.localScale.x,1,1);
-    }
+        transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
+    } 
+    #endregion
 
-    public void OnPlayerDead()
-    {
-        
-    }
 
     private void OnDrawGizmos()
     {

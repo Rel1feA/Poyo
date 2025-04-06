@@ -11,8 +11,8 @@ public enum TranferAreaType
 
 public class TranferArea : MonoBehaviour
 {
-    public int leftRoomID;
-    public int rightRoomID;
+    public int leftOrDownRoomID;
+    public int rightOrUpRoomID;
     public TranferAreaType type;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,21 +29,21 @@ public class TranferArea : MonoBehaviour
                 case TranferAreaType.horizontal:
                     if (collision.transform.position.x < transform.position.x)
                     {
-                        TranferManager.Instance.TranferRoom(leftRoomID);
+                        TranferManager.Instance.TranferRoom(leftOrDownRoomID);
                     }
                     else if (collision.transform.position.x > transform.position.x)
                     {
-                        TranferManager.Instance.TranferRoom(rightRoomID);
+                        TranferManager.Instance.TranferRoom(rightOrUpRoomID);
                     }
                     break;
                 case TranferAreaType.vertical:
                     if (collision.transform.position.y < transform.position.y)
                     {
-                        TranferManager.Instance.TranferRoom(leftRoomID);
+                        TranferManager.Instance.TranferRoom(leftOrDownRoomID);
                     }
                     else if (collision.transform.position.y > transform.position.y)
                     {
-                        TranferManager.Instance.TranferRoom(rightRoomID);
+                        TranferManager.Instance.TranferRoom(rightOrUpRoomID);
                     }
                     break;
                 default:

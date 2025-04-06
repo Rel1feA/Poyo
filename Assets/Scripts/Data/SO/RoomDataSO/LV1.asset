@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: LV1
+  m_EditorClassIdentifier: Assembly-CSharp::RoomDataSO
+  roomDatas:
+  - roomID: 1
+    roomCameraID: 1
+    assetData: {fileID: 6738334050577224803, guid: dc348aff790bff14f903b3a2988f2152, type: 3}
+  - roomID: 2
+    roomCameraID: 2
+    assetData: {fileID: 4535797621287861545, guid: c84af8fcba7c716488d4d22b007d3ac8, type: 3}
+  - roomID: 3
+    roomCameraID: 3
+    assetData: {fileID: 8279088681726895727, guid: 931c0ebfceafefd4c989ef5e191902ed, type: 3}
+  - roomID: 4
+    roomCameraID: 4
+    assetData: {fileID: 7341688125971895060, guid: eab54ec74aacf114a93a5ad36c7436aa, type: 3}

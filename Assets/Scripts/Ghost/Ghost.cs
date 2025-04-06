@@ -7,9 +7,7 @@ public class Ghost : MonoBehaviour, IOperator
     public float moveSpeed;
     public float moveRadius;
     public Player player;
-
     public float CheckEnemyRadius;
-    private Vector2 startPos;
 
     public bool canOperator { get; set; }
 
@@ -30,13 +28,12 @@ public class Ghost : MonoBehaviour, IOperator
 
     public void EnterOperator()
     {
-        startPos=player.transform.position;
         canOperator=true;
     }
 
     public void OnOperator()
     {
-        if( Vector2.Distance(transform.position,startPos)>moveRadius||Input.GetKeyDown(KeyCode.Q) )
+        if( Vector2.Distance(transform.position,player.transform.position)>moveRadius||Input.GetKeyDown(KeyCode.Q) )
         {
             OperatorManager.Instance.ChangeOperator(player.controller);
             Destroy(gameObject);

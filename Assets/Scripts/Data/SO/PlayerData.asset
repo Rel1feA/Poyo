@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   moveSpeed: 6
-  jumpHeight: 1.9
+  jumpHeight: 1.7
   maxHealth: 1
   operatorCoolTime: 0.6
   normalGravityScale: 2.5

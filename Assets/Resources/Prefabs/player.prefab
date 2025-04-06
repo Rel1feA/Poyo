@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 90822552602ac1843a2141873937d58e, type: 2}
+  inputX: 0
 --- !u!70 &6036410526582409339
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

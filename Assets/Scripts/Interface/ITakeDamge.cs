@@ -6,4 +6,6 @@ using UnityEngine.Events;
 public interface ITakeDamge
 {
     void TakeDamge(float damage,UnityAction callback=null);
+
+    bool hasDead { get; set; }
 }

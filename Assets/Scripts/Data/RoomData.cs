@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RoomData", menuName = "Data/RoomData")]
-
+[Serializable]
 public class RoomDataSO : ScriptableObject
 {
     public List<RoomData> roomDatas;

@@ -20,7 +20,7 @@ public class StateMachine
 
 
     /// <summary>
-    /// �˷������ڸı�״̬ʱִ���߼����������LateUpdate����ִ�У�Ŀ�����ڷ�ֹ�ɵ�״̬��֡���з������ǵ���״̬�Ľ���״̬��ִ�еķ���
+    /// 用于检测状态的切换，必须放在lateupdate执行，防止旧的状态的每帧方法会在转换状态后还继续执行
     /// </summary>
     public void CheckChangeState()
     {

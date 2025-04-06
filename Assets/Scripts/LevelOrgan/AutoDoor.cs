@@ -14,6 +14,6 @@ public class AutoDoor : MonoBehaviour
 
     public void AddForceToDoor(Vector2 dir)
     {
-        rb2D.AddForce(dir*upForce*Time.fixedDeltaTime);
+        rb2D.AddForce(dir*upForce*Time.deltaTime,ForceMode2D.Impulse);
     }
 }

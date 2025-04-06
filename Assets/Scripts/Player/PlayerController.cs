@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private string previousTrigger;
+    private Player player;
 
     private float timer;
     public float inputX;
@@ -18,40 +20,44 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     public bool IsClimb { get; set; }
     public bool CanClimb { get; set; }
 
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
+        player =GetComponent<Player>();
         rb2D= GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D.gravityScale=playerData.normalGravityScale;
         OperatorManager.Instance.InitOperator(this);
     }
 
-    private void Update()
-    {
-        CheckSwitch();
-        ChangeGravityScale();
-    }
-
+    #region 操控移动代码
     public void Move()
     {
         inputX = Input.GetAxis("Horizontal");
-        rb2D.velocity = new Vector2(inputX * playerData.moveSpeed, rb2D.velocity.y);
+        Vector2 speed = new Vector2(inputX * playerData.moveSpeed, rb2D.velocity.y);
+        SetVel(speed);
         ChangeSpriteDir(inputX);
     }
+    #endregion
 
+    #region 跳跃代码
     public void Jump()
     {
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
-        float speedY = Mathf.Sqrt((-Physics2D.gravity.y)*rb2D.gravityScale * 2 * playerData.jumpHeight);
+        float speedY = Mathf.Sqrt((-Physics2D.gravity.y) * rb2D.gravityScale * 2 * playerData.jumpHeight);
         rb2D.velocity += Vector2.up * speedY;
     }
+    #endregion
 
+    #region 改变重力比例大小代码
     public void ChangeGravityScale()
     {
         if (IsClimb) return;
-        if(!CheckGround()&&rb2D.velocity.y<0)
+        if (!CheckGround() && rb2D.velocity.y < 0)
         {
             rb2D.gravityScale = playerData.fallGravityScale;
         }
@@ -60,64 +66,76 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
             rb2D.gravityScale = playerData.normalGravityScale;
         }
     }
+    #endregion
 
+    #region 使用能力代码
     public void UseSkill()
     {
         GameObject ghost = ResourcesManager.Instance.Load<GameObject>("Prefabs/ghost");
-        ghost.transform.position = transform.position + new Vector3(transform.localScale.x, 1, 0);
+        ghost.transform.position = transform.position+new Vector3(0,0.5f,0);
         OperatorManager.Instance.ChangeOperator(ghost.GetComponent<Ghost>());
+        player.ChangeState(PlayerStateType.Idle);
     }
+    #endregion
 
+    #region 检测地面代码
     public bool CheckGround()
     {
-       return Physics2D.OverlapBox(transform.position + new Vector3(transform.localScale.x * 0.1f, 0, 0), new Vector2(0.8f,0.3f), 0, LayerMask.GetMask("Ground","Tool"));
+        return Physics2D.OverlapBox(transform.position + new Vector3(transform.localScale.x * 0.1f, 0, 0), new Vector2(0.8f, 0.3f), 0, LayerMask.GetMask("Ground", "Tool"));
     }
+    #endregion
 
+    #region 检测是否碰到机关开关代码
     public void CheckSwitch()
     {
-        Collider2D collider2D = Physics2D.OverlapBox(transform.position, Vector2.one, 0,LayerMask.GetMask("Switch"));
-        if(collider2D == null) return;
+        Collider2D collider2D = Physics2D.OverlapBox(transform.position, Vector2.one, 0, LayerMask.GetMask("Switch"));
+        if (collider2D == null) return;
         if (collider2D.TryGetComponent<ISwitch>(out ISwitch _switch))
         {
             _switch.CanTrigger(this);
         }
     }
+    #endregion
 
+    #region 改变精灵图像方向代码
     public void ChangeSpriteDir(float value)
     {
-        if(value>0)
+        if (value > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
-        else if(value<0)
+        else if (value < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-    }
+    } 
+    #endregion
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position +new Vector3(transform.localScale.x*0.1f,0,0), new Vector2(0.8f, 0.3f));
-    }
-
+    #region 进入操控状态时代码
     public void EnterOperator()
     {
         timer = 0;
         canOperator = true;
-
-        Debug.Log("EnterOperator");
+        player.ChangeState(PlayerStateType.Operator);
     }
+    #endregion
 
+    #region 实现操控接口每帧执行的逻辑（目前无方法在里面，转为在操控状态的每帧方法执行）
     public void OnOperator()
+    {
+
+    } 
+    #endregion
+
+    #region 在操控状态时每帧执行的逻辑
+    public void BeOnOperator()
     {
         //设置动画
         SetAni();
-        Debug.Log("OnOperator");
 
         //操作前腰（测试用）
         timer += Time.deltaTime;
-        if(timer<playerData.operatorCoolTime)
+        if (timer < playerData.operatorCoolTime)
         {
             spriteRenderer.color = Color.green;
             return;
@@ -125,14 +143,14 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         //
         spriteRenderer.color = Color.white;
         //上楼梯，并且下面的移动等操作不执行
-        if (CanClimb&&!IsClimb)
+        if (CanClimb && !IsClimb)
         {
-            if(Input.GetKeyDown(KeyCode.W)|| Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             {
                 EnterClimb();
             }
         }
-        if(IsClimb)
+        if (IsClimb)
         {
             OnClimb();
             return;
@@ -148,89 +166,121 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         if (Input.GetKeyDown(KeyCode.E))
         {
             UseSkill();
-            SetVel(Vector2.zero);
+            SetVel(0);
         }
         //
 
         //跳跃
-        if(Input.GetKeyDown(KeyCode.Space)&&CheckGround())
+        if (Input.GetKeyDown(KeyCode.Space) && CheckGround())
         {
             Jump();
         }
         //
     }
+    #endregion
 
+    #region 退出被操控状态时代码
     public void ExitOperator()
     {
         inputX = 0;
         SetVel(0);
-        animator.SetTrigger("Idle");
-        Debug.Log("ExitOperator");
+        animator.ResetTrigger(previousTrigger);
+        animator.Play("Idle");
+        player.ChangeState(PlayerStateType.Idle);
     }
+    #endregion
 
+    #region 实现操控接口，便于获取操控对象的gameobject代码
     public GameObject GetOperatorObject()
     {
         return gameObject;
     }
+    #endregion
 
+    #region 进入攀爬状态代码
     public void EnterClimb()
     {
         IsClimb = true;
         rb2D.gravityScale = 0;
     }
+    #endregion
 
+    #region 在攀爬状态时每帧执行的代码
     public void OnClimb()
     {
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
         ChangeSpriteDir(inputX);
-        Vector2 speed=new Vector2(inputX, inputY)*playerData.climbSpeed;
+        Vector2 speed = new Vector2(inputX, inputY) * playerData.climbSpeed;
         rb2D.velocity = speed;
     }
+    #endregion
 
+    #region 退出攀爬状态代码
     public void ExitClimb()
     {
         IsClimb = false;
         rb2D.gravityScale = playerData.normalGravityScale;
     }
+    #endregion
 
+    #region 设置刚体速度代码
     public void SetVel(Vector2 newVel)
     {
         rb2D.velocity = newVel;
-    }
+    } 
+
 
     public void SetVel(float newVelX)
     {
         rb2D.velocity=new Vector2(newVelX, rb2D.velocity.y);
     }
+    #endregion
 
-    /// <summary>
-    /// 游戏主角设置动画逻辑
-    /// </summary>
+    #region 在被操控时动画切换逻辑
     public void SetAni()
     {
-        if(inputX!=0&&CheckGround())
+        if (inputX != 0 && CheckGround())
         {
-            //Debug.Log("MoveAni");
-            animator.SetTrigger("Move");
+            AniSetTrigger("Move");
+            animator.SetBool("IsDown", true);
         }
-        else if(!CheckGround())
+        else if (!CheckGround())
         {
-            if(rb2D.velocity.y > 0)
+            animator.SetBool("IsDown", false);
+            if (rb2D.velocity.y > 0)
             {
-                //Debug.Log("JumpAni");
-                animator.SetTrigger("Jump");
+                AniSetTrigger("Jump");
             }
             else
             {
-                //Debug.Log("FallAni");
-                animator.SetTrigger("Fall");
+                AniSetTrigger("Fall");
             }
         }
         else
         {
-            //Debug.Log("IdleAni");
-            animator.SetTrigger("Idle");
+            AniSetTrigger("Idle");
+            animator.SetBool("IsDown", true);
         }
+    } 
+    #endregion
+
+    #region 重置animatorTrigger的代码，防止出现动画切换bug
+    public void AniSetTrigger(string triggerName)
+    {
+        if (triggerName == string.Empty) return;
+        if (previousTrigger != null)
+        {
+            animator.ResetTrigger(previousTrigger);
+        }
+        previousTrigger = triggerName;
+        animator.SetTrigger(previousTrigger);
+    }
+    #endregion
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.1f, 0, 0), new Vector2(0.8f, 0.3f));
     }
 }

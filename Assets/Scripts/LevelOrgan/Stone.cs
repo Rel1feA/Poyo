@@ -8,6 +8,8 @@ public class Stone : MonoBehaviour, ITakeDamge
     public float maxHealth;
     private float health;
 
+    public bool hasDead { get; set; }
+
     private void Start()
     {
         health=maxHealth;
@@ -15,6 +17,7 @@ public class Stone : MonoBehaviour, ITakeDamge
 
     public void TakeDamge(float damage, UnityAction callback = null)
     {
+        if (hasDead) return;
         health -= damage;
         if(health<=0)
         {
@@ -24,6 +27,7 @@ public class Stone : MonoBehaviour, ITakeDamge
 
     public void Dead()
     {
+        hasDead = true;
         Destroy(gameObject);
     }
 }

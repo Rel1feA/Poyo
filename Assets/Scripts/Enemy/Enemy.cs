@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour, IOperator,ITakeDamge
 {
     public bool canOperator { get; set; }
+    public bool hasDead { get; set; }
 
     public virtual void EnterOperator()
     {

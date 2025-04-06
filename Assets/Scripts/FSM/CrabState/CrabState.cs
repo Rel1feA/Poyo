@@ -20,6 +20,7 @@ public class CrabState : State
     }
 }
 
+#region Crab的Idle状态类
 public class CrabIdle : CrabState
 {
     public CrabIdle(StateMachine _stateMachine, Crab turtle) : base(_stateMachine, turtle)
@@ -48,7 +49,9 @@ public class CrabIdle : CrabState
 
     }
 }
+#endregion
 
+#region Crab的被操控状态类
 public class CrabContro : CrabState
 {
     public CrabContro(StateMachine _stateMachine, Crab turtle) : base(_stateMachine, turtle)
@@ -58,7 +61,7 @@ public class CrabContro : CrabState
 
     public override void EnterState()
     {
-        
+
     }
 
     public override void ExitState()
@@ -78,7 +81,8 @@ public class CrabContro : CrabState
 
     public override void PhysicsUpdate()
     {
-        
+
     }
-}
+} 
+#endregion
 
