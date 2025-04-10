@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorSwitch :MonoBehaviour
 {
-    public AutoDoor autoDoor;
+    public List<AutoDoor> autoDoors;
     public Vector2 forceDir;
     private bool isDown;
     private Animator animator;
@@ -14,17 +14,26 @@ public class DoorSwitch :MonoBehaviour
         animator= GetComponent<Animator>();
     }
 
-    private void Update()
+    public void FixedUpdate()
     {
-        if(!hasColliderOn())
+        bool currentPressed = hasColliderOn();
+        if(currentPressed!=isDown)
         {
-            animator.Play("Up");
+            foreach(AutoDoor autoDoor in autoDoors)
+            {
+                if(currentPressed)
+                {
+                    autoDoor.StartMoving(forceDir);
+                    animator.Play("Down");
+                }
+                else
+                {
+                    autoDoor.StopMoving();
+                    animator.Play("Up");
+                }
+            }
         }
-        else
-        {
-            autoDoor.AddForceToDoor(forceDir);
-            animator.Play("Down");
-        }
+        isDown=currentPressed;
     }
 
 

@@ -17,7 +17,7 @@ TagManager:
   - Tool
   - Obstacle
   - TranferRoomArea
-  - 
+  - Spike
   - 
   - 
   - 
@@ -41,7 +41,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
+  - name: TileMap
     uniqueID: 3612101551
     locked: 0
   - name: Level

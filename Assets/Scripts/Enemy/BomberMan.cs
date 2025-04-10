@@ -176,7 +176,7 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     {
         Vector2 checkPos = transform.position + new Vector3(transform.localScale.x * 0.5f, 0, 0);
         Vector2 boxSize = new Vector2(0.5f, 0.75f);
-        Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground", "Obstacle","Tool"));
+        Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground", "Obstacle","Tool","Spike"));
         if (collider2D != null)
         {
             return true;

@@ -79,6 +79,7 @@ public class Player : MonoBehaviour,ITakeDamge
         if (currentHealth <= 0)
         {
             EventCenter.Instance.EventTrigger("PlayerDead");
+            controller.useRaduisObj.SetActive(false);
             OperatorManager.Instance.ChangeOperator(null);
             hasDead = true;
             GameManager.Instance.ReStart();

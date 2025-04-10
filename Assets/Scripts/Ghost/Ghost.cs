@@ -36,6 +36,7 @@ public class Ghost : MonoBehaviour, IOperator
         if( Vector2.Distance(transform.position,player.transform.position)>moveRadius||Input.GetKeyDown(KeyCode.Q) )
         {
             OperatorManager.Instance.ChangeOperator(player.controller);
+            player.controller.useRaduisObj.SetActive(false);
             Destroy(gameObject);
         }
         Move();
@@ -63,6 +64,7 @@ public class Ghost : MonoBehaviour, IOperator
         {
             if (collider.TryGetComponent<IOperator>(out IOperator _operator))
             {
+                player.controller.useRaduisObj.SetActive(false);
                 OperatorManager.Instance.ChangeOperator(_operator);
             }
         }

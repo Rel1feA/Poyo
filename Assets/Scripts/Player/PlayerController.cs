@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
 
     private float timer;
     public float inputX;
+    public GameObject useRaduisObj;
 
     public bool canOperator { get; set; }
     public bool IsClimb { get; set; }
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D.gravityScale=playerData.normalGravityScale;
         OperatorManager.Instance.InitOperator(this);
+        useRaduisObj.SetActive(false);
     }
 
     #region 操控移动代码
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         ghost.transform.position = transform.position+new Vector3(0,0.5f,0);
         OperatorManager.Instance.ChangeOperator(ghost.GetComponent<Ghost>());
         player.ChangeState(PlayerStateType.Idle);
+        useRaduisObj.SetActive(true);
     }
     #endregion
 
@@ -193,7 +196,11 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     #region 实现操控接口，便于获取操控对象的gameobject代码
     public GameObject GetOperatorObject()
     {
-        return gameObject;
+        if(this!=null)
+        {
+            return gameObject;
+        }
+        return null;
     }
     #endregion
 

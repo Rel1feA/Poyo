@@ -25,3 +25,6 @@ MonoBehaviour:
   - roomID: 4
     roomCameraID: 4
     assetData: {fileID: 2450539795378556333, guid: d397ce3b15b90e24da61697bfdfc7710, type: 3}
+  - roomID: 5
+    roomCameraID: 5
+    assetData: {fileID: 6619705453655528666, guid: fc1b119cb9bdc5b42922457b1c84e694, type: 3}
