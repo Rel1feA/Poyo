@@ -5,9 +5,9 @@ using UnityEngine;
 public class AutoDoor : MonoBehaviour
 {
     private Rigidbody2D rb2D;
-    public float upForce;
+    public float upVel;
     private bool shouldMove;
-    private Vector2 realForce;
+    private Vector2 realVel;
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class AutoDoor : MonoBehaviour
 
     public void StartMoving(Vector2 dir)
     {
-        realForce = upForce * dir;
+        realVel = upVel * dir;
         shouldMove= true;
     }
 
@@ -30,7 +30,7 @@ public class AutoDoor : MonoBehaviour
     {
         if(shouldMove)
         {
-            rb2D.AddForce(realForce,ForceMode2D.Impulse);
+            rb2D.velocity = realVel;
         }
     }
 }

@@ -21,12 +21,17 @@ public class Bomb : MonoBehaviour
     public void Explosion()
     {
        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, bombRadius);
+       HashSet<ITakeDamge> damages = new HashSet<ITakeDamge>();
        foreach(Collider2D collider in colliders)
        {
             if(collider.TryGetComponent<ITakeDamge>(out ITakeDamge damge))
             {
-                damge.TakeDamge(damage);
+                damages.Add(damge);
             }
+       }
+       foreach(ITakeDamge takeDamge in damages)
+       {
+            takeDamge.TakeDamge(damage);
        }
     }
 

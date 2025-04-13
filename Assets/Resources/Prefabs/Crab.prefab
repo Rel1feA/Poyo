@@ -104,7 +104,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 2
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: 1fd118ddce02f5a419d78b72ff52d481, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -197,7 +197,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9386546, y: 0.87709665}
+  m_Size: {x: 0.93, y: 0.87709665}
   m_EdgeRadius: 0
 --- !u!1 &9087456602862409264
 GameObject:

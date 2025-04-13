@@ -75,7 +75,7 @@ public class Ghost : MonoBehaviour, IOperator
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, CheckEnemyRadius);
         Gizmos.color= Color.blue;
-        Gizmos.DrawWireSphere(player.transform.position, moveRadius);
+        Gizmos.DrawWireSphere((Vector2)player.transform.position, moveRadius);
     }
 
     public void OnPlayerDead()
