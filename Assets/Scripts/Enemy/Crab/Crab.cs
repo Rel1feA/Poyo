@@ -24,6 +24,17 @@ public class Crab : Enemy
     public float maxHealth;
     private float health;
 
+    private void OnEnable()
+    {
+        EventCenter.Instance.AddListener("PlayerDead", OnPlayerDead);
+    }
+
+    private void OnDisable()
+    {
+        EventCenter.Instance.RemoveListener("PlayerDead", OnPlayerDead);
+    }
+
+
     private void Start()
     {
         player = FindObjectOfType<Player>();
@@ -172,6 +183,11 @@ public class Crab : Enemy
     {
         transform.position = new Vector3(46.5f, -6, 0);
         SetVelocity(0);
+        ChangeState(CrabStateType.Idle);
+    }
+
+    public void OnPlayerDead()
+    {
         ChangeState(CrabStateType.Idle);
     }
 }

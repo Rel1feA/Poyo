@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4295769249608860970}
   - component: {fileID: 6087586966870162027}
   - component: {fileID: 5777031427056513848}
+  - component: {fileID: 1193777746116355538}
   m_Layer: 3
   m_Name: player
   m_TagString: Player
@@ -131,8 +132,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 90822552602ac1843a2141873937d58e, type: 2}
+  rb2D: {fileID: 0}
   inputX: 0
   useRaduisObj: {fileID: 8893942387943522337}
+  isOnWake: 0
 --- !u!70 &6036410526582409339
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -140,15 +143,15 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2682528022064258459}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 68812c8c9c88eae47a41aa119baf01e8, type: 2}
+  m_Material: {fileID: 6200000, guid: 1fd118ddce02f5a419d78b72ff52d481, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 14720
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -165,8 +168,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10029459, y: 0.4959219}
-  m_Size: {x: 0.8102703, y: 0.93945754}
+  m_Offset: {x: 0.065, y: 0.6013739}
+  m_Size: {x: 0.85, y: 0.91976404}
   m_Direction: 0
 --- !u!114 &4295769249608860970
 MonoBehaviour:
@@ -198,7 +201,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 15232
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -215,7 +218,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1, y: 0.42}
+  m_Offset: {x: 0.063474655, y: 0.57311994}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.08}
@@ -226,7 +229,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.84, y: 0.56}
+  m_Size: {x: 0.8758173, y: 0.6593288}
   m_EdgeRadius: 0
 --- !u!95 &5777031427056513848
 Animator:
@@ -249,6 +252,41 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &1193777746116355538
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2682528022064258459}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 68812c8c9c88eae47a41aa119baf01e8, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 14736
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.06672883, y: 0.46127266}
+  m_Size: {x: 0.8335614, y: 0.8525454}
+  m_Direction: 0
 --- !u!1 &8893942387943522337
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,6 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4246053803754744003}
   - component: {fileID: 796992509806349823}
+  - component: {fileID: 8103518139571287727}
   m_Layer: 3
   m_Name: GhostRadius
   m_TagString: Untagged
@@ -333,3 +372,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8103518139571287727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893942387943522337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7813c42c45ad53b44afd1714fd27b6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 15

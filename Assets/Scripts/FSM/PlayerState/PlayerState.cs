@@ -28,12 +28,13 @@ public class PlayerIdle : PlayerState
 
     public override void EnterState()
     {
-        player.controller.AniSetTrigger("Idle");
+        player.controller.AniSetTrigger("Sleep");
+        //player.controller.rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
 
     public override void ExitState()
     {
-        
+        //player.controller.rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public override void FrameUpdate()
@@ -54,6 +55,18 @@ public class PlayerOperator : PlayerState
 {
     public PlayerOperator(StateMachine _stateMachine, Player player) : base(_stateMachine, player)
     {
+
+    }
+
+    public override void EnterState()
+    {
+        player.controller.isOnWake=true;
+        player.controller.AniSetTrigger("Wake");
+    }
+
+    public override void ExitState()
+    {
+        
     }
 
     public override void FrameUpdate()
@@ -61,6 +74,11 @@ public class PlayerOperator : PlayerState
         player.controller.BeOnOperator();
         player.controller.CheckSwitch();
         player.controller.ChangeGravityScale();
+    }
+
+    public override string ToString()
+    {
+        return base.ToString();
     }
 } 
 #endregion

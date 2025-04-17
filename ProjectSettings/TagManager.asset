@@ -50,3 +50,6 @@ TagManager:
   - name: Player
     uniqueID: 2344016045
     locked: 0
+  - name: Descoration
+    uniqueID: 3815594063
+    locked: 0

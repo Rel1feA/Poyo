@@ -7,15 +7,16 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
 {
     public PlayerData playerData;
 
-    private Rigidbody2D rb2D;
-    private SpriteRenderer spriteRenderer;
+    public Rigidbody2D rb2D;
     private Animator animator;
     private string previousTrigger;
     private Player player;
 
-    private float timer;
+    //private float timer;
     public float inputX;
     public GameObject useRaduisObj;
+
+    public bool isOnWake;//判断是否在前腰阶段的布尔值
 
     public bool canOperator { get; set; }
     public bool IsClimb { get; set; }
@@ -30,7 +31,6 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     {
         player =GetComponent<Player>();
         rb2D= GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D.gravityScale=playerData.normalGravityScale;
         OperatorManager.Instance.InitOperator(this);
         useRaduisObj.SetActive(false);
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     public void UseSkill()
     {
         GameObject ghost = ResourcesManager.Instance.Load<GameObject>("Prefabs/ghost");
-        ghost.transform.position = transform.position+new Vector3(0,0.5f,0);
+        ghost.transform.position = transform.position+new Vector3(0,1f,0);
         OperatorManager.Instance.ChangeOperator(ghost.GetComponent<Ghost>());
         player.ChangeState(PlayerStateType.Idle);
         useRaduisObj.SetActive(true);
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     #region 检测地面代码
     public bool CheckGround()
     {
-        return Physics2D.OverlapBox(transform.position + new Vector3(transform.localScale.x * 0.1f, 0, 0), new Vector2(0.8f, 0.3f), 0, LayerMask.GetMask("Ground", "Tool"));
+        return Physics2D.OverlapBox(transform.position + new Vector3(transform.localScale.x * 0.07f, 0, 0), new Vector2(0.8f, 0.3f), 0, LayerMask.GetMask("Ground", "Tool","Obstacle"));
     }
     #endregion
 
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     #region 进入操控状态时代码
     public void EnterOperator()
     {
-        timer = 0;
+        //timer = 0;
         canOperator = true;
         player.ChangeState(PlayerStateType.Operator);
     }
@@ -133,18 +133,16 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     #region 在操控状态时每帧执行的逻辑
     public void BeOnOperator()
     {
-        //设置动画
-        SetAni();
-
+        if (isOnWake) return;
         //操作前腰（测试用）
-        timer += Time.deltaTime;
-        if (timer < playerData.operatorCoolTime)
-        {
-            spriteRenderer.color = Color.green;
-            return;
-        }
+        //timer += Time.deltaTime;
+        //if (timer < playerData.operatorCoolTime)
+        //{
+        //    spriteRenderer.color = Color.green;
+        //    return;
+        //}
         //
-        spriteRenderer.color = Color.white;
+
         //上楼梯，并且下面的移动等操作不执行
         if (CanClimb && !IsClimb)
         {
@@ -160,6 +158,9 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         }
         //
 
+        //设置动画
+        SetNormalAni();
+        //
 
         //移动
         Move();
@@ -187,8 +188,6 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     {
         inputX = 0;
         SetVel(0);
-        animator.ResetTrigger(previousTrigger);
-        animator.Play("Idle");
         player.ChangeState(PlayerStateType.Idle);
     }
     #endregion
@@ -209,6 +208,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     {
         IsClimb = true;
         rb2D.gravityScale = 0;
+        AniSetTrigger("Climb");
     }
     #endregion
 
@@ -220,12 +220,21 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         ChangeSpriteDir(inputX);
         Vector2 speed = new Vector2(inputX, inputY) * playerData.climbSpeed;
         rb2D.velocity = speed;
+        if(inputX==0&&inputY==0)
+        {
+            animator.speed = 0;
+        }
+        else
+        {
+            animator.speed = 1;
+        }
     }
     #endregion
 
     #region 退出攀爬状态代码
     public void ExitClimb()
     {
+        animator.speed = 1;
         IsClimb = false;
         rb2D.gravityScale = playerData.normalGravityScale;
     }
@@ -244,8 +253,8 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     }
     #endregion
 
-    #region 在被操控时动画切换逻辑
-    public void SetAni()
+    #region 在被操控时正常状态下动画切换逻辑（排除攀爬动画）
+    public void SetNormalAni()
     {
         if (inputX != 0 && CheckGround())
         {
@@ -285,9 +294,16 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     }
     #endregion
 
+    #region 结束前摇执行的方法，给Wake动画片段使用
+    public void EndWakeUp()
+    {
+        isOnWake = false;
+    } 
+    #endregion
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.1f, 0, 0), new Vector2(0.8f, 0.3f));
+        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.07f, 0, 0), new Vector2(0.8f, 0.3f));
     }
 }

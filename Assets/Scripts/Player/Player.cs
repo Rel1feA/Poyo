@@ -65,6 +65,7 @@ public class Player : MonoBehaviour,ITakeDamge
             transform.position = checkPoint.transform.position;
         }
         controller.SetVel(Vector2.zero);
+        controller.isOnWake= true;
         OperatorManager.Instance.ChangeOperator(controller);
         currentHealth = playerData.maxHealth;
         hasDead = false;

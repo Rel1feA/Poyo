@@ -26,6 +26,11 @@ public class Ghost : MonoBehaviour, IOperator
         player=FindObjectOfType<Player>();
     }
 
+    private void Start()
+    {
+        transform.localScale=player.transform.localScale;
+    }
+
     public void EnterOperator()
     {
         canOperator=true;
@@ -55,6 +60,14 @@ public class Ghost : MonoBehaviour, IOperator
         float moveY = Input.GetAxis("Vertical");
         Vector3 moveDir = new Vector3(moveX, moveY, 0);
         transform.position += moveDir* moveSpeed*Time.deltaTime;
+        if(moveX>0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if(moveX<0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
     
     public void CheckEnemy()
