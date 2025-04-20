@@ -19,11 +19,13 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
     {
         foreach (Spike spike in firstSpikes)
         {
-            spike.gameObject.SetActive(false);
+            //spike.gameObject.SetActive(false);
+            spike.AniSetTrigger("Down");
         }
         foreach(Spike spike in secondSpikes)
         {
-            spike.gameObject.SetActive(true);
+            //spike.gameObject.SetActive(true);
+            spike.AniSetTrigger("Up");
         }
         isOpen = true;
         animator.SetTrigger("Open");
@@ -34,11 +36,14 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
     {
         foreach (Spike spike in firstSpikes)
         {
-            spike.gameObject.SetActive(true);
+            //spike.gameObject.SetActive(true);
+            spike.AniSetTrigger("Up");
+
         }
         foreach(Spike spike in secondSpikes)
         {
-            spike.gameObject.SetActive(false);
+            //spike.gameObject.SetActive(false);
+            spike.AniSetTrigger("Down");
         }
         isOpen = false;
         animator.SetTrigger("Close");

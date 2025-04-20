@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1765439880068716037}
   - component: {fileID: 4008264966414925595}
   - component: {fileID: 577602696019483756}
+  - component: {fileID: 3856971422892514275}
   m_Layer: 12
   m_Name: SpikeGroup
   m_TagString: Untagged
@@ -171,6 +172,27 @@ CompositeCollider2D:
   m_OffsetDistance: 0
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 6617850236226439603}
+--- !u!95 &3856971422892514275
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6617850236226439603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37072cfb224747d48b93e4adb9a6d814, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &3420451975813238358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,6 +245,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -27646289, guid: 83d66b34bb71efc4e90bf9c6472ca2c4, type: 3}
+    - target: {fileID: 5586876461382621022, guid: 130a1c8c10ca04547b152d78141b7501, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586876461382621022, guid: 130a1c8c10ca04547b152d78141b7501, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5768742295247888600, guid: 130a1c8c10ca04547b152d78141b7501, type: 3}
       propertyPath: m_UsedByComposite
       value: 1
@@ -397,6 +427,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4914308023446315745, guid: 130a1c8c10ca04547b152d78141b7501, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586876461382621022, guid: 130a1c8c10ca04547b152d78141b7501, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586876461382621022, guid: 130a1c8c10ca04547b152d78141b7501, type: 3}
+      propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6463865289804375771, guid: 130a1c8c10ca04547b152d78141b7501, type: 3}

@@ -31,3 +31,6 @@ MonoBehaviour:
   - roomID: 6
     roomCameraID: 6
     assetData: {fileID: 883701460380857558, guid: 0d1952f2aba9a4f4e8190be383641e8f, type: 3}
+  - roomID: 7
+    roomCameraID: 7
+    assetData: {fileID: 4489076057151090749, guid: a836889dc9e8d9b4bb1c543074e4488b, type: 3}
