@@ -19,3 +19,4 @@ MonoBehaviour:
   normalGravityScale: 2.5
   fallGravityScale: 6
   climbSpeed: 4
+  generateGhostPos: {x: 0.065, y: 0.475, z: 0}

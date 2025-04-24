@@ -5,7 +5,8 @@ using UnityEngine;
 public enum PlayerStateType
 {
     Idle,
-    Operator
+    Operator,
+    Dead
 }
 
 public class PlayerState : State
@@ -79,6 +80,31 @@ public class PlayerOperator : PlayerState
     public override string ToString()
     {
         return base.ToString();
+    }
+}
+#endregion
+
+#region 玩家死亡状态类
+public class PlayerDeadState : PlayerState
+{
+    public PlayerDeadState(StateMachine _stateMachine, Player player) : base(_stateMachine, player)
+    {
+
+    }
+
+    public override void EnterState()
+    {
+        player.Dead();
+    }
+
+    public override void ExitState()
+    {
+
+    }
+
+    public override void FrameUpdate()
+    {
+
     }
 } 
 #endregion

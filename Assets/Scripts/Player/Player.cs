@@ -7,14 +7,14 @@ public class Player : MonoBehaviour,ITakeDamge
 {
     [HideInInspector]
     public PlayerController controller;
-    private float currentHealth;
-    private float health;
+    public float currentHealth;
     public PlayerData playerData;
     public bool hasKey;
 
     public StateMachine stateMachine;
     public PlayerState idleState;
     public PlayerState operatorState;
+    public PlayerState deadState;
 
     public bool hasDead { get; set; }
 
@@ -32,15 +32,8 @@ public class Player : MonoBehaviour,ITakeDamge
     {
         controller = GetComponent<PlayerController>();
         currentHealth = playerData.maxHealth;
-        if (GameManager.Instance.checkPoint == null)
-        {
-            transform.position = LevelManager.Instance.currentLevel.playerStartPos;
-        }
-        else
-        {
-            transform.position = GameManager.Instance.checkPoint.transform.position;
-        }
         InitState();
+        SetStartPos();
     }
 
     private void Update()
@@ -79,11 +72,7 @@ public class Player : MonoBehaviour,ITakeDamge
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            EventCenter.Instance.EventTrigger("PlayerDead");
-            controller.useRaduisObj.SetActive(false);
-            OperatorManager.Instance.ChangeOperator(null);
-            hasDead = true;
-            GameManager.Instance.ReStart();
+            ChangeState(PlayerStateType.Dead);
         }
         callback?.Invoke();
     }
@@ -95,6 +84,7 @@ public class Player : MonoBehaviour,ITakeDamge
         stateMachine = new StateMachine();
         idleState = new PlayerIdle(stateMachine, this);
         operatorState=new PlayerOperator(stateMachine, this);
+        deadState=new PlayerDeadState(stateMachine, this);
         stateMachine.Init(operatorState);
     }
     #endregion
@@ -110,8 +100,46 @@ public class Player : MonoBehaviour,ITakeDamge
             case PlayerStateType.Operator:
                 stateMachine.Changestate(operatorState);
                 break;
+            case PlayerStateType.Dead:
+                stateMachine.Changestate(deadState);
+                break;
             default:
                 break;
+        }
+    }
+    #endregion
+
+    #region 玩家死亡逻辑
+    public void Dead()
+    {
+        EventCenter.Instance.EventTrigger("PlayerDead");
+        controller.AniSetTrigger("Dead");
+        controller.useRaduisObj.SetActive(false);
+        OperatorManager.Instance.ChangeOperator(null);
+        hasDead = true;
+    }
+    #endregion
+
+    #region 播放死亡动画时执行的逻辑
+    public void OnDeadAni()
+    {
+        GameManager.Instance.ReStart();
+    }
+    #endregion
+
+    #region 初始化玩家位置逻辑
+    public void SetStartPos()
+    {
+        if (!LevelManager.Instance.currentLevel.levelSceneName.Equals(string.Empty))
+        {
+            if (GameManager.Instance.checkPoint == null)
+            {
+                transform.position = LevelManager.Instance.currentLevel.playerStartPos;
+            }
+            else
+            {
+                transform.position = GameManager.Instance.checkPoint.transform.position;
+            }
         }
     } 
     #endregion

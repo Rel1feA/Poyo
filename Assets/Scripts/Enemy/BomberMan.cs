@@ -25,7 +25,6 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     public float dizzyTime;
     private float currentHealth;
 
-
     [Header("巡逻相关")]
     public Transform pointA;
     public Transform pointB;
@@ -37,6 +36,7 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
 
 
     [Header("攻击相关")]
+    public bool canAttack;
     public Vector2 attackCheckBox;
     public float bombToPlayerTime;//投掷炸弹到玩家身旁的炸弹飞行期望时间
     public float attackCoolTime;
@@ -111,6 +111,7 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     #region 检测玩家是否在攻击范围内的方法
     public bool CheckAttackPlayer()
     {
+        if (!canAttack) return false;
         if (player == null) return false;
         Collider2D collider2D = Physics2D.OverlapBox(transform.position, attackCheckBox, 0, LayerMask.GetMask("Player"));
         if (collider2D != null)

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6087586966870162027}
   - component: {fileID: 5777031427056513848}
   - component: {fileID: 1193777746116355538}
+  - component: {fileID: 7276383254615965344}
   m_Layer: 3
   m_Name: player
   m_TagString: Player
@@ -151,7 +152,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 14720
+    m_Bits: 14592
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -184,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  currentHealth: 0
   playerData: {fileID: 11400000, guid: 90822552602ac1843a2141873937d58e, type: 2}
   hasKey: 0
 --- !u!61 &6087586966870162027
@@ -287,6 +289,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.06672883, y: 0.46127266}
   m_Size: {x: 0.8335614, y: 0.8525454}
   m_Direction: 0
+--- !u!114 &7276383254615965344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2682528022064258459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b3ccb0b8503fc14e8d36cf03e5c0209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 15
+  isInTestState: 0
 --- !u!1 &8893942387943522337
 GameObject:
   m_ObjectHideFlags: 0

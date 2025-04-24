@@ -18,8 +18,9 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        LevelManager.Instance.LoadLevel("level2");
         DontDestroyOnLoad(gameObject);
+        LevelManager.Instance.LoadLevel("level1");
+        //LoadSceneManager.Instance.LoadSceneAsync("ChooseLevel");
     }
 
     public void ReStart()

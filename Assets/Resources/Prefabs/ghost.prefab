@@ -101,7 +101,7 @@ MonoBehaviour:
   moveSpeed: 6
   moveRadius: 6.2
   player: {fileID: 0}
-  CheckEnemyRadius: 0.6
+  CheckEnemyRadius: 0.43
 --- !u!95 &4383082277420336440
 Animator:
   serializedVersion: 5

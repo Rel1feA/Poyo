@@ -74,7 +74,8 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     public void UseSkill()
     {
         GameObject ghost = ResourcesManager.Instance.Load<GameObject>("Prefabs/ghost");
-        ghost.transform.position = transform.position+new Vector3(0,1f,0);
+        Vector3 offset = new Vector3(playerData.generateGhostPos.x * player.transform.localScale.x, playerData.generateGhostPos.y, playerData.generateGhostPos.z);
+        ghost.transform.position = transform.position+offset;
         OperatorManager.Instance.ChangeOperator(ghost.GetComponent<Ghost>());
         player.ChangeState(PlayerStateType.Idle);
         useRaduisObj.SetActive(true);

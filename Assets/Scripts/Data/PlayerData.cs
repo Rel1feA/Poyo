@@ -13,4 +13,5 @@ public class PlayerData : ScriptableObject
     public float normalGravityScale;
     public float fallGravityScale;
     public float climbSpeed;
+    public Vector3 generateGhostPos;//使用技能时生成幽灵时与player的相对位置
 }
