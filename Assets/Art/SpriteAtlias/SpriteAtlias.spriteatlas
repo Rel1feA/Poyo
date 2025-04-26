@@ -74,7 +74,9 @@ SpriteAtlas:
     - 83d66b34bb71efc4e90bf9c6472ca2c4: 2131100688
     - a324a04547203894c85747e78c86e3e0: 21300000
     - 6733bf9621103e54f8c373d5a291869d: 21300000
+    - c9f370c661600f0499c8c65e950200c6: 21300000
     - 135e03e60df66b34b836b58301fd06f7: 21300000
+    - c5122b08592bfab46af063d758042d12: 21300000
     - bb2a241868ec3f642a301aa604271498: 21300000
     - 01b33ac8cce92c448aca83fad5f32ac3: 21300000
     - 44e8d9398cb0ee444a83b5bf3e4b11d4: -283005674
@@ -146,6 +148,11 @@ SpriteAtlas:
     - 3e5ba5cb5bb6cdd4bb06455f4917ce09: -2122974772
     - 3e5ba5cb5bb6cdd4bb06455f4917ce09: -1771963067
     - 3e5ba5cb5bb6cdd4bb06455f4917ce09: 1413832791
+    - df997d3ce039da849a46eab902aeedb2: 577642386
+    - df997d3ce039da849a46eab902aeedb2: -1975353350
+    - df997d3ce039da849a46eab902aeedb2: -1830218575
+    - df997d3ce039da849a46eab902aeedb2: -74275014
+    - 301d389deb78b6b48b9645a82642297d: 21300000
     - a1f9ca1e87456b3488d670342a157730: -1185479549
     - a1f9ca1e87456b3488d670342a157730: -1598817226
     - a1f9ca1e87456b3488d670342a157730: 404461729
@@ -186,6 +193,10 @@ SpriteAtlas:
     - e3c733dec6ee9d24c84858302ea05122: 325386750
     - e3c733dec6ee9d24c84858302ea05122: 1352725344
     - e3c733dec6ee9d24c84858302ea05122: 419942900
+    - b9ff921f6f5fa4943adb104b73ac72e2: -1202184232
+    - b9ff921f6f5fa4943adb104b73ac72e2: -83487795
+    - b9ff921f6f5fa4943adb104b73ac72e2: -659315324
+    - b9ff921f6f5fa4943adb104b73ac72e2: 449253663
     - 6758f31f4c4aaf54992c39a96f0d3a42: -536307076
     - 6758f31f4c4aaf54992c39a96f0d3a42: 1118751019
     - 6758f31f4c4aaf54992c39a96f0d3a42: -202517734
@@ -212,7 +223,9 @@ SpriteAtlas:
   - {fileID: 2131100688, guid: 83d66b34bb71efc4e90bf9c6472ca2c4, type: 3}
   - {fileID: 21300000, guid: a324a04547203894c85747e78c86e3e0, type: 3}
   - {fileID: 21300000, guid: 6733bf9621103e54f8c373d5a291869d, type: 3}
+  - {fileID: 21300000, guid: c9f370c661600f0499c8c65e950200c6, type: 3}
   - {fileID: 21300000, guid: 135e03e60df66b34b836b58301fd06f7, type: 3}
+  - {fileID: 21300000, guid: c5122b08592bfab46af063d758042d12, type: 3}
   - {fileID: 21300000, guid: bb2a241868ec3f642a301aa604271498, type: 3}
   - {fileID: 21300000, guid: 01b33ac8cce92c448aca83fad5f32ac3, type: 3}
   - {fileID: -283005674, guid: 44e8d9398cb0ee444a83b5bf3e4b11d4, type: 3}
@@ -284,6 +297,11 @@ SpriteAtlas:
   - {fileID: -2122974772, guid: 3e5ba5cb5bb6cdd4bb06455f4917ce09, type: 3}
   - {fileID: -1771963067, guid: 3e5ba5cb5bb6cdd4bb06455f4917ce09, type: 3}
   - {fileID: 1413832791, guid: 3e5ba5cb5bb6cdd4bb06455f4917ce09, type: 3}
+  - {fileID: 577642386, guid: df997d3ce039da849a46eab902aeedb2, type: 3}
+  - {fileID: -1975353350, guid: df997d3ce039da849a46eab902aeedb2, type: 3}
+  - {fileID: -1830218575, guid: df997d3ce039da849a46eab902aeedb2, type: 3}
+  - {fileID: -74275014, guid: df997d3ce039da849a46eab902aeedb2, type: 3}
+  - {fileID: 21300000, guid: 301d389deb78b6b48b9645a82642297d, type: 3}
   - {fileID: -1185479549, guid: a1f9ca1e87456b3488d670342a157730, type: 3}
   - {fileID: -1598817226, guid: a1f9ca1e87456b3488d670342a157730, type: 3}
   - {fileID: 404461729, guid: a1f9ca1e87456b3488d670342a157730, type: 3}
@@ -324,6 +342,10 @@ SpriteAtlas:
   - {fileID: 325386750, guid: e3c733dec6ee9d24c84858302ea05122, type: 3}
   - {fileID: 1352725344, guid: e3c733dec6ee9d24c84858302ea05122, type: 3}
   - {fileID: 419942900, guid: e3c733dec6ee9d24c84858302ea05122, type: 3}
+  - {fileID: -1202184232, guid: b9ff921f6f5fa4943adb104b73ac72e2, type: 3}
+  - {fileID: -83487795, guid: b9ff921f6f5fa4943adb104b73ac72e2, type: 3}
+  - {fileID: -659315324, guid: b9ff921f6f5fa4943adb104b73ac72e2, type: 3}
+  - {fileID: 449253663, guid: b9ff921f6f5fa4943adb104b73ac72e2, type: 3}
   - {fileID: -536307076, guid: 6758f31f4c4aaf54992c39a96f0d3a42, type: 3}
   - {fileID: 1118751019, guid: 6758f31f4c4aaf54992c39a96f0d3a42, type: 3}
   - {fileID: -202517734, guid: 6758f31f4c4aaf54992c39a96f0d3a42, type: 3}
@@ -349,7 +371,9 @@ SpriteAtlas:
   - Normal_8
   - locked_door03
   - locked_door01
+  - mobile_platform2.0
   - peristele01
+  - portal01
   - peristele02
   - locked_door02
   - NormalGround_6
@@ -421,6 +445,11 @@ SpriteAtlas:
   - key_4
   - key_7
   - key_6
+  - transfrring_effect(yellow)_3
+  - transfrring_effect(yellow)_2
+  - transfrring_effect(yellow)_1
+  - transfrring_effect(yellow)_0
+  - portal02
   - Beach2.0_30
   - Beach2.0_31
   - Beach2.0_25
@@ -461,6 +490,10 @@ SpriteAtlas:
   - button_3
   - button_0
   - button_1
+  - transfrring_effect(green)_2
+  - transfrring_effect(green)_3
+  - transfrring_effect(green)_0
+  - transfrring_effect(green)_1
   - SpikeSwitch_2
   - SpikeSwitch_0
   - SpikeSwitch_1
