@@ -12,6 +12,7 @@ public class BombIdleState : BomberManState
 
     public override void EnterState()
     {
+        bomberMan.AniSetTrigger("Idle");
         timer = 0;
         bomberMan.rb2D.velocity=new Vector2(0,bomberMan.rb2D.velocity.y);
     }
@@ -24,7 +25,6 @@ public class BombIdleState : BomberManState
     public override void FrameUpdate()
     {
         bomberMan.rb2D.velocity = new Vector2(0, bomberMan.rb2D.velocity.y);
-        bomberMan.spriteRenderer.color = Color.yellow;
         timer += Time.deltaTime;
         if (bomberMan.CheckAttackPlayer())
         {

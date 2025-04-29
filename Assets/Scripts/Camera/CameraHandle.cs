@@ -51,15 +51,15 @@ public class CameraHandle : MonoBehaviour
 
     private void OnEnable()
     {
-        EventCenter.Instance.AddListener<RoomData>("TranferRoom", OnTranferRoom);
+        EventCenter.Instance.AddListener<RoomData>("TransferRoom", OnTransferRoom);
     }
 
     private void OnDisable()
     {
-        EventCenter.Instance.RemoveListener<RoomData>("TranferRoom", OnTranferRoom);
+        EventCenter.Instance.RemoveListener<RoomData>("TransferRoom", OnTransferRoom);
     }
 
-    public void OnTranferRoom(RoomData roomData)
+    public void OnTransferRoom(RoomData roomData)
     {
         if(roomData.roomCameraID==id)
         {

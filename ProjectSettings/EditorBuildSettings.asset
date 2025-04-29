@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Persistent.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/StartGame.unity
+    guid: 90419333f1ede8a4facacaa484d01897
+  - enabled: 1
     path: Assets/Scenes/ChooseLevel.unity
     guid: 3556c9a478ccdd64ab301b3e8652e1b9
   - enabled: 1

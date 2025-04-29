@@ -16,6 +16,7 @@ public class Crab : Enemy
     public Player player;
     [HideInInspector]
     public Animator animator;
+    private string previousTrigger;
 
     [Header("移动相关")]
     public float moveSpeed;
@@ -68,7 +69,7 @@ public class Crab : Enemy
 
     public override void EnterOperator()
     {
-        animator.SetTrigger("EnterControl");
+        AniSetTrigger("EnterControl");
         canOperator = true;
     }
 
@@ -112,11 +113,11 @@ public class Crab : Enemy
         SetVelocity(inputX*moveSpeed);
         if(Mathf.Abs(rb2D.velocity.x) > 0)
         {
-            animator.Play("Move");
+            AniSetTrigger("Move");
         }
         else
         {
-            animator.SetTrigger("Idle");
+            AniSetTrigger("Idle");
         }
         //翻转精灵图片
         if(inputX>0)
@@ -179,12 +180,19 @@ public class Crab : Enemy
         rb2D.velocity = new Vector2(speedX,rb2D.velocity.y);
     }
 
-    public void Init()
+    #region 重置animatorTrigger的代码，防止出现动画切换bug
+    public void AniSetTrigger(string triggerName)
     {
-        transform.position = new Vector3(46.5f, -6, 0);
-        SetVelocity(0);
-        ChangeState(CrabStateType.Idle);
+        if (triggerName == string.Empty) return;
+        if (triggerName == previousTrigger) return;
+        if (previousTrigger != null)
+        {
+            animator.ResetTrigger(previousTrigger);
+        }
+        previousTrigger = triggerName;
+        animator.SetTrigger(previousTrigger);
     }
+    #endregion
 
     public void OnPlayerDead()
     {

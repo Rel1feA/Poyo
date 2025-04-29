@@ -10,12 +10,12 @@ public class ReSet : MonoBehaviour
 
     private void OnEnable()
     {
-        EventCenter.Instance.AddListener<RoomData>("TranferRoom", CheckRetSet);
+        EventCenter.Instance.AddListener<RoomData>("TransferRoom", CheckRetSet);
     }
 
     private void OnDisable()
     {
-        EventCenter.Instance.RemoveListener<RoomData>("TranferRoom", CheckRetSet);
+        EventCenter.Instance.RemoveListener<RoomData>("TransferRoom", CheckRetSet);
     }
 
     public void CheckRetSet(RoomData roomData)
@@ -25,8 +25,8 @@ public class ReSet : MonoBehaviour
         {
             if (hasBeTranfer) return;
             hasBeTranfer = true;
-            Destroy(gameObject,0.5f);
             Instantiate(roomData.assetData);
+            Destroy(gameObject,0.5f);
         }
     }
 }

@@ -37,13 +37,13 @@ public class TranferManager : Singleton<TranferManager>
     {
         RoomData roomData = GetRoomData(LevelManager.Instance.currentLevel.levelIndex,roomId);
         currentRoomData = roomData;
-        EventCenter.Instance.EventTrigger<RoomData>("TranferRoom", roomData);
+        EventCenter.Instance.EventTrigger<RoomData>("TransferRoom", roomData);
     }
 
     public void TranferRoom(int levelIndex, int roomId)
     {
         RoomData roomData = GetRoomData(levelIndex, roomId);
         currentRoomData = roomData;
-        EventCenter.Instance.EventTrigger<RoomData>("TranferRoom", roomData);
+        EventCenter.Instance.EventTrigger<RoomData>("TransferRoom", roomData);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
@@ -38,24 +39,25 @@ public class LevelManager : Singleton<LevelManager>
         return null;
     }
 
-    public void LoadLevel(string levelName)
+    public void LoadLevel(string levelName,UnityAction<float> OnLoading=null,UnityAction<AsyncOperation> onCompleted = null,bool sceneActive=true)
     {
         levelData targetLevel = GetLevelData(levelName);
-        LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, null, (value) =>
+        LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, OnLoading, (value) =>
         {
+            onCompleted?.Invoke(value);
             EventCenter.Instance.EventTrigger<levelData>("CompletedLoadLevel", targetLevel);
-        });
+        },sceneActive);
         currentLevel = targetLevel;
     }
 
-    public void LoadLevel(int levelIndex)
+    public void LoadLevel(int levelIndex,UnityAction<float> OnLoading=null,UnityAction<AsyncOperation> onCompleted=null, bool sceneActive = true)
     {
-        OperatorManager.Instance.ChangeOperator(null);
         levelData targetLevel = GetLevelData(levelIndex);
-        LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, null, (value) =>
+        LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, OnLoading, (value) =>
         {
+            onCompleted?.Invoke(value);
             EventCenter.Instance.EventTrigger<levelData>("CompletedLoadLevel", targetLevel);
-        });
+        },sceneActive);
         currentLevel = targetLevel;
     }
 

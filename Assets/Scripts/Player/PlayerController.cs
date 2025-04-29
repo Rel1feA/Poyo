@@ -279,13 +279,14 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
             AniSetTrigger("Idle");
             animator.SetBool("IsDown", true);
         }
-    } 
+    }
     #endregion
 
     #region 重置animatorTrigger的代码，防止出现动画切换bug
     public void AniSetTrigger(string triggerName)
     {
         if (triggerName == string.Empty) return;
+        if (triggerName == previousTrigger) return;
         if (previousTrigger != null)
         {
             animator.ResetTrigger(previousTrigger);

@@ -54,7 +54,7 @@ SpriteAtlas:
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
     - 049b0b00f9bb00f49af6f38378523856: 21300000
-    - 1e663de1d7f34214cb566679b45cf35b: 21300000
+    - d53227a0e8e173f42bc351879673b54d: 21300000
     - 720e2c1370385e443840f9d56b1c316e: 21300000
     - 83d66b34bb71efc4e90bf9c6472ca2c4: 1049001175
     - 83d66b34bb71efc4e90bf9c6472ca2c4: -1575726899
@@ -74,7 +74,6 @@ SpriteAtlas:
     - 83d66b34bb71efc4e90bf9c6472ca2c4: 2131100688
     - a324a04547203894c85747e78c86e3e0: 21300000
     - 6733bf9621103e54f8c373d5a291869d: 21300000
-    - c9f370c661600f0499c8c65e950200c6: 21300000
     - 135e03e60df66b34b836b58301fd06f7: 21300000
     - c5122b08592bfab46af063d758042d12: 21300000
     - bb2a241868ec3f642a301aa604271498: 21300000
@@ -203,7 +202,7 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 049b0b00f9bb00f49af6f38378523856, type: 3}
-  - {fileID: 21300000, guid: 1e663de1d7f34214cb566679b45cf35b, type: 3}
+  - {fileID: 21300000, guid: d53227a0e8e173f42bc351879673b54d, type: 3}
   - {fileID: 21300000, guid: 720e2c1370385e443840f9d56b1c316e, type: 3}
   - {fileID: 1049001175, guid: 83d66b34bb71efc4e90bf9c6472ca2c4, type: 3}
   - {fileID: -1575726899, guid: 83d66b34bb71efc4e90bf9c6472ca2c4, type: 3}
@@ -223,7 +222,6 @@ SpriteAtlas:
   - {fileID: 2131100688, guid: 83d66b34bb71efc4e90bf9c6472ca2c4, type: 3}
   - {fileID: 21300000, guid: a324a04547203894c85747e78c86e3e0, type: 3}
   - {fileID: 21300000, guid: 6733bf9621103e54f8c373d5a291869d, type: 3}
-  - {fileID: 21300000, guid: c9f370c661600f0499c8c65e950200c6, type: 3}
   - {fileID: 21300000, guid: 135e03e60df66b34b836b58301fd06f7, type: 3}
   - {fileID: 21300000, guid: c5122b08592bfab46af063d758042d12, type: 3}
   - {fileID: 21300000, guid: bb2a241868ec3f642a301aa604271498, type: 3}
@@ -351,7 +349,7 @@ SpriteAtlas:
   - {fileID: -202517734, guid: 6758f31f4c4aaf54992c39a96f0d3a42, type: 3}
   m_PackedSpriteNamesToIndex:
   - sea_door02
-  - mobile_platform
+  - mobile_platform3.0 1
   - sea_door01
   - Normal_12
   - Normal_13
@@ -371,7 +369,6 @@ SpriteAtlas:
   - Normal_8
   - locked_door03
   - locked_door01
-  - mobile_platform2.0
   - peristele01
   - portal01
   - peristele02

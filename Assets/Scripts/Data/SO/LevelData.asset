@@ -13,18 +13,13 @@ MonoBehaviour:
   m_Name: LevelData
   m_EditorClassIdentifier: 
   levelDates:
-  - levelName: level1
+  - levelName: Beach
     levelSceneName: Level1
     levelIndex: 1
-    roomData: {fileID: 11400000, guid: f3a51885f50e43241b545b618d27030e, type: 2}
+    roomData: {fileID: 11400000, guid: 1cc96c022865e4f49bbf302d82a8d7ba, type: 2}
     playerStartPos: {x: 0, y: -6, z: 0}
-  - levelName: level2
+  - levelName: Temple
     levelSceneName: Level2
     levelIndex: 2
     roomData: {fileID: 11400000, guid: 383442d259a94b34789d924b59be099e, type: 2}
     playerStartPos: {x: -8.5, y: -6, z: 0}
-  - levelName: level3
-    levelSceneName: Level3
-    levelIndex: 3
-    roomData: {fileID: 0}
-    playerStartPos: {x: 0, y: 0, z: 0}

@@ -6,6 +6,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class BombControl : BomberManState
 {
     private float timer;
+    private float inputX;
 
     public BombControl(StateMachine _stateMachine, BomberMan bomberMan) : base(_stateMachine, bomberMan)
     {
@@ -14,7 +15,6 @@ public class BombControl : BomberManState
 
     public override void EnterState()
     {
-        bomberMan.spriteRenderer.color = Color.blue;
         timer = bomberMan.useCoolTime;
     }
 
@@ -27,6 +27,7 @@ public class BombControl : BomberManState
     {
         timer += Time.deltaTime;
         Move();
+        SetAni();
         if(Input.GetKeyDown(KeyCode.Q))
         {
             //if (bomberMan.player == null) return;
@@ -42,7 +43,7 @@ public class BombControl : BomberManState
 
     public void Move()
     {
-        float inputX = Input.GetAxis("Horizontal");
+        inputX = Input.GetAxis("Horizontal");
         bomberMan.rb2D.velocity = new Vector2(bomberMan.moveSpeed*inputX,bomberMan.rb2D.velocity.y);
         if(inputX > 0)
         {
@@ -54,5 +55,15 @@ public class BombControl : BomberManState
         }
     }
 
-
+    public void SetAni()
+    {
+        if(inputX!=0)
+        {
+            bomberMan.AniSetTrigger("Walk");
+        }
+        else
+        {
+            bomberMan.AniSetTrigger("Idle");
+        }
+    }
 }

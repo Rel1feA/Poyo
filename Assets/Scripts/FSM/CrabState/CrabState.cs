@@ -30,7 +30,7 @@ public class CrabIdle : CrabState
 
     public override void EnterState()
     {
-        crab.animator.SetTrigger("ExitControl");
+        crab.AniSetTrigger("ExitControl");
         crab.rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
 

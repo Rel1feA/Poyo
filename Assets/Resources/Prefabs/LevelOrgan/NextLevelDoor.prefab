@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6605635036335849378}
   - component: {fileID: 5180643848457841324}
   - component: {fileID: 4898736892986239437}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: NextLevelDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d5c8ea09b06340419411e2492af7d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectType: 2
   toLevelIndex: 2
 --- !u!61 &4898736892986239437
 BoxCollider2D:
@@ -143,7 +144,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1967645, y: 2.5238013}
+  m_Size: {x: 0.43671256, y: 2.5238013}
   m_EdgeRadius: 0
 --- !u!1 &4729816471144614681
 GameObject:
@@ -156,7 +157,7 @@ GameObject:
   - component: {fileID: 157738414482663064}
   - component: {fileID: 5668739248633112448}
   - component: {fileID: 6085821421781548714}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: transfrring_effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

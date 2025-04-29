@@ -14,7 +14,6 @@ public class BombAttack : BomberManState
     public override void EnterState()
     {
         bomberMan.LookAtPlayer();
-        bomberMan.spriteRenderer.color = Color.red;
         timer = bomberMan.attackCoolTime-0.5f;
     }
 

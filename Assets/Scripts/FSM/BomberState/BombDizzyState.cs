@@ -15,7 +15,6 @@ public class DizzyState : BomberManState
     {
         timer = 0;
         bomberMan.rb2D.velocity = new Vector2(0, bomberMan.rb2D.velocity.y);
-        bomberMan.spriteRenderer.color = Color.green;
     }
 
     public override void ExitState()

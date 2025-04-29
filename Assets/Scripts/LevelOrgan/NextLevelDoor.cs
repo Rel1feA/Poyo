@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class NextLevelDoor : MonoBehaviour
 {
+    public TransferEffectType effectType;
     public int toLevelIndex;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            LevelManager.Instance.LoadLevel(toLevelIndex);
+            LoadSceneManager.Instance.CreateTransferEffect(effectType,() =>
+            {
+                LevelManager.Instance.LoadLevel("Temple", null, (value) =>
+                {
+                    LoadSceneManager.Instance.ChangeEffect();
+                });
+            });
         }
     }
 }

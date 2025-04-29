@@ -17,8 +17,6 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     public Rigidbody2D rb2D;
     [HideInInspector]
     public Player player;
-    [HideInInspector]
-    public SpriteRenderer spriteRenderer;
 
     [Header("基本属性")]
     public float maxHealth;
@@ -45,11 +43,16 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     public float throwSpeed;
     public float useCoolTime;
 
+    [Header("动画相关")]
+    private string previousTrigger;
+    [HideInInspector]
+    public Animator animator;
+
     private void Start()
     {
         player=FindObjectOfType<Player>();
         rb2D = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator= GetComponent<Animator>();
         InitState();
         currentHealth = maxHealth;
     }
@@ -113,7 +116,7 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     {
         if (!canAttack) return false;
         if (player == null) return false;
-        Collider2D collider2D = Physics2D.OverlapBox(transform.position, attackCheckBox, 0, LayerMask.GetMask("Player"));
+        Collider2D collider2D = Physics2D.OverlapBox(transform.position+Vector3.up*0.5f, attackCheckBox, 0, LayerMask.GetMask("Player"));
         if (collider2D != null)
         {
             return true;
@@ -125,9 +128,9 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     #region 投掷炸弹的方法
     public void ThrowBomb(Vector2 speed)
     {
-        ResourcesManager.Instance.LoadAsync<GameObject>("Prefabs/Bomb", (obj) =>
+        ResourcesManager.Instance.LoadAsync<GameObject>("Prefabs/Enemy/Bomb", (obj) =>
         {
-            obj.transform.position = (Vector2)transform.position + new Vector2(transform.localScale.x, 0.7f);
+            obj.transform.position = (Vector2)transform.position + new Vector2(transform.localScale.x, 1.4f);
             obj.GetComponent<Rigidbody2D>().velocity = speed;
         });
     }
@@ -175,8 +178,8 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     #region 检测前方是否有障碍物或者墙壁的方法
     public bool CheckWallPatrol()
     {
-        Vector2 checkPos = transform.position + new Vector3(transform.localScale.x * 0.5f, 0, 0);
-        Vector2 boxSize = new Vector2(0.5f, 0.75f);
+        Vector2 checkPos = transform.position + new Vector3(transform.localScale.x * 0.65f, 0.5f, 0);
+        Vector2 boxSize = new Vector2(0.5f, 0.85f);
         Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground", "Obstacle","Tool","Spike"));
         if (collider2D != null)
         {
@@ -190,15 +193,29 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     public void Filp()
     {
         transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
-    } 
+    }
+    #endregion
+
+    #region 重置animatorTrigger的代码，防止出现动画切换bug
+    public void AniSetTrigger(string triggerName)
+    {
+        if (triggerName == string.Empty) return;
+        if (triggerName == previousTrigger) return;
+        if (previousTrigger != string.Empty)
+        {
+            animator.ResetTrigger(previousTrigger);
+        }
+        previousTrigger = triggerName;
+        animator.SetTrigger(previousTrigger);
+    }
     #endregion
 
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(transform.position,attackCheckBox);
+        Gizmos.DrawWireCube(transform.position+Vector3.up*0.5f,attackCheckBox);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.5f, 0, 0),new Vector2(0.5f,0.75f));
+        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.65f, 0.5f, 0),new Vector2(0.5f,0.85f));
     }
 }
