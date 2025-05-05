@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     //private float timer;
     public float inputX;
     public GameObject useRaduisObj;
-
     public bool isOnWake;//判断是否在前腰阶段的布尔值
 
     public bool canOperator { get; set; }
@@ -159,20 +158,20 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         }
         //
 
-        //设置动画
-        SetNormalAni();
-        //
-
-        //移动
-        Move();
-        //
-
         //使用技能
         if (Input.GetKeyDown(KeyCode.E))
         {
             UseSkill();
             SetVel(0);
         }
+        //
+
+        //设置动画
+        SetNormalAni();
+        //
+
+        //移动
+        Move();
         //
 
         //跳跃

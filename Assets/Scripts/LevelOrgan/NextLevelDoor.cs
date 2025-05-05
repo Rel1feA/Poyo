@@ -13,7 +13,7 @@ public class NextLevelDoor : MonoBehaviour
         {
             LoadSceneManager.Instance.CreateTransferEffect(effectType,() =>
             {
-                LevelManager.Instance.LoadLevel("Temple", null, (value) =>
+                LevelManager.Instance.LoadLevel(toLevelIndex, null, (value) =>
                 {
                     LoadSceneManager.Instance.ChangeEffect();
                 });

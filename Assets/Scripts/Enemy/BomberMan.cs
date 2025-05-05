@@ -40,8 +40,14 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     public float attackCoolTime;
 
     [Header("技能相关")]
-    public float throwSpeed;
+    public float minThrowSpeed;
+    public float maxThrowSpeed;
+    public float targetSpeed;
+    public float detalAddSpeed;
     public float useCoolTime;
+    public Vector2 throwOffset;
+    public ParabolicPred parabolicPred;
+
 
     [Header("动画相关")]
     private string previousTrigger;
@@ -71,7 +77,8 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     #region 实现进入操控模式的方法
     public override void EnterOperator()
     {
-        stateMachine.Changestate(controlState);
+        ChangeState(BomberManStateType.Dizzy);
+        AniSetTrigger("WakeUp");
         canOperator = true;
     }
     #endregion
@@ -104,7 +111,7 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            stateMachine.Changestate(hurtState);
+            ChangeState(BomberManStateType.Hurt);
             hasDead = true;
         }
         callback?.Invoke();
@@ -126,14 +133,32 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     #endregion
 
     #region 投掷炸弹的方法
-    public void ThrowBomb(Vector2 speed)
+    public void ThrowBomb()
     {
         ResourcesManager.Instance.LoadAsync<GameObject>("Prefabs/Enemy/Bomb", (obj) =>
         {
-            obj.transform.position = (Vector2)transform.position + new Vector2(transform.localScale.x, 1.4f);
-            obj.GetComponent<Rigidbody2D>().velocity = speed;
+            obj.transform.position = (Vector2)transform.position +new Vector2(transform.localScale.x*throwOffset.x,throwOffset.y);
+            obj.GetComponent<Rigidbody2D>().velocity=new Vector2(transform.localScale.x,1).normalized*targetSpeed;
+            obj.GetComponent<Rigidbody2D>().angularVelocity = 360*2*(-transform.localScale.x);
         });
     }
+    #endregion
+
+    #region 计算投掷速度
+    public void CaluateThrowForce()
+    {
+        if (targetSpeed < minThrowSpeed)
+        {
+            targetSpeed = minThrowSpeed;
+            detalAddSpeed = -detalAddSpeed;
+        }
+        else if (targetSpeed > maxThrowSpeed)
+        {
+            targetSpeed = maxThrowSpeed;
+            detalAddSpeed = -detalAddSpeed;
+        }
+        targetSpeed += detalAddSpeed * Time.deltaTime;
+    } 
     #endregion
 
     #region 计算炸弹跟踪玩家所需要的初速度的方法
@@ -210,6 +235,31 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     }
     #endregion
 
+    #region 给外部调用的切换状态方法
+    public void ChangeState(BomberManStateType state)
+    {
+        switch (state)
+        {
+            case BomberManStateType.Idle:
+                stateMachine.Changestate(idleState);
+                break;
+            case BomberManStateType.Control:
+                stateMachine.Changestate(controlState);
+                break;
+            case BomberManStateType.Hurt:
+                stateMachine.Changestate(hurtState);
+                break;
+            case BomberManStateType.Patrol:
+                stateMachine.Changestate(patrolState);
+                break;
+            case BomberManStateType.Dizzy:
+                stateMachine.Changestate(dizzyState);
+                break;
+            default:
+                break;
+        }
+    } 
+    #endregion
 
     private void OnDrawGizmos()
     {

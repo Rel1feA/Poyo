@@ -45,7 +45,7 @@ public class PlayerTest : MonoBehaviour
             {
                 if(!isTestMove)
                 {
-                    Debug.Log("½øÈë·ÉĞĞÄ£Ê½");
+                    Debug.Log("è¿›å…¥é£è¡Œæ¨¡å¼");
                     isTestMove = true;
                     rb2D.velocity = Vector2.zero;
                     player.controller.enabled = false;
@@ -58,7 +58,7 @@ public class PlayerTest : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("ÍË³ö·ÉĞĞÄ£Ê½");
+                    Debug.Log("é€€å‡ºé£è¡Œæ¨¡å¼");
                     player.controller.enabled = true;
                     player.enabled = true;
                     rb2D.isKinematic = false;
@@ -76,7 +76,7 @@ public class PlayerTest : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.P))
             {
-                Debug.Log("Ö´ĞĞÁ¢¼´ËÀÍö");
+                Debug.Log("æ‰§è¡Œæ­»äº¡");
                 player.TakeDamge(9999);
             }
         }
@@ -100,7 +100,7 @@ public class PlayerTest : MonoBehaviour
 
     public void EnterTest()
     {
-        Debug.Log("½øÈëµ÷ÊÔÄ£Ê½");
+        Debug.Log("è¿›å…¥è°ƒè¯•æ¨¡å¼");
         player.currentHealth = 999;
         spriteRenderer.color = Color.red;
         isTestMove= false;
@@ -108,7 +108,7 @@ public class PlayerTest : MonoBehaviour
 
     public void ExitTest()
     {
-        Debug.Log("ÍË³öµ÷ÊÔÄ£Ê½");
+        Debug.Log("æ¨å‡ºè°ƒè¯•æ¨¡å¼");
         spriteRenderer.color = Color.white;
         player.currentHealth = player.playerData.maxHealth;
         player.controller.enabled = true;

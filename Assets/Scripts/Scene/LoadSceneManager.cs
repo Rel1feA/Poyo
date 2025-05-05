@@ -8,6 +8,7 @@ public enum TransferEffectType
 {
     Fade,
     Round,
+    FadeWhite,
     None
 }
 
@@ -148,6 +149,15 @@ public class LoadSceneManager : NormalSingleton<LoadSceneManager>
                     {
                         effect.callback = callback;
                         currentEffect = UIManager.Instance.GetPanel<TransferEffect>("TransferEffects/Round");
+                    });
+                    break;
+                }
+            case TransferEffectType.FadeWhite:
+                {
+                    UIManager.Instance.ShowPanel<TransferEffect>("TransferEffects/FadeWhite", E_UI_Layer.System, (effect) =>
+                    {
+                        effect.callback = callback;
+                        currentEffect = UIManager.Instance.GetPanel<TransferEffect>("TransferEffects/FadeWhite");
                     });
                     break;
                 }

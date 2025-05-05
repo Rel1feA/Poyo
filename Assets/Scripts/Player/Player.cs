@@ -39,6 +39,10 @@ public class Player : MonoBehaviour,ITakeDamge
     private void Update()
     {
         stateMachine.currentState.FrameUpdate();
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Dead();
+        }
     }
 
     private void LateUpdate()

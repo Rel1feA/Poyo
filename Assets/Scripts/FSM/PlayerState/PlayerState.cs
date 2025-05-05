@@ -30,6 +30,7 @@ public class PlayerIdle : PlayerState
     public override void EnterState()
     {
         player.controller.AniSetTrigger("Sleep");
+        player.controller.SetVel(0);
         //player.controller.rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
     }
 

@@ -15,7 +15,7 @@ public class StateMachine
 
     public void Changestate(State newState)
     {
-        nextState=newState;
+       this.nextState=newState;
     }
 
 

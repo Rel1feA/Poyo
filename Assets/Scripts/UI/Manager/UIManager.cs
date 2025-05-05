@@ -43,6 +43,11 @@ public class UIManager : Singleton<UIManager>
         DontDestroyOnLoad (obj);
     }
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     /// <summary>
     /// 显示面板
     /// </summary>
