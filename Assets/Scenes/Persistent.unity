@@ -271,7 +271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1251580490}
-  - component: {fileID: 1251580489}
+  - component: {fileID: 1251580491}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -279,20 +279,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1251580489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1251580488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e05acb6be8ed62047b903d55375a5684, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BGValue: 1
-  SeValue: 1
 --- !u!4 &1251580490
 Transform:
   m_ObjectHideFlags: 0
@@ -308,6 +294,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1251580491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251580488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb00639131c1df40904b44172cb082c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - clip: {fileID: 8300000, guid: 125cbb3965dc4d44cb4130d19ad446d5, type: 3}
+    mixerGroup: {fileID: 8113867246846877464, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    volume: 0.3
+    playOnAwake: 1
+    loop: 1
 --- !u!1 &1270365421
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPoint: {fileID: 0}
-  currentState: 0
+  currentState: 2
 --- !u!4 &2039302393
 Transform:
   m_ObjectHideFlags: 0

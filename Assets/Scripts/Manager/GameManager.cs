@@ -36,7 +36,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        LoadSceneManager.Instance.LoadSceneAsync(1);
+        LoadSceneManager.Instance.LoadSceneAsync("StartGame");
         InitState();
     }
 

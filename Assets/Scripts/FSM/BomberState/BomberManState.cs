@@ -230,7 +230,6 @@ public class DizzyState : BomberManState
 
     public override void EnterState()
     {
-        Debug.Log("Dizzy");
         bomberMan.rb2D.velocity = new Vector2(0, bomberMan.rb2D.velocity.y);
     }
 } 

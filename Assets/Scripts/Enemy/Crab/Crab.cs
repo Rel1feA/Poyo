@@ -35,7 +35,6 @@ public class Crab : Enemy
         EventCenter.Instance.RemoveListener("PlayerDead", OnPlayerDead);
     }
 
-
     private void Start()
     {
         player = FindObjectOfType<Player>();
@@ -56,6 +55,7 @@ public class Crab : Enemy
         stateMachine.CheckChangeState();
     }
 
+    #region 物体被销毁时所执行的方法
     private void OnDestroy()
     {
         if (OperatorManager.Instance.GetCurrentOperatorObj() != null)
@@ -65,8 +65,10 @@ public class Crab : Enemy
                 OperatorManager.Instance.ChangeOperator(player.controller);
             }
         }
-    }
+    } 
+    #endregion
 
+    #region 实现操控接口所需要的方法
     public override void EnterOperator()
     {
         AniSetTrigger("EnterControl");
@@ -82,16 +84,20 @@ public class Crab : Enemy
     public override GameObject GetOperatorObject()
     {
         return gameObject;
-    }
+    } 
+    #endregion
 
+    #region 初始化状态的方法
     public void InitState()
     {
         stateMachine = new StateMachine();
-        idleState = new CrabIdle(stateMachine,this);
+        idleState = new CrabIdle(stateMachine, this);
         onControllState = new CrabContro(stateMachine, this);
         stateMachine.Init(idleState);
-    }
+    } 
+    #endregion
 
+    #region 给外部调用改变状态的方法
     public void ChangeState(CrabStateType type)
     {
         switch (type)
@@ -105,13 +111,15 @@ public class Crab : Enemy
             default:
                 break;
         }
-    }
+    } 
+    #endregion
 
+    #region 移动方法
     public void Move()
     {
         float inputX = Input.GetAxis("Horizontal");
-        SetVelocity(inputX*moveSpeed);
-        if(Mathf.Abs(rb2D.velocity.x) > 0)
+        SetVelocity(inputX * moveSpeed);
+        if (Mathf.Abs(rb2D.velocity.x) > 0)
         {
             AniSetTrigger("Move");
         }
@@ -120,27 +128,31 @@ public class Crab : Enemy
             AniSetTrigger("Idle");
         }
         //翻转精灵图片
-        if(inputX>0)
+        if (inputX > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
-        else if(inputX<0)
+        else if (inputX < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
-    }
+    } 
+    #endregion
 
+    #region 实现takedamage接口所执行的方法
     public override void TakeDamge(float damage, UnityAction callback = null)
     {
-        if(hasDead)return;
+        if (hasDead) return;
         health -= damage;
         if (health <= 0)
         {
             Dead();
         }
         callback?.Invoke();
-    }
+    } 
+    #endregion
 
+    #region 死亡的方法
     public void Dead()
     {
         if (OperatorManager.Instance.GetCurrentOperatorObj() != null)
@@ -152,8 +164,10 @@ public class Crab : Enemy
         }
         hasDead = true;
         GameObject.Destroy(gameObject);
-    }
+    } 
+    #endregion
 
+    #region 检测是否碰到开关的方法
     public void CheckSwitch()
     {
         Collider2D collider2D = Physics2D.OverlapBox(transform.position, Vector2.one, 0, LayerMask.GetMask("Switch"));
@@ -162,23 +176,25 @@ public class Crab : Enemy
         {
             _switch.CanTrigger(this);
         }
-    }
+    } 
+    #endregion
 
-
+    #region 给外部调用设置速度的方法
     public void SetVelocity(Vector2 speed)
     {
         rb2D.velocity = speed;
     }
 
-    public void SetVelocity(float speedX,float speedY)
+    public void SetVelocity(float speedX, float speedY)
     {
-        rb2D.velocity = new Vector2(speedX,speedY);
+        rb2D.velocity = new Vector2(speedX, speedY);
     }
 
     public void SetVelocity(float speedX)
     {
-        rb2D.velocity = new Vector2(speedX,rb2D.velocity.y);
-    }
+        rb2D.velocity = new Vector2(speedX, rb2D.velocity.y);
+    } 
+    #endregion
 
     #region 重置animatorTrigger的代码，防止出现动画切换bug
     public void AniSetTrigger(string triggerName)
@@ -194,8 +210,10 @@ public class Crab : Enemy
     }
     #endregion
 
+    #region 监听Player死亡时执行的方法
     public void OnPlayerDead()
     {
         ChangeState(CrabStateType.Idle);
-    }
+    } 
+    #endregion
 }

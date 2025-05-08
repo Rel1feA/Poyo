@@ -21,11 +21,13 @@ public class Player : MonoBehaviour,ITakeDamge
     private void OnEnable()
     {
         EventCenter.Instance.AddListener<CheckPoint>("RestartGame", OnRestartGame);
+        EventCenter.Instance.AddListener("Reset", OnReset);
     }
 
     private void OnDisable()
     {
         EventCenter.Instance.RemoveListener<CheckPoint>("RestartGame", OnRestartGame);
+        EventCenter.Instance.RemoveListener("Reset", OnReset);
     }
 
     private void Start()
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour,ITakeDamge
         stateMachine.currentState.FrameUpdate();
         if(Input.GetKeyDown(KeyCode.R))
         {
-            Dead();
+            TakeDamge(9999);
         }
     }
 
@@ -145,6 +147,13 @@ public class Player : MonoBehaviour,ITakeDamge
                 transform.position = GameManager.Instance.checkPoint.transform.position;
             }
         }
+    }
+    #endregion
+
+    #region 监听玩家重置游戏方法
+    public void OnReset()
+    {
+        TakeDamge(9999);
     } 
     #endregion
 

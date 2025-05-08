@@ -246,8 +246,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00065004826, y: -0.00040006638, z: 0}
-    m_Extent: {x: 2.3499498, y: 2.3506, z: 0}
+    m_Center: {x: -0.000049948692, y: 0.00034999847, z: 0}
+    m_Extent: {x: 2.3492498, y: 2.35055, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3019,6 +3019,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bomberMan
       objectReference: {fileID: 0}
+    - target: {fileID: 1951576531696835019, guid: 4583b1e5590061d4c8043075da1e30b7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f783b9c00af36b24f967c01d1c43329a, type: 2}
     - target: {fileID: 5108473201936908079, guid: 4583b1e5590061d4c8043075da1e30b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.27
@@ -3075,7 +3079,7 @@ GameObject:
   - component: {fileID: 1110037722}
   - component: {fileID: 1110037721}
   m_Layer: 0
-  m_Name: Light 2D (1)
+  m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3098,7 +3102,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.29
   m_Color: {r: 0.48005322, g: 0.6981132, b: 0.10208259, a: 1}
-  m_Intensity: 5
+  m_Intensity: 2.3
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000af4b4cd75bccd614add8b68b4f586de3
@@ -3115,8 +3119,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.10109997, y: 0.15055001, z: 0}
-    m_Extent: {x: 2.0669, y: 2.71595, z: 0}
+    m_Center: {x: 0.10134995, y: 0.1513499, z: 0}
+    m_Extent: {x: 2.4770498, y: 3.1259499, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -3124,7 +3128,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 1.6
+  m_ShapeLightFalloffSize: 2.01
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -0.36492127, y: -0.94863915, z: 0}
@@ -3140,12 +3144,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110037720}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 5.64, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.11, y: -0.36000013, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1557163565893462254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1173366372
 GameObject:
@@ -3321,7 +3325,7 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.8549847, g: 1, b: 0.6933962, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.3
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -3650,6 +3654,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6029012112760340081}
+  - {fileID: 1110037722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2239532556332326064
@@ -3829,7 +3834,6 @@ SceneRoots:
   - {fileID: 1401589626}
   - {fileID: 1557163565893462254}
   - {fileID: 1380207063}
-  - {fileID: 1110037722}
   - {fileID: 14128251}
   - {fileID: 809610091}
   - {fileID: 514817544}

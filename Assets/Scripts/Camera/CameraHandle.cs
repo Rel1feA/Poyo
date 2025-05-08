@@ -5,6 +5,8 @@ using Cinemachine;
 
 public class CameraHandle : MonoBehaviour
 {
+    private const float referenceWidth = 1920;
+    private const float referenceOrthographicSize = 8f;
     //private CinemachineVirtualCamera virtualCamera;
 
     //private void OnEnable()
@@ -49,6 +51,11 @@ public class CameraHandle : MonoBehaviour
         _virtualCamera=GetComponent<CinemachineVirtualCamera>();
     }
 
+    private void Start()
+    {
+        ChangeResolution();
+    }
+
     private void OnEnable()
     {
         EventCenter.Instance.AddListener<RoomData>("TransferRoom", OnTransferRoom);
@@ -57,6 +64,20 @@ public class CameraHandle : MonoBehaviour
     private void OnDisable()
     {
         EventCenter.Instance.RemoveListener<RoomData>("TransferRoom", OnTransferRoom);
+    }
+
+    public void ChangeResolution()
+    {
+        float screenAspect = (float)Screen.width / Screen.height;
+        float referenceAspect = referenceWidth / 1080f;
+        if (screenAspect < referenceAspect)
+        {
+            _virtualCamera.m_Lens.OrthographicSize = referenceOrthographicSize * (referenceAspect / screenAspect);
+        }
+        else
+        {
+            _virtualCamera.m_Lens.OrthographicSize = referenceOrthographicSize;
+        }
     }
 
     public void OnTransferRoom(RoomData roomData)

@@ -45,7 +45,7 @@ public class Ghost : MonoBehaviour, IOperator
             Destroy(gameObject);
         }
         Move();
-        CheckEnemy();
+        //CheckEnemy();
     }
 
 
@@ -70,6 +70,7 @@ public class Ghost : MonoBehaviour, IOperator
         }
     }
     
+    //弃用的检测敌人方法(因为有时候会出现检测不到敌人的bug)
     public void CheckEnemy()
     {
         Collider2D collider= Physics2D.OverlapCircle(transform.position, CheckEnemyRadius,LayerMask.GetMask("Enemy","Tool"));
@@ -83,10 +84,17 @@ public class Ghost : MonoBehaviour, IOperator
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent<IOperator>(out IOperator _operator))
+        {
+            player.controller.useRaduisObj.SetActive(false);
+            OperatorManager.Instance.ChangeOperator(_operator);
+        }
+    }
+
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, CheckEnemyRadius);
         Gizmos.color= Color.blue;
         Gizmos.DrawWireSphere((Vector2)player.transform.position, moveRadius);
     }

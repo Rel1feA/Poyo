@@ -32,6 +32,16 @@ public class OnGoingState : State
 
     }
 
+    public override void EnterState()
+    {
+        UIManager.Instance.ShowPanel<SystemUIPlane>("SystemUIPlane");
+    }
+
+    public override void ExitState()
+    {
+        UIManager.Instance.HidePanel("SystemUIPlane");
+    }
+
     public override void FrameUpdate()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
