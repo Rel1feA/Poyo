@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a91330a6813c1c48a1748d729ae9710, type: 3}
+  m_Name: LV3
+  m_EditorClassIdentifier: 
+  roomDatas:
+  - roomID: 1
+    roomCameraID: 1
+    assetData: {fileID: 9116904320598186050, guid: 2903c3cbdc2a2ff4cbe019f0b8174717, type: 3}
+  - roomID: 2
+    roomCameraID: 2
+    assetData: {fileID: 7484493890763358111, guid: 2364a143fa37eb846b5fee2582b45985, type: 3}
+  - roomID: 3
+    roomCameraID: 3
+    assetData: {fileID: 238833153514547260, guid: 4749dd54c56bdcb48aaec93353de1d4b, type: 3}
+  - roomID: 4
+    roomCameraID: 4
+    assetData: {fileID: 1161601014434966104, guid: 7b8f564863b7f7d49a39c9268e640e7e, type: 3}
+  - roomID: 5
+    roomCameraID: 5
+    assetData: {fileID: 2423061234462016844, guid: 0f8a5b639c1a43c4396d68b4f3324532, type: 3}
+  - roomID: 6
+    roomCameraID: 6
+    assetData: {fileID: 978056400764898805, guid: 58a908c89875ee245984d346d165a82b, type: 3}
+  - roomID: 7
+    roomCameraID: 7
+    assetData: {fileID: 178808504056179675, guid: 21b57c4e7acbfac43a142d4a6fd3ec32, type: 3}
