@@ -140,7 +140,6 @@ public class BombPatrol : BomberManState
         //{
         //    bomberMan.transform.localScale = new Vector3(-1, 1, 1);
         //}
-        Debug.Log("Patrol");
         bomberMan.AniSetTrigger("Walk");
         patrolDir = bomberMan.transform.localScale.x;
     }
@@ -201,7 +200,6 @@ public class BombIdleState : BomberManState
 
     public override void EnterState()
     {
-        Debug.Log("Idle");
         bomberMan.AniSetTrigger("Idle");
         timer = 0;
         bomberMan.rb2D.velocity = new Vector2(0, bomberMan.rb2D.velocity.y);

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b40c0526dd1b967498abd639984ec83c
+guid: 03c26b4b3817b9c45a1004d4572a421a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jump_0
+      name: jump-2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4dab51f936f2d7c46ab5a02ec927fdc7
-      internalID: -1602073947
+      spriteID: d9cef5b3a8aa97d48926deac2a759471
+      internalID: -1007284703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_1
+      name: jump-2_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 738666382b9b5c141929a7a01cc14fb7
-      internalID: -1702225947
+      spriteID: 942fd0408df5afd4bada392199f6ace0
+      internalID: 1207330083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_2
+      name: jump-2_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72da58ed8c12414439cd22dfb14ba96b
-      internalID: 1000080175
+      spriteID: c0d8b1ed559436844962c7ee831799d1
+      internalID: -501719275
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_3
+      name: jump-2_3
       rect:
         serializedVersion: 2
         x: 96
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d31396227b82ea419abba7f08af0d77
-      internalID: 2073386846
+      spriteID: 9e3d869e412762746ad8d097a06638ed
+      internalID: 1103342309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_4
+      name: jump-2_4
       rect:
         serializedVersion: 2
         x: 128
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e93934adee7945548932220878111721
-      internalID: -1019990889
+      spriteID: b72941cba42995f4a9e1af65ffcde9c1
+      internalID: -175333360
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_5
+      name: jump-2_5
       rect:
         serializedVersion: 2
         x: 160
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b993259050110446b0caaf017201037
-      internalID: 1997042743
+      spriteID: f06a2a77375203d458cb07ca20b6a4ba
+      internalID: -91081997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_6
+      name: jump-2_6
       rect:
         serializedVersion: 2
         x: 192
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cf4dcb00f12cd147b475ec2cc0199e4
-      internalID: -301912751
+      spriteID: 1ec91ebcd6eddbe44834c428127d289a
+      internalID: 911234581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_7
+      name: jump-2_7
       rect:
         serializedVersion: 2
         x: 224
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f97da236ab5329447ac1f98500135b15
-      internalID: -1127689846
+      spriteID: 72ad47a5c2049f84090392d4cb7aa30f
+      internalID: 263847171
       vertices: []
       indices: 
       edges: []
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      jump_0: -1602073947
-      jump_1: -1702225947
-      jump_2: 1000080175
-      jump_3: 2073386846
-      jump_4: -1019990889
-      jump_5: 1997042743
-      jump_6: -301912751
-      jump_7: -1127689846
+      jump-2_0: -1007284703
+      jump-2_1: 1207330083
+      jump-2_2: -501719275
+      jump-2_3: 1103342309
+      jump-2_4: -175333360
+      jump-2_5: -91081997
+      jump-2_6: 911234581
+      jump-2_7: 263847171
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

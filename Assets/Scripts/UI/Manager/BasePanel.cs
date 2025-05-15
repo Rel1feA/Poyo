@@ -56,6 +56,6 @@ public class BasePanel : MonoBehaviour
     }
     public virtual void HideMe()
     {
-
+        Destroy(gameObject);
     }
 }

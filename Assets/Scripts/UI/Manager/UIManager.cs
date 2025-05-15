@@ -109,7 +109,6 @@ public class UIManager : Singleton<UIManager>
         if (panelDic.ContainsKey(panelName))
         {
             panelDic[panelName].HideMe();
-            Destroy(panelDic[panelName].gameObject);
             panelDic.Remove(panelName);
         }
     }

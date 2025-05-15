@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 89f52497a0387fa4e8a10601317ea1c7
+guid: f1a098f85e3d58243bdb593248af1211
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,148 +110,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: deadlight_0
+      name: deadlight2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 160
-      alignment: 9
+        height: 320
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ebda1a335a558a43add098186d2d995
-      internalID: -751911235
+      spriteID: 319aac680376e01428abcfb3ee76040c
+      internalID: 1990543787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deadlight_1
+      name: deadlight2_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
-        height: 160
-      alignment: 9
+        height: 320
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9824b813fd51b54bb568b8ff8edd890
-      internalID: 1540134250
+      spriteID: 6a3d31e13dc3ea84188dd02dd247340a
+      internalID: 937331861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deadlight_2
+      name: deadlight2_2
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 32
-        height: 160
-      alignment: 9
+        height: 320
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e31903b2d87a9b41b0f934cf9d57d75
-      internalID: 456585824
+      spriteID: e996c4a87efcf2a4fbb780ed507ab9cd
+      internalID: -832566737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deadlight_3
+      name: deadlight2_3
       rect:
         serializedVersion: 2
         x: 96
         y: 0
         width: 32
-        height: 160
-      alignment: 9
+        height: 320
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e057290e3c70a8c4c81c8d54c929813a
-      internalID: -2020885051
+      spriteID: a0d238834b8c4344db69eff9625be6bf
+      internalID: -1571487615
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deadlight_4
+      name: deadlight2_4
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 32
-        height: 160
-      alignment: 9
+        height: 320
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7158f540dc101b4abf7284c5f00daa8
-      internalID: 682899628
+      spriteID: 9f9fdcf6cf77b114b983d1328c0369a1
+      internalID: -1794107826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deadlight_5
+      name: deadlight2_5
       rect:
         serializedVersion: 2
         x: 160
         y: 0
         width: 32
-        height: 160
-      alignment: 9
+        height: 320
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 369932ff922dece489b708cc09a4e491
-      internalID: 302606438
+      spriteID: 5d811a02ff938364e9ca478a2f69393a
+      internalID: -1909122726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deadlight_6
+      name: deadlight2_6
       rect:
         serializedVersion: 2
         x: 192
         y: 0
         width: 32
-        height: 160
-      alignment: 9
+        height: 320
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18d220d457a7d1e47b3331243717fe58
-      internalID: -1290465264
+      spriteID: 698396d5fa55038438ea723709b3893d
+      internalID: -809224458
       vertices: []
       indices: 
       edges: []
@@ -267,13 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      deadlight_0: -751911235
-      deadlight_1: 1540134250
-      deadlight_2: 456585824
-      deadlight_3: -2020885051
-      deadlight_4: 682899628
-      deadlight_5: 302606438
-      deadlight_6: -1290465264
+      deadlight2_0: 1990543787
+      deadlight2_1: 937331861
+      deadlight2_2: -832566737
+      deadlight2_3: -1571487615
+      deadlight2_4: -1794107826
+      deadlight2_5: -1909122726
+      deadlight2_6: -809224458
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

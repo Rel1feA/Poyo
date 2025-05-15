@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager>
 
     public GameStateType currentState;
 
+    private bool isFirstPlay=true;
+
     private void Update()
     {
         stateMachine.currentState.FrameUpdate();
@@ -36,19 +38,31 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        LoadSceneManager.Instance.LoadSceneAsync("OpenScene");
+        LoadSceneManager.Instance.LoadSceneAsync("StartGame");
         InitState();
     }
 
     #region 开始游戏的方法
     public void StartGame()
     {
+        if(isFirstPlay)
+        {
+            LoadSceneManager.Instance.CreateTransferEffect(TransferEffectType.Fade, () =>
+            {
+                LoadSceneManager.Instance.LoadSceneAsync("OpenScene", null, (value) =>
+                {
+                    LoadSceneManager.Instance.ChangeEffect();
+                });
+            });
+            isFirstPlay=false;
+            return;
+        }
         LoadSceneManager.Instance.CreateTransferEffect(TransferEffectType.Fade, () =>
         {
             LevelManager.Instance.LoadLevel("Beach", null, (value) =>
             {
                 LoadSceneManager.Instance.ChangeEffect();
-                UIManager.Instance.HidePanel("StartGamePlane");
+                //UIManager.Instance.HidePanel("StartGamePlane");
                 ChangeState(GameStateType.OnGoing);
             });
         });

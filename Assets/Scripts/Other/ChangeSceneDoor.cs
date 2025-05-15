@@ -27,6 +27,7 @@ public class ChangeSceneDoor : MonoBehaviour
                 LoadSceneManager.Instance.ChangeEffect();
             });
         });
+        GameManager.Instance.ChangeState(GameStateType.Normal);
         hasChangeScene = true;
     }
 }

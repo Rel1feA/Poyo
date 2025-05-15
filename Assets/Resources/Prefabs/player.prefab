@@ -12,12 +12,11 @@ GameObject:
   - component: {fileID: 2823620581927765390}
   - component: {fileID: 1164274782885174108}
   - component: {fileID: 5601284246943734612}
-  - component: {fileID: 6036410526582409339}
   - component: {fileID: 4295769249608860970}
   - component: {fileID: 6087586966870162027}
   - component: {fileID: 5777031427056513848}
   - component: {fileID: 1193777746116355538}
-  - component: {fileID: 7276383254615965344}
+  - component: {fileID: 9084620240854429716}
   m_Layer: 3
   m_Name: player
   m_TagString: Player
@@ -61,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1950951251
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: efc475a3dcd3f704aa7dd37271c7a7b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -137,41 +136,6 @@ MonoBehaviour:
   inputX: 0
   useRaduisObj: {fileID: 8893942387943522337}
   isOnWake: 0
---- !u!70 &6036410526582409339
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2682528022064258459}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 1fd118ddce02f5a419d78b72ff52d481, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 14592
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.065, y: 0.6013739}
-  m_Size: {x: 0.85, y: 0.91976404}
-  m_Direction: 0
 --- !u!114 &4295769249608860970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +253,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.06672883, y: 0.46127266}
   m_Size: {x: 0.8335614, y: 0.8525454}
   m_Direction: 0
---- !u!114 &7276383254615965344
+--- !u!114 &9084620240854429716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

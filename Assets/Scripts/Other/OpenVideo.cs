@@ -5,7 +5,7 @@ using UnityEngine.Video;
 
 public class OpenVideo : MonoBehaviour
 {
-    public VideoPlayer player;
+    private VideoPlayer player;
 
     private void Start()
     {
@@ -25,10 +25,11 @@ public class OpenVideo : MonoBehaviour
     {
         LoadSceneManager.Instance.CreateTransferEffect(TransferEffectType.Fade, () =>
         {
-            LoadSceneManager.Instance.LoadSceneAsync("StartGame",null,(value) =>
+            LevelManager.Instance.LoadLevel("Beach",null,(value) =>
             {
                 LoadSceneManager.Instance.ChangeEffect();
-                Destroy(gameObject);
+                GameManager.Instance.ChangeState(GameStateType.OnGoing);
+                //Destroy(gameObject);
             });
         });
     }

@@ -86,6 +86,7 @@ public class LoadSceneManager : NormalSingleton<LoadSceneManager>
         }
         loading?.Invoke(1);
         asyncOperation.allowSceneActivation = setActiveAfterCompleted;
+        yield return null;
         completed?.Invoke(asyncOperation);
     }
     #endregion
