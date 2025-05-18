@@ -214,6 +214,18 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     }
     #endregion
 
+    public bool CheckGround()
+    {
+        Vector2 checkPos = transform.position + new Vector3(transform.localScale.x*1.2f , -0.2f, 0);
+        Vector2 boxSize = new Vector2(0.4f, 0.5f);
+        Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground", "Obstacle", "Tool"));
+        if (collider2D != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
     #region 水平翻转精灵图片的方法
     public void Filp()
     {
@@ -267,5 +279,7 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
         Gizmos.DrawWireCube(transform.position+Vector3.up*0.5f,attackCheckBox);
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.65f, 0.5f, 0),new Vector2(0.5f,0.85f));
+        Gizmos.color= Color.yellow;
+        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x*1.2f, -0.2f, 0), new Vector2(0.4f, 0.5f));
     }
 }

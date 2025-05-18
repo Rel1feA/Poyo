@@ -108,7 +108,7 @@ public class PlayerTest : MonoBehaviour
 
     public void ExitTest()
     {
-        Debug.Log("推出调试模式");
+        Debug.Log("退出调试模式");
         spriteRenderer.color = Color.white;
         player.currentHealth = player.playerData.maxHealth;
         player.controller.enabled = true;

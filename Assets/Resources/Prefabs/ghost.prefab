@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3582406458198591278}
   - component: {fileID: 4383082277420336440}
   - component: {fileID: 5156628246724284267}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ghost
   m_TagString: Ghost
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1950951251
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 3
   m_Sprite: {fileID: -1090606875, guid: feb8ca54ed8b42942ae9df29ebfe7a2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.69803923}

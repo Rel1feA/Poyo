@@ -35,7 +35,6 @@ public class BombControl : BomberManState
 
     public override void EnterState()
     {
-        Debug.Log("Control");
         timer = bomberMan.useCoolTime;
     }
 
@@ -153,7 +152,7 @@ public class BombPatrol : BomberManState
     {
         //Patrol();
         WallPatrol();
-        if (bomberMan.CheckWallPatrol())
+        if (bomberMan.CheckWallPatrol()||!bomberMan.CheckGround())
         {
             stateMachine.Changestate(bomberMan.idleState);
         }
