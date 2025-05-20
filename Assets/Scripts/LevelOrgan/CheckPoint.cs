@@ -10,6 +10,7 @@ public class CheckPoint : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
+            AudioManager.Instance.PlayAudio("CheckPoint");
             GameManager.Instance.checkPoint = this;
         }
     }

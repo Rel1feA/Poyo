@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
         float speedY = Mathf.Sqrt((-Physics2D.gravity.y) * rb2D.gravityScale * 2 * playerData.jumpHeight);
         rb2D.velocity += Vector2.up * speedY;
+        AudioManager.Instance.PlayAudio("player_jump");
     }
     #endregion
 

@@ -19,12 +19,10 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
     {
         foreach (Spike spike in firstSpikes)
         {
-            //spike.gameObject.SetActive(false);
             spike.AniSetTrigger("Down");
         }
         foreach(Spike spike in secondSpikes)
         {
-            //spike.gameObject.SetActive(true);
             spike.AniSetTrigger("Up");
         }
         isOpen = true;
@@ -36,13 +34,11 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
     {
         foreach (Spike spike in firstSpikes)
         {
-            //spike.gameObject.SetActive(true);
             spike.AniSetTrigger("Up");
 
         }
         foreach(Spike spike in secondSpikes)
         {
-            //spike.gameObject.SetActive(false);
             spike.AniSetTrigger("Down");
         }
         isOpen = false;
@@ -54,6 +50,7 @@ public class SpikeSwitch : MonoBehaviour,ISwitch
         if (OperatorManager.Instance.currentOperator != _operator) return;
         if(Input.GetKeyDown(KeyCode.W))
         {
+            AudioManager.Instance.PlayAudio("Switch");
             if (isOpen)
             {
                 OnClose ();

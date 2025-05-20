@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 750154015477459127}
   - component: {fileID: 2815017759164618884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: locked_door02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377227803396118926}
   - component: {fileID: 2165848891609551886}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: locked_door01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3354216386678429689}
   - component: {fileID: 6486270541606014718}
   - component: {fileID: 6293502940819798616}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: KeyDoor_Forest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5978584330551412197}
   - component: {fileID: 6189089282727185567}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: locked_door03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1950951251
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: a324a04547203894c85747e78c86e3e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

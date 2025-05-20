@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 180664794}
   - component: {fileID: 180664793}
   - component: {fileID: 180664792}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Stair
   m_TagString: Untagged
   m_Icon: {fileID: 0}

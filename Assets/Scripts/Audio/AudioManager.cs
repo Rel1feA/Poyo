@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+public enum AudioType
+{
+    BGM,
+    SE
+}
+
 public class AudioManager : Singleton<AudioManager>
 {
     public List<Sound> sounds;
     private Dictionary<string, AudioSource> audioDics=new Dictionary<string, AudioSource>();
+    private Sound currentBGM;
 
     private void Start()
     {
@@ -37,11 +44,19 @@ public class AudioManager : Singleton<AudioManager>
         }
         else
         {
+            if(FindSoundByName(name).audioType==AudioType.BGM)
+            {
+                if(currentBGM!=null)
+                {
+                    StopAudio(currentBGM.clip.name);
+                }
+                currentBGM = FindSoundByName(name);
+            }
             audioDics[name].Play();
         }
     }
 
-    public void StopAudio()
+    public void StopAudio(string name)
     {
         if(!audioDics.ContainsKey(name))
         {
@@ -52,6 +67,18 @@ public class AudioManager : Singleton<AudioManager>
             audioDics[name].Stop();
         }
     }
+
+    public Sound FindSoundByName(string name)
+    {
+        foreach(Sound sound in sounds)
+        {
+            if(sound.clip.name==name)
+            {
+                return sound;
+            }
+        }
+        return null;
+    }
 }
 
 [System.Serializable]
@@ -60,6 +87,8 @@ public class Sound
     public AudioClip clip;
 
     public AudioMixerGroup mixerGroup;
+
+    public AudioType audioType;
 
     [Range(0f, 1f)]
     public float volume=0.5f;

@@ -14,13 +14,13 @@ public class KeyDoor : MonoBehaviour
         lockSprite.SetActive(true);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(isOpen)return;
-        if(collision.CompareTag("Player"))
+        if (isOpen) return;
+        if (collision.transform.CompareTag("Player"))
         {
-            Player player=collision.GetComponent<Player>();
-            if(player.hasKey)
+            Player player = collision.transform.GetComponent<Player>();
+            if (player.hasKey)
             {
                 isOpen = true;
                 lockSprite.SetActive(false);

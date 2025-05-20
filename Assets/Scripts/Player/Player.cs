@@ -154,6 +154,13 @@ public class Player : MonoBehaviour,ITakeDamge
     public void OnReset()
     {
         TakeDamge(9999);
+    }
+    #endregion
+
+    #region 给动画机使用的调用声音的方法
+    public void PlaySE(string seName)
+    {
+        AudioManager.Instance.PlayAudio(seName);
     } 
     #endregion
 

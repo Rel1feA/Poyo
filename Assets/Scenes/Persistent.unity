@@ -156,6 +156,7 @@ MonoBehaviour:
   currentLevel:
     levelName: 
     levelSceneName: 
+    BGMName: 
     levelIndex: 0
     roomData: {fileID: 0}
     playerStartPos: {x: 0, y: 0, z: 0}
@@ -309,9 +310,46 @@ MonoBehaviour:
   sounds:
   - clip: {fileID: 8300000, guid: 125cbb3965dc4d44cb4130d19ad446d5, type: 3}
     mixerGroup: {fileID: 8113867246846877464, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 0
     volume: 0.3
-    playOnAwake: 1
+    playOnAwake: 0
     loop: 1
+  - clip: {fileID: 8300000, guid: 008767d0b2a399a4e8fb0d5e195e18c8, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 1
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: a5e73ec965a1a8945b828dd36c6e5d8f, type: 3}
+    mixerGroup: {fileID: 8113867246846877464, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 0
+    volume: 1
+    playOnAwake: 0
+    loop: 1
+  - clip: {fileID: 8300000, guid: b1c6dd68deea79f4a90ee9cc90f445cb, type: 3}
+    mixerGroup: {fileID: 8113867246846877464, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 0
+    volume: 1
+    playOnAwake: 0
+    loop: 1
+  - clip: {fileID: 8300000, guid: 68d6820f687dcae41acbf4dadeb9d8d3, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 1
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 3354b274c0e948e4a821d1bf93c1a662, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 1
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: e4330416ad0cc714c8d69a74ff2c1496, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 1
+    playOnAwake: 0
+    loop: 0
 --- !u!1 &1270365421
 GameObject:
   m_ObjectHideFlags: 0

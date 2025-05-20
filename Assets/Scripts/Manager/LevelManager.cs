@@ -45,6 +45,7 @@ public class LevelManager : Singleton<LevelManager>
         LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, OnLoading, (value) =>
         {
             onCompleted?.Invoke(value);
+            AudioManager.Instance.PlayAudio(targetLevel.BGMName);
             EventCenter.Instance.EventTrigger<levelData>("CompletedLoadLevel", targetLevel);
         },sceneActive);
         currentLevel = targetLevel;
@@ -56,6 +57,7 @@ public class LevelManager : Singleton<LevelManager>
         LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, OnLoading, (value) =>
         {
             onCompleted?.Invoke(value);
+            AudioManager.Instance.PlayAudio(targetLevel.BGMName);
             EventCenter.Instance.EventTrigger<levelData>("CompletedLoadLevel", targetLevel);
         },sceneActive);
         currentLevel = targetLevel;

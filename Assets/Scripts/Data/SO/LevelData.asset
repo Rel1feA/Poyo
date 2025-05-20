@@ -15,16 +15,19 @@ MonoBehaviour:
   levelDates:
   - levelName: Beach
     levelSceneName: Level1
+    BGMName: Beach
     levelIndex: 1
     roomData: {fileID: 11400000, guid: 1cc96c022865e4f49bbf302d82a8d7ba, type: 2}
     playerStartPos: {x: -9.75, y: -6, z: 0}
   - levelName: Temple
     levelSceneName: Level2
+    BGMName: Temple
     levelIndex: 2
     roomData: {fileID: 11400000, guid: 383442d259a94b34789d924b59be099e, type: 2}
     playerStartPos: {x: -8.5, y: -6, z: 0}
   - levelName: Beach2
     levelSceneName: Level3
+    BGMName: Beach
     levelIndex: 3
     roomData: {fileID: 11400000, guid: 1301aa5df96381c4f9e324718d318378, type: 2}
     playerStartPos: {x: -6, y: -5, z: 0}

@@ -39,6 +39,7 @@ public class GameManager : Singleton<GameManager>
     {
         DontDestroyOnLoad(gameObject);
         LoadSceneManager.Instance.LoadSceneAsync("StartGame");
+        AudioManager.Instance.PlayAudio("MainMenu");
         InitState();
     }
 
@@ -51,6 +52,7 @@ public class GameManager : Singleton<GameManager>
             {
                 LoadSceneManager.Instance.LoadSceneAsync("OpenScene", null, (value) =>
                 {
+                    AudioManager.Instance.StopAudio("MainMenu");
                     LoadSceneManager.Instance.ChangeEffect();
                 });
             });
@@ -117,6 +119,7 @@ public class GameManager : Singleton<GameManager>
         {
             LoadSceneManager.Instance.LoadSceneAsync("StartGame", null, (value) =>
             {
+                AudioManager.Instance.PlayAudio("MainMenu");
                 LoadSceneManager.Instance.ChangeEffect();
                 Time.timeScale = 1;
             });
