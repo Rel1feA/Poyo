@@ -55,6 +55,8 @@ public class PlayerIdle : PlayerState
 #region Player被操控状态类
 public class PlayerOperator : PlayerState
 {
+    private bool canJump;
+
     public PlayerOperator(StateMachine _stateMachine, Player player) : base(_stateMachine, player)
     {
 
@@ -73,9 +75,58 @@ public class PlayerOperator : PlayerState
 
     public override void FrameUpdate()
     {
-        player.controller.BeOnOperator();
         player.controller.CheckSwitch();
         player.controller.ChangeGravityScale();
+
+
+        if (player.controller.isOnWake) return;
+        //上楼梯，并且下面的移动等操作不执行
+        if (player.controller.CanClimb && !player.controller.IsClimb)
+        {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+            {
+                player.controller.EnterClimb();
+            }
+        }
+        if (player.controller.IsClimb)
+        {
+            player.controller.OnClimb();
+            return;
+        }
+        //
+
+        //使用技能
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            player.controller.UseSkill();
+            player.controller.SetVel(0);
+        }
+        //
+
+        //设置动画
+        player.controller.SetNormalAni();
+        //
+
+        //移动
+         player.controller.Move();
+        //
+
+        if (Input.GetKeyDown(KeyCode.Space) && !canJump && player.controller.CheckGround())
+        {
+            canJump = true;
+        }
+
+    }
+
+    public override void PhysicsUpdate()
+    {
+        //跳跃
+        if (canJump)
+        {
+            player.controller.Jump();
+            canJump = false;
+        }
+        //
     }
 
     public override string ToString()

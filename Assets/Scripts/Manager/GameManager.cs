@@ -39,7 +39,6 @@ public class GameManager : Singleton<GameManager>
     {
         DontDestroyOnLoad(gameObject);
         LoadSceneManager.Instance.LoadSceneAsync("StartGame");
-        AudioManager.Instance.PlayAudio("MainMenu");
         InitState();
     }
 
@@ -52,7 +51,6 @@ public class GameManager : Singleton<GameManager>
             {
                 LoadSceneManager.Instance.LoadSceneAsync("OpenScene", null, (value) =>
                 {
-                    AudioManager.Instance.StopAudio("MainMenu");
                     LoadSceneManager.Instance.ChangeEffect();
                 });
             });
@@ -64,7 +62,6 @@ public class GameManager : Singleton<GameManager>
             LevelManager.Instance.LoadLevel("Beach", null, (value) =>
             {
                 LoadSceneManager.Instance.ChangeEffect();
-                //UIManager.Instance.HidePanel("StartGamePlane");
                 ChangeState(GameStateType.OnGoing);
             });
         });

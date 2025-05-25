@@ -86,7 +86,7 @@ public class LoadSceneManager : NormalSingleton<LoadSceneManager>
         }
         loading?.Invoke(1);
         asyncOperation.allowSceneActivation = setActiveAfterCompleted;
-        yield return null;
+        yield return new WaitForEndOfFrame();
         completed?.Invoke(asyncOperation);
     }
     #endregion
@@ -140,7 +140,7 @@ public class LoadSceneManager : NormalSingleton<LoadSceneManager>
                     UIManager.Instance.ShowPanel<TransferEffect>("TransferEffects/Fade", E_UI_Layer.System, (effect) =>
                     {
                         effect.callback = callback;
-                        currentEffect = UIManager.Instance.GetPanel<TransferEffect>("TransferEffects/Fade");
+                        currentEffect = effect;
                     });
                     break;
                 }
@@ -149,7 +149,7 @@ public class LoadSceneManager : NormalSingleton<LoadSceneManager>
                     UIManager.Instance.ShowPanel<TransferEffect>("TransferEffects/Round", E_UI_Layer.System, (effect) =>
                     {
                         effect.callback = callback;
-                        currentEffect = UIManager.Instance.GetPanel<TransferEffect>("TransferEffects/Round");
+                        currentEffect = effect;
                     });
                     break;
                 }
@@ -158,7 +158,7 @@ public class LoadSceneManager : NormalSingleton<LoadSceneManager>
                     UIManager.Instance.ShowPanel<TransferEffect>("TransferEffects/FadeWhite", E_UI_Layer.System, (effect) =>
                     {
                         effect.callback = callback;
-                        currentEffect = UIManager.Instance.GetPanel<TransferEffect>("TransferEffects/FadeWhite");
+                        currentEffect = effect;
                     });
                     break;
                 }

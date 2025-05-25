@@ -1425,6 +1425,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpPlane
       objectReference: {fileID: 0}
+    - target: {fileID: 3293708272782077463, guid: fa48da2db5ee4b84cb4b85a947abeb7d, type: 3}
+      propertyPath: m_Size.y
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293708272782077463, guid: fa48da2db5ee4b84cb4b85a947abeb7d, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8766818026072402233, guid: fa48da2db5ee4b84cb4b85a947abeb7d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.5

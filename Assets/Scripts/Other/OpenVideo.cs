@@ -29,7 +29,6 @@ public class OpenVideo : MonoBehaviour
             {
                 LoadSceneManager.Instance.ChangeEffect();
                 GameManager.Instance.ChangeState(GameStateType.OnGoing);
-                //Destroy(gameObject);
             });
         });
     }

@@ -41,10 +41,10 @@ public class Player : MonoBehaviour,ITakeDamge
     private void Update()
     {
         stateMachine.currentState.FrameUpdate();
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            TakeDamge(9999);
-        }
+    }
+    private void FixedUpdate()
+    {
+        stateMachine.currentState.PhysicsUpdate();
     }
 
     private void LateUpdate()

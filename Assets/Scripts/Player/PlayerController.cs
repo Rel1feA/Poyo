@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     #region 检测地面代码
     public bool CheckGround()
     {
-        return Physics2D.OverlapBox(transform.position + new Vector3(transform.localScale.x * 0.07f, 0, 0), new Vector2(0.8f, 0.3f), 0, LayerMask.GetMask("Ground", "Tool","Obstacle"));
+        return Physics2D.OverlapBox(transform.position + new Vector3(transform.localScale.x * 0.07f, 0.1f, 0), new Vector2(0.8f, 0.25f), 0, LayerMask.GetMask("Ground", "Tool","Obstacle"));
     }
     #endregion
 
@@ -306,6 +306,6 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.07f, 0, 0), new Vector2(0.8f, 0.3f));
+        Gizmos.DrawWireCube(transform.position + new Vector3(transform.localScale.x * 0.07f,0.1f, 0), new Vector2(0.8f, 0.25f));
     }
 }

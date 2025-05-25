@@ -350,6 +350,18 @@ MonoBehaviour:
     volume: 1
     playOnAwake: 0
     loop: 0
+  - clip: {fileID: 8300000, guid: a42399cb061b6f94495dc2497d85c517, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 1
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 177adca4382e79446a144335831ca5b2, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.8
+    playOnAwake: 0
+    loop: 0
 --- !u!1 &1270365421
 GameObject:
   m_ObjectHideFlags: 0

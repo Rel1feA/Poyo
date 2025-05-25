@@ -39,11 +39,22 @@ public class DoorSwitch :MonoBehaviour
 
     public bool hasColliderOn()
     {
-        Collider2D[] collider2Ds= Physics2D.OverlapBoxAll(transform.position + new Vector3(0, 0.3f, 0), Vector2.one, 0, LayerMask.GetMask("Player", "Enemy", "Tool"));
+        Collider2D[] collider2Ds= Physics2D.OverlapBoxAll(transform.position + new Vector3(0, 0.4f, 0),new Vector2(1f,0.7f), 0, LayerMask.GetMask("Player", "Enemy", "Tool"));
         if(collider2Ds.Length > 0 )
         {
             return true;
         }
         return false;
+    }
+
+    public void PlayMusic(string name)
+    {
+        AudioManager.Instance.PlayAudio(name);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + new Vector3(0, 0.4f, 0), new Vector2(1f,0.7f));
     }
 }
