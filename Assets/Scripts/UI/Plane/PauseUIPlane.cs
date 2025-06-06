@@ -16,5 +16,10 @@ public class PauseUIPlane : BasePanel
         {
             GameManager.Instance.BackToMenu();
         });
+
+        GetControl<Button>("SettingBTN").onClick.AddListener(() =>
+        {
+            UIManager.Instance.ShowPanel<SettingPlane>("SettingPlane",E_UI_Layer.System);
+        });
     }
 }

@@ -9,8 +9,6 @@ public class StartGamePlane : BasePanel
 
     private void Start()
     {
-        //GetControl<Button>("StartGameBTN").onClick.AddListener(GameManager.Instance.StartGame);
-        //GetControl<Button>("QuitGameBTN").onClick.AddListener(GameManager.Instance.QuitGame);
         InitBTNTXT();
     }
 
@@ -35,7 +33,7 @@ public class StartGamePlane : BasePanel
         });
         UIManager.AddCustomEventListener(GetControl<Text>("SettingTXT"), EventTriggerType.PointerClick, (value) =>
         {
-
+            UIManager.Instance.ShowPanel<SettingPlane>("SettingPlane");
         });
         UIManager.AddCustomEventListener(GetControl<Text>("SettingTXT"), EventTriggerType.PointerExit, (value) =>
         {

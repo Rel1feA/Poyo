@@ -362,6 +362,7 @@ MonoBehaviour:
     volume: 0.8
     playOnAwake: 0
     loop: 0
+  mixer: {fileID: 24100000, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
 --- !u!1 &1270365421
 GameObject:
   m_ObjectHideFlags: 0

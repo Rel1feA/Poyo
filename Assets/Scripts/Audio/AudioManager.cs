@@ -12,6 +12,7 @@ public enum AudioType
 public class AudioManager : Singleton<AudioManager>
 {
     public List<Sound> sounds;
+    public AudioMixer mixer;
     private Dictionary<string, AudioSource> audioDics=new Dictionary<string, AudioSource>();
     private Sound currentBGM;
 
@@ -78,6 +79,16 @@ public class AudioManager : Singleton<AudioManager>
             }
         }
         return null;
+    }
+
+    public void ChangeBGMValue(float value)
+    {
+        mixer.SetFloat("BGM", value);
+    }
+
+    public void ChangeSEValue(float value)
+    {
+        mixer.SetFloat("SE", value);
     }
 }
 

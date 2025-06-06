@@ -39,6 +39,7 @@ public class GameManager : Singleton<GameManager>
     {
         DontDestroyOnLoad(gameObject);
         LoadSceneManager.Instance.LoadSceneAsync("StartGame");
+        AudioManager.Instance.PlayAudio("MainMenu");
         InitState();
     }
 
@@ -160,6 +161,33 @@ public class GameManager : Singleton<GameManager>
             case GameStateType.OnGoing:
                 stateMachine.Changestate(onGoingState);
                 currentState = GameStateType.OnGoing;
+                break;
+            default:
+                break;
+        }
+    }
+    #endregion
+
+    #region 切换是否全屏模式的方法
+    public void ChangeFullScreen(bool isFullScreen)
+    {
+        Screen.fullScreen = isFullScreen;
+    }
+    #endregion
+
+    #region 切换分辨率方法
+    public void ChangeResolution(int value)
+    {
+        switch(value)
+        {
+            case 0:
+                Screen.SetResolution(1920, 1080,Screen.fullScreen);
+                break;
+            case 1:
+                Screen.SetResolution(1280, 720, Screen.fullScreen);
+                break;
+            case 2:
+                Screen.SetResolution(1024,576,Screen.fullScreen);
                 break;
             default:
                 break;
