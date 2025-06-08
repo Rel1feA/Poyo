@@ -16455,6 +16455,10 @@ PrefabInstance:
       propertyPath: inRoomID
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2380147648752320799, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
+      propertyPath: LevelName
+      value: Temple
+      objectReference: {fileID: 0}
     - target: {fileID: 5116428856126108856, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
       propertyPath: m_LocalPosition.x
       value: 67.61
@@ -16722,6 +16726,10 @@ PrefabInstance:
     - target: {fileID: 2380147648752320799, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
       propertyPath: inRoomID
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2380147648752320799, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
+      propertyPath: LevelName
+      value: Temple
       objectReference: {fileID: 0}
     - target: {fileID: 5116428856126108856, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17096,6 +17104,10 @@ PrefabInstance:
     - target: {fileID: 2380147648752320799, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
       propertyPath: inRoomID
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2380147648752320799, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
+      propertyPath: LevelName
+      value: Temple
       objectReference: {fileID: 0}
     - target: {fileID: 5116428856126108856, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19621,6 +19633,10 @@ PrefabInstance:
       propertyPath: inRoomID
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2380147648752320799, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
+      propertyPath: LevelName
+      value: Temple
+      objectReference: {fileID: 0}
     - target: {fileID: 5116428856126108856, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.11
@@ -19857,6 +19873,10 @@ PrefabInstance:
     - target: {fileID: 2380147648752320799, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
       propertyPath: inRoomID
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2380147648752320799, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
+      propertyPath: LevelName
+      value: Temple
       objectReference: {fileID: 0}
     - target: {fileID: 5116428856126108856, guid: e8b86745f26e0b14dacbf03900cb5311, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21245,6 +21265,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1668038506}
     m_Modifications:
+    - target: {fileID: 1291200619330154991, guid: 4aca59003d45b6147a04e1b5de7949f4, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 1557163565434926584, guid: 4aca59003d45b6147a04e1b5de7949f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.5
@@ -21289,16 +21313,90 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartLevelDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 2239532558019920294, guid: 4aca59003d45b6147a04e1b5de7949f4, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2239532558019920294, guid: 4aca59003d45b6147a04e1b5de7949f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2096108251}
+    - targetCorrespondingSourceObject: {fileID: 2239532558019920294, guid: 4aca59003d45b6147a04e1b5de7949f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2096108252}
   m_SourcePrefab: {fileID: 100100000, guid: 4aca59003d45b6147a04e1b5de7949f4, type: 3}
 --- !u!4 &2096108249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1557163565434926584, guid: 4aca59003d45b6147a04e1b5de7949f4, type: 3}
   m_PrefabInstance: {fileID: 2096108248}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2096108250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2239532558019920294, guid: 4aca59003d45b6147a04e1b5de7949f4, type: 3}
+  m_PrefabInstance: {fileID: 2096108248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2096108251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096108250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69cdfeef4715f640a4d9c7979319967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inRoomID: 1
+  LevelName: Temple
+--- !u!61 &2096108252
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096108250}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.93671846}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.3403652, y: 3.9284935}
+  m_EdgeRadius: 0
 --- !u!1 &2106472916
 GameObject:
   m_ObjectHideFlags: 3
@@ -21445,8 +21543,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.00040006638, y: -0.0008997917, z: 0}
-    m_Extent: {x: 6.4994, y: 6.5, z: 0}
+    m_Center: {x: -0.00060009956, y: 0.00055003166, z: 0}
+    m_Extent: {x: 6.4988003, y: 6.49905, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

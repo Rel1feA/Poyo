@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : Singleton<GameManager>
 {
-    public CheckPoint checkPoint;
+    public CheckPointData checkPointData;
 
     public StateMachine stateMachine;
     public State pauseState;
@@ -13,7 +15,7 @@ public class GameManager : Singleton<GameManager>
 
     public GameStateType currentState;
 
-    private bool isFirstPlay=true;
+    private bool isFirstPlay;
 
     private void Update()
     {
@@ -38,10 +40,24 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        LoadSaveDataToInitGame();
         LoadSceneManager.Instance.LoadSceneAsync("StartGame");
         AudioManager.Instance.PlayAudio("MainMenu");
         InitState();
     }
+
+    #region 读取用户存档初始化游戏方法
+    public void LoadSaveDataToInitGame()
+    {
+        UserData userData= SaveManager.Instance.GetUserData("A");
+        AudioManager.Instance.mixer.SetFloat("BGM",userData.bgmValue);
+        AudioManager.Instance.mixer.SetFloat("SE", userData.seValue);
+        Screen.fullScreen = userData.isFullScreen;
+        ChangeResolution(userData.resolutionWidth);
+        isFirstPlay=userData.isFirstOpenGame;
+        checkPointData = userData.checkPointData;
+    } 
+    #endregion
 
     #region 开始游戏的方法
     public void StartGame()
@@ -60,34 +76,38 @@ public class GameManager : Singleton<GameManager>
         }
         LoadSceneManager.Instance.CreateTransferEffect(TransferEffectType.Fade, () =>
         {
-            LevelManager.Instance.LoadLevel("Beach", null, (value) =>
+            if(checkPointData != null)
             {
-                LoadSceneManager.Instance.ChangeEffect();
-                ChangeState(GameStateType.OnGoing);
-            });
+                LevelManager.Instance.LoadLevel(checkPointData.levelName, null, (value) =>
+                {
+                    LoadSceneManager.Instance.ChangeEffect();
+                    ChangeState(GameStateType.OnGoing);
+                });
+            }
         });
-    } 
+    }
     #endregion
 
     #region 重新开始游戏的方法
     public void ReStart()
     {
-        if (checkPoint == null)
-        {
-            TranferManager.Instance.TranferRoom(1);
-        }
-        else
-        {
-            TranferManager.Instance.TranferRoom(checkPoint.inRoomID);
-        }
-        EventCenter.Instance.EventTrigger<CheckPoint>("RestartGame", checkPoint);
+        TranferManager.Instance.TranferRoom(checkPointData.roomID);
+        EventCenter.Instance.EventTrigger<CheckPointData>("RestartGame", checkPointData);
     }
     #endregion
 
-    #region 监听下一关关卡完成加载时的方法
+    #region 监听关卡完成加载时的方法
     public void OnCompletedLoadLevel(levelData levelData)
     {
-        checkPoint = null;
+        if(checkPointData.levelName.Equals(levelData.levelName))
+        {
+            return;
+        }
+        checkPointData.levelName=levelData.levelName;
+        checkPointData.roomID = 1;
+        checkPointData.startPosX=levelData.playerStartPos.x;
+        checkPointData.startPosY = levelData.playerStartPos.y;
+        checkPointData.startPosZ = levelData.playerStartPos.z;
     }
     #endregion
 
@@ -113,6 +133,7 @@ public class GameManager : Singleton<GameManager>
     public void BackToMenu()
     {
         ChangeState(GameStateType.Normal);
+        UpdateUserData();
         LoadSceneManager.Instance.CreateTransferEffect(TransferEffectType.Fade, () =>
         {
             LoadSceneManager.Instance.LoadSceneAsync("StartGame", null, (value) =>
@@ -129,6 +150,7 @@ public class GameManager : Singleton<GameManager>
     #region 退出游戏的方法
     public void QuitGame()
     {
+        UpdateUserData();
         Application.Quit();
     }
     #endregion
@@ -192,6 +214,39 @@ public class GameManager : Singleton<GameManager>
             default:
                 break;
         }
+    }
+
+    public void ChangeResolution(float width)
+    {
+        switch (width)
+        {
+            case 1920:
+                Screen.SetResolution(1920, 1080, Screen.fullScreen);
+                break;
+            case 1280:
+                Screen.SetResolution(1280, 720, Screen.fullScreen);
+                break;
+            case 1024:
+                Screen.SetResolution(1024, 576, Screen.fullScreen);
+                break;
+            default:
+                break;
+        }
+    }
+    #endregion
+
+    #region 更新目前游戏的设置到用户存档中
+    public void UpdateUserData()
+    {
+        float bgmValue;
+        AudioManager.Instance.mixer.GetFloat("BGM",out bgmValue);
+        float seValue;
+        AudioManager.Instance.mixer.GetFloat("SE", out seValue);
+        float resolutionWidth=Screen.width;
+        bool _isFirstPlay = isFirstPlay;
+        bool isFullScreen=Screen.fullScreen;
+        UserData userData=new UserData("A",bgmValue,seValue,resolutionWidth,isFullScreen,_isFirstPlay,checkPointData);
+        SaveManager.Instance.SaveUserData(userData);
     } 
     #endregion
 }

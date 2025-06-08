@@ -20,13 +20,13 @@ public class Player : MonoBehaviour,ITakeDamge
 
     private void OnEnable()
     {
-        EventCenter.Instance.AddListener<CheckPoint>("RestartGame", OnRestartGame);
+        EventCenter.Instance.AddListener<CheckPointData>("RestartGame", OnRestartGame);
         EventCenter.Instance.AddListener("Reset", OnReset);
     }
 
     private void OnDisable()
     {
-        EventCenter.Instance.RemoveListener<CheckPoint>("RestartGame", OnRestartGame);
+        EventCenter.Instance.RemoveListener<CheckPointData>("RestartGame", OnRestartGame);
         EventCenter.Instance.RemoveListener("Reset", OnReset);
     }
 
@@ -36,6 +36,7 @@ public class Player : MonoBehaviour,ITakeDamge
         currentHealth = playerData.maxHealth;
         InitState();
         SetStartPos();
+        TranferManager.Instance.TranferRoom(GameManager.Instance.checkPointData.roomID);
     }
 
     private void Update()
@@ -53,16 +54,10 @@ public class Player : MonoBehaviour,ITakeDamge
     }
 
     #region 监听重开游戏时的方法
-    public void OnRestartGame(CheckPoint checkPoint)
+    public void OnRestartGame(CheckPointData checkPointData)
     {
-        if (checkPoint == null)
-        {
-            transform.position = LevelManager.Instance.currentLevel.playerStartPos;
-        }
-        else
-        {
-            transform.position = checkPoint.transform.position;
-        }
+        Vector3 startPos= new Vector3(checkPointData.startPosX,checkPointData.startPosY,checkPointData.startPosZ);
+        transform.position = startPos;
         controller.SetVel(Vector2.zero);
         controller.isOnWake= true;
         OperatorManager.Instance.ChangeOperator(controller);
@@ -136,17 +131,8 @@ public class Player : MonoBehaviour,ITakeDamge
     #region 初始化玩家位置逻辑
     public void SetStartPos()
     {
-        if (!LevelManager.Instance.currentLevel.levelSceneName.Equals(string.Empty))
-        {
-            if (GameManager.Instance.checkPoint == null)
-            {
-                transform.position = LevelManager.Instance.currentLevel.playerStartPos;
-            }
-            else
-            {
-                transform.position = GameManager.Instance.checkPoint.transform.position;
-            }
-        }
+        Vector3 startPos=new Vector3(GameManager.Instance.checkPointData.startPosX,GameManager.Instance.checkPointData.startPosY, GameManager.Instance.checkPointData.startPosZ);
+        transform.position = startPos;
     }
     #endregion
 

@@ -11,7 +11,6 @@ public class TranferManager : Singleton<TranferManager>
 
     private void Start()
     {
-        TranferRoom(1,1);
         DontDestroyOnLoad(gameObject);
     }
 
