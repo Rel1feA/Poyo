@@ -214,9 +214,10 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
     }
     #endregion
 
+    #region 检测前方是否有平台的方法
     public bool CheckGround()
     {
-        Vector2 checkPos = transform.position + new Vector3(transform.localScale.x*1.2f , -0.2f, 0);
+        Vector2 checkPos = transform.position + new Vector3(transform.localScale.x * 1.2f, -0.2f, 0);
         Vector2 boxSize = new Vector2(0.4f, 0.5f);
         Collider2D collider2D = Physics2D.OverlapBox(checkPos, boxSize, 0, LayerMask.GetMask("Ground", "Obstacle", "Tool"));
         if (collider2D != null)
@@ -224,7 +225,8 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
             return true;
         }
         return false;
-    }
+    } 
+    #endregion
 
     #region 水平翻转精灵图片的方法
     public void Filp()
@@ -270,6 +272,13 @@ public class BomberMan : Enemy,ITakeDamge,IOperator
             default:
                 break;
         }
+    }
+    #endregion
+
+    #region 死亡动画触发的逻辑
+    public void OnDeadAni()
+    {
+        Destroy(gameObject);
     } 
     #endregion
 

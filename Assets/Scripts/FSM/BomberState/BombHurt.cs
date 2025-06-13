@@ -18,7 +18,7 @@ public class BombHurt : BomberManState
                 OperatorManager.Instance.ChangeOperator(bomberMan.player.controller);
             }
         }
-        GameObject.Destroy(bomberMan.gameObject);
+        bomberMan.AniSetTrigger("Dead");
     }
 
     public override void ExitState()
