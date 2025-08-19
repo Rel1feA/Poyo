@@ -12,10 +12,10 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     private string previousTrigger;
     private Player player;
 
-    //private float timer;
     public float inputX;
     public GameObject useRaduisObj;
     public bool isOnWake;//判断是否在前腰阶段的布尔值
+    public bool canControl;//判断玩家是否可以控制主角
 
     public bool canOperator { get; set; }
     public bool IsClimb { get; set; }
@@ -118,7 +118,6 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     #region 进入操控状态时代码
     public void EnterOperator()
     {
-        //timer = 0;
         canOperator = true;
         player.ChangeState(PlayerStateType.Operator);
     }
@@ -251,6 +250,18 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
     public void SetVel(float newVelX)
     {
         rb2D.velocity=new Vector2(newVelX, rb2D.velocity.y);
+    }
+    #endregion
+
+    #region 给外部调用，控制主角是否可被操控
+    public void SetPlayerController(bool value)
+    {
+        canControl = value;
+        if (!value)
+        {
+            rb2D.velocity = Vector2.zero;
+            AniSetTrigger("Idle");
+        }
     }
     #endregion
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 680857523312719858}
   - component: {fileID: 8269581312621648652}
   - component: {fileID: 6542410155777337491}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Checkpoint_Temple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inRoomID: 2
+  LevelName: 
 --- !u!61 &6542410155777337491
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 750154015477459127}
   - component: {fileID: 2815017759164618884}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: locked_door02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377227803396118926}
   - component: {fileID: 2165848891609551886}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: locked_door01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,10 +177,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5886293869929341458}
-  - component: {fileID: 3354216386678429689}
   - component: {fileID: 6486270541606014718}
   - component: {fileID: 6293502940819798616}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: KeyDoor_Forest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,51 +204,6 @@ Transform:
   - {fileID: 5978584330551412197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &3354216386678429689
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8200737095231891552}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
 --- !u!61 &6486270541606014718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -307,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac048fd51dcf494418f29645f402c27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxCollider: {fileID: 3537464037438099300}
   lockSprite: {fileID: 4286277146372431853}
 --- !u!1 &8349269927498642823
 GameObject:
@@ -318,6 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5978584330551412197}
   - component: {fileID: 6189089282727185567}
+  - component: {fileID: 3537464037438099300}
   m_Layer: 10
   m_Name: locked_door03
   m_TagString: Untagged
@@ -392,3 +348,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &3537464037438099300
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8349269927498642823}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 0.16, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2}
+  m_EdgeRadius: 0

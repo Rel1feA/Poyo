@@ -110,6 +110,7 @@ public class Player : MonoBehaviour,ITakeDamge
     }
     #endregion
 
+
     #region 玩家死亡逻辑
     public void Dead()
     {

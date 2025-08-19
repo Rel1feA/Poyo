@@ -10,12 +10,13 @@ public class SystemUIPlane : BasePanel
         GetControl<Button>("PauseBTN").onClick.AddListener(() =>
         {
             GameManager.Instance.PauseGame();
+            AudioManager.Instance.PlayAudio("UIClick");
         });
 
         GetControl<Button>("ResetBTN").onClick.AddListener(() =>
         {
-            Debug.Log("click");
             EventCenter.Instance.EventTrigger("Reset");
+            AudioManager.Instance.PlayAudio("UIClick");
         });
     }
 }

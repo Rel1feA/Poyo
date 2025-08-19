@@ -10,6 +10,8 @@ public class Ghost : MonoBehaviour, IOperator
     public float CheckEnemyRadius;
     public bool canOperator { get; set; }
 
+    private bool hasTrigger;
+
     private void OnEnable()
     {
         EventCenter.Instance.AddListener("PlayerDead", OnPlayerDead);
@@ -28,6 +30,7 @@ public class Ghost : MonoBehaviour, IOperator
     private void Start()
     {
         transform.localScale=player.transform.localScale;
+        hasTrigger = false;
     }
 
     #region 实现操控接口的进入操控时所执行的方法
@@ -98,10 +101,12 @@ public class Ghost : MonoBehaviour, IOperator
     #region 检测敌人的方法
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (hasTrigger) return;
         if (collision.TryGetComponent<IOperator>(out IOperator _operator))
         {
             player.controller.useRaduisObj.SetActive(false);
             OperatorManager.Instance.ChangeOperator(_operator);
+            hasTrigger = true;
         }
     } 
     #endregion

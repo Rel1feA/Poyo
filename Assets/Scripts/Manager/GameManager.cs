@@ -1,5 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEngine.Rendering.DebugUI;
@@ -44,6 +46,7 @@ public class GameManager : Singleton<GameManager>
         LoadSceneManager.Instance.LoadSceneAsync("StartGame");
         AudioManager.Instance.PlayAudio("MainMenu");
         InitState();
+        DOTween.Init();
     }
 
     #region 读取用户存档初始化游戏方法
@@ -99,7 +102,7 @@ public class GameManager : Singleton<GameManager>
     #region 监听关卡完成加载时的方法
     public void OnCompletedLoadLevel(levelData levelData)
     {
-        if(checkPointData.levelName.Equals(levelData.levelName))
+        if (checkPointData.levelName.Equals(levelData.levelName))
         {
             return;
         }
@@ -108,6 +111,10 @@ public class GameManager : Singleton<GameManager>
         checkPointData.startPosX=levelData.playerStartPos.x;
         checkPointData.startPosY = levelData.playerStartPos.y;
         checkPointData.startPosZ = levelData.playerStartPos.z;
+        if(levelData.levelIndex>checkPointData.maxFinishLevel)
+        {
+            checkPointData.maxFinishLevel = levelData.levelIndex;
+        }
     }
     #endregion
 
@@ -153,6 +160,13 @@ public class GameManager : Singleton<GameManager>
         UpdateUserData();
         Application.Quit();
     }
+    #endregion
+
+    #region 当应用程序关闭时执行的逻辑
+    private void OnApplicationQuit()
+    {
+        UpdateUserData();
+    } 
     #endregion
 
     #region 初始化状态的代码

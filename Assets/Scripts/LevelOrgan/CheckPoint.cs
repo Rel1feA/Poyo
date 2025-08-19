@@ -17,6 +17,7 @@ public class CheckPoint : MonoBehaviour
             GameManager.Instance.checkPointData.startPosZ = transform.position.z;
             GameManager.Instance.checkPointData.levelName = LevelName;
             GameManager.Instance.checkPointData.roomID = inRoomID;
+            UIManager.Instance.ShowPanel<SaveTipPlane>("SaveTipPlane",E_UI_Layer.System);
         }
     }
 }

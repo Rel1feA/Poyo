@@ -78,6 +78,7 @@ public class CheckPointData
     public float startPosY;
     public float startPosZ;
     public int roomID;
+    public int maxFinishLevel;
     public string levelName;
 }
 

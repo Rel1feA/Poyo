@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6977559905238526080}
   - component: {fileID: 1720112188281015446}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Sprite1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1049993341358802393}
   - component: {fileID: 5270534974480912143}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Sprtie2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 3014654825842070213}
   - component: {fileID: 8310020260322900154}
   - component: {fileID: 7256030425179443859}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CheckPoint_Beach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inRoomID: 2
+  LevelName: 
 --- !u!61 &7256030425179443859
 BoxCollider2D:
   m_ObjectHideFlags: 0

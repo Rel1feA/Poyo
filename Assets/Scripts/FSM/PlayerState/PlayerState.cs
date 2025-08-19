@@ -80,6 +80,7 @@ public class PlayerOperator : PlayerState
 
 
         if (player.controller.isOnWake) return;
+        if(!player.controller.canControl) return;
         //上楼梯，并且下面的移动等操作不执行
         if (player.controller.CanClimb && !player.controller.IsClimb)
         {

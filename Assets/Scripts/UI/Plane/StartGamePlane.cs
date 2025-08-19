@@ -3,54 +3,79 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StartGamePlane : BasePanel
 {
 
     private void Start()
     {
-        InitBTNTXT();
+        InitBTN();
     }
 
-    #region 初始化面板的文字按钮
-    public void InitBTNTXT()
+    
+
+    public void InitBTN()
     {
-        UIManager.AddCustomEventListener(GetControl<Text>("StartTXT"), EventTriggerType.PointerEnter, (value) =>
+        GetControl<Button>("StartBTN").onClick.AddListener(() =>
         {
-            GetControl<Text>("StartTXT").GetComponent<Animator>().SetTrigger("Bigger");
-        });
-        UIManager.AddCustomEventListener(GetControl<Text>("StartTXT"), EventTriggerType.PointerClick, (value) =>
-        {
+            AudioManager.Instance.PlayAudio("UIClick");
             GameManager.Instance.StartGame();
         });
-        UIManager.AddCustomEventListener(GetControl<Text>("StartTXT"), EventTriggerType.PointerExit, (value) =>
+        UIManager.AddCustomEventListener(GetControl<Button>("StartBTN"), EventTriggerType.PointerEnter, (value) =>
         {
-            GetControl<Text>("StartTXT").GetComponent<Animator>().SetTrigger("Normal");
+            AudioManager.Instance.PlayAudio("UISelect");
+            GetControl<Button>("StartBTN").transform.DOScale(Vector3.one * 1.15f, 0.2f).From(Vector3.one);
         });
-        UIManager.AddCustomEventListener(GetControl<Text>("SettingTXT"), EventTriggerType.PointerEnter, (value) =>
+        UIManager.AddCustomEventListener(GetControl<Button>("StartBTN"), EventTriggerType.PointerExit, (value) =>
         {
-            GetControl<Text>("SettingTXT").GetComponent<Animator>().SetTrigger("Bigger");
+            GetControl<Button>("StartBTN").transform.DOScale(Vector3.one, 0.2f).From(Vector3.one*1.15f);
         });
-        UIManager.AddCustomEventListener(GetControl<Text>("SettingTXT"), EventTriggerType.PointerClick, (value) =>
+
+        GetControl<Button>("SettingBTN").onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlayAudio("UIClick");
             UIManager.Instance.ShowPanel<SettingPlane>("SettingPlane");
         });
-        UIManager.AddCustomEventListener(GetControl<Text>("SettingTXT"), EventTriggerType.PointerExit, (value) =>
+        UIManager.AddCustomEventListener(GetControl<Button>("SettingBTN"), EventTriggerType.PointerEnter, (value) =>
         {
-            GetControl<Text>("SettingTXT").GetComponent<Animator>().SetTrigger("Normal");
+            AudioManager.Instance.PlayAudio("UISelect");
+            GetControl<Button>("SettingBTN").transform.DOScale(Vector3.one * 1.15f, 0.2f).From(Vector3.one);
         });
-        UIManager.AddCustomEventListener(GetControl<Text>("QuitTXT"), EventTriggerType.PointerEnter, (value) =>
+        UIManager.AddCustomEventListener(GetControl<Button>("SettingBTN"), EventTriggerType.PointerExit, (value) =>
         {
-            GetControl<Text>("QuitTXT").GetComponent<Animator>().SetTrigger("Bigger");
+            GetControl<Button>("SettingBTN").transform.DOScale(Vector3.one, 0.2f).From(Vector3.one * 1.15f);
         });
-        UIManager.AddCustomEventListener(GetControl<Text>("QuitTXT"), EventTriggerType.PointerClick, (value) =>
+
+        GetControl<Button>("QuitBTN").onClick.AddListener(() =>
         {
+            AudioManager.Instance.PlayAudio("UIClick");
             GameManager.Instance.QuitGame();
         });
-        UIManager.AddCustomEventListener(GetControl<Text>("QuitTXT"), EventTriggerType.PointerExit, (value) =>
+        UIManager.AddCustomEventListener(GetControl<Button>("QuitBTN"), EventTriggerType.PointerEnter, (value) =>
         {
-            GetControl<Text>("QuitTXT").GetComponent<Animator>().SetTrigger("Normal");
+            AudioManager.Instance.PlayAudio("UISelect");
+            GetControl<Button>("QuitBTN").transform.DOScale(Vector3.one * 1.15f, 0.2f).From(Vector3.one);
         });
-    } 
-    #endregion
+        UIManager.AddCustomEventListener(GetControl<Button>("QuitBTN"), EventTriggerType.PointerExit, (value) =>
+        {
+            GetControl<Button>("QuitBTN").transform.DOScale(Vector3.one, 0.2f).From(Vector3.one * 1.15f);
+        });
+
+
+        GetControl<Button>("ChooseLevelBTN").onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayAudio("UIClick");
+            UIManager.Instance.ShowPanel<ChooseLevelPlane>("ChooseLevelPlane");
+        });
+        UIManager.AddCustomEventListener(GetControl<Button>("ChooseLevelBTN"), EventTriggerType.PointerEnter, (value) =>
+        {
+            AudioManager.Instance.PlayAudio("UISelect");
+            GetControl<Button>("ChooseLevelBTN").transform.DOScale(Vector3.one * 1.15f, 0.2f).From(Vector3.one);
+        });
+        UIManager.AddCustomEventListener(GetControl<Button>("ChooseLevelBTN"), EventTriggerType.PointerExit, (value) =>
+        {
+            GetControl<Button>("ChooseLevelBTN").transform.DOScale(Vector3.one, 0.2f).From(Vector3.one * 1.15f);
+        });
+    }
 }

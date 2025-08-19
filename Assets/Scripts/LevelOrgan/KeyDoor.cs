@@ -5,21 +5,20 @@ using UnityEngine;
 public class KeyDoor : MonoBehaviour
 {
     private bool isOpen;
-    private BoxCollider2D boxCollider;
+    public BoxCollider2D boxCollider;
     public GameObject lockSprite;
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
         lockSprite.SetActive(true);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isOpen) return;
-        if (collision.transform.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            Player player = collision.transform.GetComponent<Player>();
+            Player player = collision.GetComponent<Player>();
             if (player.hasKey)
             {
                 isOpen = true;

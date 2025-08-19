@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 
 public class SettingPlane : BasePanel
 {
+    private RectTransform rectTransform;
     public Toggle fullScreenToggle;
     public Dropdown dropdown;
     public Slider BGMSlider;
@@ -12,6 +14,7 @@ public class SettingPlane : BasePanel
 
     private void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
         BGMSlider.onValueChanged.AddListener(AudioManager.Instance.ChangeBGMValue);
         SESlider.onValueChanged.AddListener(AudioManager.Instance.ChangeSEValue);
         fullScreenToggle.isOn = Screen.fullScreen;
@@ -19,10 +22,12 @@ public class SettingPlane : BasePanel
         SetDropdownValue();
         SetAudioSliderValue();
         dropdown.onValueChanged.AddListener(GameManager.Instance.ChangeResolution);
-        GetControl<Button>("CloseBTN").onClick.AddListener(() =>
+        GetControl<Button>("BackBTN").onClick.AddListener(() =>
         {
             UIManager.Instance.HidePanel("SettingPlane");
+            AudioManager.Instance.PlayAudio("UIClick");
         });
+        rectTransform.DOScale(Vector3.one, 0.2f).From(Vector3.zero).SetUpdate(true);
     }
 
     public void SetDropdownValue()
@@ -49,5 +54,10 @@ public class SettingPlane : BasePanel
         BGMSlider.value = bgmValue;
         AudioManager.Instance.mixer.GetFloat("SE", out float seValue);
         SESlider.value = seValue;
+    }
+
+    public override void HideMe()
+    {
+        rectTransform.DOScale(Vector3.zero, 0.2f).From(Vector3.one).SetUpdate(true).OnComplete(() => { base.HideMe(); });
     }
 }
