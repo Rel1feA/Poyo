@@ -42,7 +42,7 @@ public class SaveManager : NormalSingleton<SaveManager>
             checkPointData.startPosX = startPos.x;
             checkPointData.startPosY = startPos.y;
             checkPointData.startPosZ = startPos.z;
-            UserData userData=new UserData("A",-40,-40,1920,true,true,checkPointData);
+            UserData userData=new UserData("A",-30,-30,1920,true,true,checkPointData);
             SaveUserData(userData);
             Debug.Log(userData.checkPointData.levelName);
             return userData;
