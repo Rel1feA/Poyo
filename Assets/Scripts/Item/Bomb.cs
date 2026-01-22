@@ -57,6 +57,13 @@ public class Bomb : MonoBehaviour
         Destroy(gameObject);
     }
 
+    #region 给动画机使用的调用声音的方法
+    public void PlaySE(string seName)
+    {
+        AudioManager.Instance.PlayAudio(seName);
+    }
+    #endregion
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Explosion();

@@ -23,13 +23,6 @@ public class OpenVideo : MonoBehaviour
 
     public void OnVideoCompleted(VideoPlayer player)
     {
-        LoadSceneManager.Instance.CreateTransferEffect(TransferEffectType.Fade, () =>
-        {
-            LevelManager.Instance.LoadLevel("Beach",null,(value) =>
-            {
-                LoadSceneManager.Instance.ChangeEffect();
-                GameManager.Instance.ChangeState(GameStateType.OnGoing);
-            });
-        });
+        UIManager.Instance.ShowPanel<ShowTextPanel>("ShowTextPanel_1");
     }
 }

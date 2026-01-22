@@ -82,6 +82,7 @@ public class UIManager : Singleton<UIManager>
                     father = system;
                     break;
             }
+            obj.name = panelName;
             obj.transform.SetParent(father);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localScale = Vector3.one;

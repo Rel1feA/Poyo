@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class Ghost : MonoBehaviour, IOperator
     public bool canOperator { get; set; }
 
     private bool hasTrigger;
+    private SpriteRenderer spriteRenderer;
 
     private void OnEnable()
     {
@@ -25,6 +27,7 @@ public class Ghost : MonoBehaviour, IOperator
     private void Awake()
     {
         player=FindObjectOfType<Player>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -36,7 +39,9 @@ public class Ghost : MonoBehaviour, IOperator
     #region 实现操控接口的进入操控时所执行的方法
     public void EnterOperator()
     {
+        spriteRenderer.DOColor(new Color(1,1,1,1),0.3f).From(new Color(1,1,1,0));
         canOperator = true;
+        AudioManager.Instance.PlayAudio("Soul");
     }
     #endregion
 
@@ -47,7 +52,7 @@ public class Ghost : MonoBehaviour, IOperator
         {
             OperatorManager.Instance.ChangeOperator(player.controller);
             player.controller.useRaduisObj.SetActive(false);
-            Destroy(gameObject);
+            HideGhost();
         }
         Move();
     }
@@ -56,7 +61,8 @@ public class Ghost : MonoBehaviour, IOperator
     #region 实现操控接口的退出操控所执行的方法
     public void ExitOperator()
     {
-        Destroy(gameObject);
+        AudioManager.Instance.PlayAudio("Soul");
+        HideGhost();
     }
     #endregion
 
@@ -122,6 +128,16 @@ public class Ghost : MonoBehaviour, IOperator
     public GameObject GetOperatorObject()
     {
         return gameObject;
+    }
+    #endregion
+
+    #region 隐藏灵魂的方法
+    public void HideGhost()
+    {
+        spriteRenderer.DOColor(new Color(1, 1, 1, 0), 0.3f).From(new Color(1, 1, 1, 1)).OnComplete(() =>
+        {
+            Destroy(gameObject);
+        });
     }
     #endregion
 

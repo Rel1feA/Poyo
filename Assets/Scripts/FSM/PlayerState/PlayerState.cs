@@ -6,7 +6,8 @@ public enum PlayerStateType
 {
     Idle,
     Operator,
-    Dead
+    Dead,
+    Dialogue
 }
 
 public class PlayerState : State
@@ -43,11 +44,6 @@ public class PlayerIdle : PlayerState
     {
         player.controller.CheckSwitch();
         player.controller.ChangeGravityScale();
-    }
-
-    public override void PhysicsUpdate()
-    {
-        
     }
 }
 #endregion
@@ -158,6 +154,28 @@ public class PlayerDeadState : PlayerState
     public override void FrameUpdate()
     {
 
+    }
+}
+#endregion
+
+#region 玩家进入对话状态类
+public class PlayerDialogue : PlayerState
+{
+    public PlayerDialogue(StateMachine _stateMachine, Player player) : base(_stateMachine, player)
+    {
+
+    }
+
+    public override void EnterState()
+    {
+        player.ShowGhostDialogue();
+        player.controller.SetVel(0);
+        player.controller.AniSetTrigger("Sleep");
+    }
+
+    public override void ExitState()
+    {
+        player.HideGhostDialogue();
     }
 } 
 #endregion

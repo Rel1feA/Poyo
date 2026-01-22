@@ -214,6 +214,13 @@ public class Crab : Enemy
     public void OnPlayerDead()
     {
         ChangeState(CrabStateType.Idle);
-    } 
+    }
+    #endregion
+
+    #region 给动画机使用的调用声音的方法
+    public void PlaySE(string seName)
+    {
+        AudioManager.Instance.PlayAudio(seName);
+    }
     #endregion
 }

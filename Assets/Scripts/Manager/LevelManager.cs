@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : Singleton<LevelManager>
 {
     public LevelData LevelDateSO;
-
+    [HideInInspector]
     public levelData currentLevel;
 
     private void Start()
@@ -42,9 +42,11 @@ public class LevelManager : Singleton<LevelManager>
     public void LoadLevel(string levelName,UnityAction<float> OnLoading=null,UnityAction<AsyncOperation> onCompleted = null,bool sceneActive=true)
     {
         levelData targetLevel = GetLevelData(levelName);
+        AudioManager.Instance.StopAudio(currentLevel.EnrSEName);
         LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, OnLoading, (value) =>
         {
             onCompleted?.Invoke(value);
+            AudioManager.Instance.PlayAudio(targetLevel.EnrSEName); 
             AudioManager.Instance.PlayAudio(targetLevel.BGMName);
             EventCenter.Instance.EventTrigger<levelData>("CompletedLoadLevel", targetLevel);
         },sceneActive);
@@ -54,9 +56,11 @@ public class LevelManager : Singleton<LevelManager>
     public void LoadLevel(int levelIndex,UnityAction<float> OnLoading=null,UnityAction<AsyncOperation> onCompleted=null, bool sceneActive = true)
     {
         levelData targetLevel = GetLevelData(levelIndex);
+        AudioManager.Instance.StopAudio(currentLevel.EnrSEName);
         LoadSceneManager.Instance.LoadSceneAsync(targetLevel.levelSceneName, OnLoading, (value) =>
         {
             onCompleted?.Invoke(value);
+            AudioManager.Instance.PlayAudio(targetLevel.EnrSEName);
             AudioManager.Instance.PlayAudio(targetLevel.BGMName);
             EventCenter.Instance.EventTrigger<levelData>("CompletedLoadLevel", targetLevel);
         },sceneActive);

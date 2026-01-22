@@ -35,18 +35,41 @@ public class SaveManager : NormalSingleton<SaveManager>
         }
         else
         {
-            CheckPointData checkPointData = new CheckPointData();
-            checkPointData.roomID = 1;
-            checkPointData.levelName = "Beach";
-            Vector3 startPos= LevelManager.Instance.GetLevelData("Beach").playerStartPos;
-            checkPointData.startPosX = startPos.x;
-            checkPointData.startPosY = startPos.y;
-            checkPointData.startPosZ = startPos.z;
-            UserData userData=new UserData("A",-30,-30,1920,true,true,checkPointData);
+            //CheckPointData checkPointData = new CheckPointData();
+            //checkPointData.roomID = 1;
+            //checkPointData.levelName = "Beach";
+            //Vector3 startPos= LevelManager.Instance.GetLevelData("Beach").playerStartPos;
+            //checkPointData.startPosX = startPos.x;
+            //checkPointData.startPosY = startPos.y;
+            //checkPointData.startPosZ = startPos.z;
+            //UserData userData=new UserData("A",-30,-30,1920,true,true,checkPointData);
+            UserData userData=CreateNewData();
             SaveUserData(userData);
             Debug.Log(userData.checkPointData.levelName);
             return userData;
         }
+    }
+
+    public UserData CreateNewData()
+    {
+        CheckPointData checkPointData = new CheckPointData();
+        checkPointData.roomID = 1;
+        checkPointData.levelName = "Beach";
+        Vector3 startPos = LevelManager.Instance.GetLevelData("Beach").playerStartPos;
+        checkPointData.startPosX = startPos.x;
+        checkPointData.startPosY = startPos.y;
+        checkPointData.startPosZ = startPos.z;
+        UserData userData = new UserData("A", -30, -30, 1920, true, true, checkPointData);
+        return userData;
+    }
+
+    public void ClearData(string userName)
+    {
+        if (datas.ContainsKey(userName))
+        {
+            datas[userName] = null;
+        }
+        SaveUserData(CreateNewData());
     }
 }
 

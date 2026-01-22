@@ -17,6 +17,16 @@ public class StartGamePlane : BasePanel
 
     public void InitBTN()
     {
+        if(SaveManager.Instance.GetUserData("A").isFirstOpenGame)
+        {
+            GetControl<Button>("StartBTN").interactable = false;
+            GetControl<Text>("StartTXT").color = new Color(1, 1, 1, 0.5f);
+        }
+        else
+        {
+            GetControl<Button>("StartBTN").interactable = true;
+            GetControl<Text>("StartTXT").color = new Color(1, 1, 1, 1f);
+        }
         GetControl<Button>("StartBTN").onClick.AddListener(() =>
         {
             AudioManager.Instance.PlayAudio("UIClick");
@@ -30,6 +40,21 @@ public class StartGamePlane : BasePanel
         UIManager.AddCustomEventListener(GetControl<Button>("StartBTN"), EventTriggerType.PointerExit, (value) =>
         {
             GetControl<Button>("StartBTN").transform.DOScale(Vector3.one, 0.2f).From(Vector3.one*1.15f);
+        });
+
+        GetControl<Button>("NewGameBTN").onClick.AddListener(() =>
+        {
+            AudioManager.Instance.PlayAudio("UIClick");
+            GameManager.Instance.StartNewGame();
+        });
+        UIManager.AddCustomEventListener(GetControl<Button>("NewGameBTN"), EventTriggerType.PointerEnter, (value) =>
+        {
+            AudioManager.Instance.PlayAudio("UISelect");
+            GetControl<Button>("NewGameBTN").transform.DOScale(Vector3.one * 1.15f, 0.2f).From(Vector3.one);
+        });
+        UIManager.AddCustomEventListener(GetControl<Button>("NewGameBTN"), EventTriggerType.PointerExit, (value) =>
+        {
+            GetControl<Button>("NewGameBTN").transform.DOScale(Vector3.one, 0.2f).From(Vector3.one * 1.15f);
         });
 
         GetControl<Button>("SettingBTN").onClick.AddListener(() =>

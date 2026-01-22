@@ -5,17 +5,20 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour,IOperator,IClimb
 {
-    public PlayerData playerData;
-
-    public Rigidbody2D rb2D;
     private Animator animator;
     private string previousTrigger;
     private Player player;
 
+    [HideInInspector]
     public float inputX;
-    public GameObject useRaduisObj;
+    [HideInInspector]
+    public Rigidbody2D rb2D;
+    [HideInInspector]
     public bool isOnWake;//判断是否在前腰阶段的布尔值
+    [HideInInspector]
     public bool canControl;//判断玩家是否可以控制主角
+    public GameObject useRaduisObj;
+    public PlayerData playerData;
 
     public bool canOperator { get; set; }
     public bool IsClimb { get; set; }
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour,IOperator,IClimb
         rb2D.gravityScale=playerData.normalGravityScale;
         OperatorManager.Instance.InitOperator(this);
         useRaduisObj.SetActive(false);
+        canControl = true;
     }
 
     #region 操控移动代码

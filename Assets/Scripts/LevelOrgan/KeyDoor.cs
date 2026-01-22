@@ -21,6 +21,7 @@ public class KeyDoor : MonoBehaviour
             Player player = collision.GetComponent<Player>();
             if (player.hasKey)
             {
+                AudioManager.Instance.PlayAudio("DoorUnlock");
                 isOpen = true;
                 lockSprite.SetActive(false);
                 boxCollider.enabled = false;

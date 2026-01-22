@@ -9,6 +9,7 @@ public class Key : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             collision.GetComponent<Player>().hasKey = true;
+            AudioManager.Instance.PlayAudio("PickKey");
             Destroy(gameObject);
         }
     }

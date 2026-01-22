@@ -16,6 +16,7 @@ public class levelData
     public string levelName;
     public string levelSceneName;
     public string BGMName;
+    public string EnrSEName;
     public int levelIndex;
     public RoomDataSO roomData;
     public Vector3 playerStartPos;

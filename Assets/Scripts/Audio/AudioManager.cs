@@ -41,6 +41,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if(!audioDics.ContainsKey(name))
         {
+            Debug.Log("未找到相应音频");
             return;
         }
         else
@@ -61,6 +62,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if(!audioDics.ContainsKey(name))
         {
+            Debug.Log("未找到相应音频");
             return;
         }
         else

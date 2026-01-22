@@ -2,19 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class Player : MonoBehaviour,ITakeDamge
 {
     [HideInInspector]
     public PlayerController controller;
+    [HideInInspector]
     public float currentHealth;
-    public PlayerData playerData;
+    [HideInInspector]
     public bool hasKey;
+    public PlayerData playerData;
+
+    [SerializeField]
+    private SpriteRenderer ghostDialogueSprite;
+
 
     public StateMachine stateMachine;
     public PlayerState idleState;
     public PlayerState operatorState;
     public PlayerState deadState;
+    public PlayerState dialogueState;
 
     public bool hasDead { get; set; }
 
@@ -22,21 +30,31 @@ public class Player : MonoBehaviour,ITakeDamge
     {
         EventCenter.Instance.AddListener<CheckPointData>("RestartGame", OnRestartGame);
         EventCenter.Instance.AddListener("Reset", OnReset);
+        EventCenter.Instance.AddListener<Dialogue>("StartDialogue", OnStartDialogue);
+        EventCenter.Instance.AddListener<Dialogue>("EndDialogue", OnEndDialogue);
     }
 
     private void OnDisable()
     {
         EventCenter.Instance.RemoveListener<CheckPointData>("RestartGame", OnRestartGame);
         EventCenter.Instance.RemoveListener("Reset", OnReset);
+        EventCenter.Instance.RemoveListener<Dialogue>("StartDialogue", OnStartDialogue);
+        EventCenter.Instance.RemoveListener<Dialogue>("EndDialogue", OnEndDialogue);
+    }
+
+    private void Awake()
+    {
+        controller = GetComponent<PlayerController>();
     }
 
     private void Start()
     {
-        controller = GetComponent<PlayerController>();
         currentHealth = playerData.maxHealth;
         InitState();
         SetStartPos();
         TranferManager.Instance.TranferRoom(GameManager.Instance.checkPointData.roomID);
+        hasKey = false;
+        ghostDialogueSprite.enabled=false;
     }
 
     private void Update()
@@ -86,6 +104,7 @@ public class Player : MonoBehaviour,ITakeDamge
         idleState = new PlayerIdle(stateMachine, this);
         operatorState=new PlayerOperator(stateMachine, this);
         deadState=new PlayerDeadState(stateMachine, this);
+        dialogueState=new PlayerDialogue(stateMachine, this);
         stateMachine.Init(operatorState);
     }
     #endregion
@@ -104,12 +123,14 @@ public class Player : MonoBehaviour,ITakeDamge
             case PlayerStateType.Dead:
                 stateMachine.Changestate(deadState);
                 break;
+            case PlayerStateType.Dialogue:
+                stateMachine.Changestate(dialogueState);
+                break;
             default:
                 break;
         }
     }
     #endregion
-
 
     #region 玩家死亡逻辑
     public void Dead()
@@ -148,7 +169,38 @@ public class Player : MonoBehaviour,ITakeDamge
     public void PlaySE(string seName)
     {
         AudioManager.Instance.PlayAudio(seName);
-    } 
+    }
     #endregion
 
+    #region 展示对话灵魂
+    public void ShowGhostDialogue()
+    {
+        ghostDialogueSprite.enabled = true;
+        ghostDialogueSprite.DOColor(new Color(1, 1, 1, 1), 0.3f).From(new Color(1, 1, 1, 0));
+    }
+    #endregion
+
+    #region 隐藏对话灵魂
+    public void HideGhostDialogue()
+    {
+        ghostDialogueSprite.DOColor(new Color(1, 1, 1, 0), 0.3f).From(new Color(1, 1, 1, 1)).OnComplete(() =>
+        {
+            ghostDialogueSprite.enabled = false;
+        });
+    }
+    #endregion
+
+    #region 监听开始对话剧情的方法
+    public void OnStartDialogue(Dialogue dialogue)
+    {
+        ChangeState(PlayerStateType.Dialogue);
+    }
+    #endregion
+
+    #region 监听结束对话剧情的方法 
+    public void OnEndDialogue(Dialogue dialogue)
+    {
+        ChangeState(PlayerStateType.Operator);
+    } 
+    #endregion
 }

@@ -30,7 +30,6 @@ public class BasePanel : MonoBehaviour
             {
                 controlDic.Add(controls[i].gameObject.name, new List<UIBehaviour> { controls[i] });
             }
-
         }
     }
 

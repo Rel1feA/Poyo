@@ -157,6 +157,7 @@ MonoBehaviour:
     levelName: 
     levelSceneName: 
     BGMName: 
+    EnrSEName: 
     levelIndex: 0
     roomData: {fileID: 0}
     playerStartPos: {x: 0, y: 0, z: 0}
@@ -272,7 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 655396435}
-  - component: {fileID: 655396434}
+  - component: {fileID: 655396436}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -280,18 +281,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &655396434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655396433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bebdacfadd265e4386d81ec5cf0ed8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &655396435
 Transform:
   m_ObjectHideFlags: 0
@@ -307,6 +296,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &655396436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655396433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bebdacfadd265e4386d81ec5cf0ed8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueGroup_list:
+  - {fileID: 11400000, guid: 87010eea5a7bfda4bbf21d7941854548, type: 2}
+  - {fileID: 11400000, guid: 9c2828f3cc2de3a4c828f06ae431f231, type: 2}
+  - {fileID: 11400000, guid: b1d5654a9ac5ebd40b3924b2c293991b, type: 2}
+  - {fileID: 11400000, guid: dcdaad7c8946c7e4e96faae21d9b1197, type: 2}
+  - {fileID: 11400000, guid: 47c08adfc4e5f494cb08f4170b342e69, type: 2}
+  - {fileID: 11400000, guid: d0c7436644ae2dc4bacdefe7dcb348ad, type: 2}
+  - {fileID: 11400000, guid: 828fe800c80430f40991894432108354, type: 2}
+  - {fileID: 11400000, guid: c537c5c7b57d934428b32f793c3eed67, type: 2}
 --- !u!1 &1251580488
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +343,7 @@ Transform:
   m_GameObject: {fileID: 1251580488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24344821, y: -4.6898475, z: 0.083499506}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -424,6 +434,72 @@ MonoBehaviour:
     volume: 0.5
     playOnAwake: 0
     loop: 0
+  - clip: {fileID: 8300000, guid: 3883b8043e584d5468a143cb766103ec, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 1
+    playOnAwake: 0
+    loop: 1
+  - clip: {fileID: 8300000, guid: 6dd1e6498b2274541afdb67058296c70, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.75
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: cb9995a641986c54f8f1b1d9b0c0f6af, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.5
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: f9a1b9bb72078ef42855ed0f2cd5fa68, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.5
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 0fcf18e8193fda34ea1b2f0a97e62ce7, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.5
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 7f6c674901065b84babe87c26e9a2b69, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.5
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: e90a7ba1493f78f4096d9d4607d010b5, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.9
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 5c94174dd6550d546b994923b086a4f4, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.5
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: d64495090a1634d4b8c779e6841df39e, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.5
+    playOnAwake: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 56c690b0286c13c4cadb582e1c238891, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.1
+    playOnAwake: 0
+    loop: 1
+  - clip: {fileID: 8300000, guid: dc667052fbddd994997db0c356106a97, type: 3}
+    mixerGroup: {fileID: -3502263497876150225, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
+    audioType: 1
+    volume: 0.1
+    playOnAwake: 0
+    loop: 1
   mixer: {fileID: 24100000, guid: afff026adceface49a7ac7cb024c89b5, type: 2}
 --- !u!1 &1270365421
 GameObject:

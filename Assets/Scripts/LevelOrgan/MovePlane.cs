@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovePlane : MonoBehaviour
 {
+    [HideInInspector]
     public List<Rigidbody2D> rb2ds = new List<Rigidbody2D>();
     public Vector2 offset = Vector2.zero;
     public Vector2 originPos;

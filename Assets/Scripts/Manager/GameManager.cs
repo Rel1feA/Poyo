@@ -3,19 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : Singleton<GameManager>
 {
-    public CheckPointData checkPointData;
-
     public StateMachine stateMachine;
     public State pauseState;
     public State onGoingState;
     public State normalState;
-
+    [HideInInspector]
     public GameStateType currentState;
+    [HideInInspector]
+    public CheckPointData checkPointData;
 
     private bool isFirstPlay;
 
@@ -91,6 +92,15 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
 
+    #region 清空存档开始新游戏的方法
+    public void StartNewGame()
+    {
+        SaveManager.Instance.ClearData("A");
+        LoadSaveDataToInitGame();
+        StartGame();
+    } 
+    #endregion
+
     #region 重新开始游戏的方法
     public void ReStart()
     {
@@ -146,6 +156,7 @@ public class GameManager : Singleton<GameManager>
             LoadSceneManager.Instance.LoadSceneAsync("StartGame", null, (value) =>
             {
                 AudioManager.Instance.PlayAudio("MainMenu");
+                AudioManager.Instance.StopAudio(LevelManager.Instance.currentLevel.EnrSEName);
                 LoadSceneManager.Instance.ChangeEffect();
                 Time.timeScale = 1;
             });
@@ -261,6 +272,6 @@ public class GameManager : Singleton<GameManager>
         bool isFullScreen=Screen.fullScreen;
         UserData userData=new UserData("A",bgmValue,seValue,resolutionWidth,isFullScreen,_isFirstPlay,checkPointData);
         SaveManager.Instance.SaveUserData(userData);
-    } 
+    }
     #endregion
 }

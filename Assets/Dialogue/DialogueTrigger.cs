@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class DialogueTrigger : MonoBehaviour
 {
-    public DialogueContent content;
+    [SerializeField]
+    private int id;
 
-    public void TriggerDialogue()
+    private bool hasTrigger;
+
+    private void Start()
     {
-        Dialoguemanager.Instance.StartDialogue(content);
+        hasTrigger = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Player")&&!hasTrigger)
         {
-            TriggerDialogue();
+            hasTrigger = true;
+            DialogueManager.Instance.StartDialogue(id);
         }
     }
 }
