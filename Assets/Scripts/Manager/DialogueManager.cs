@@ -19,9 +19,16 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0)&&currentDialogueGroup!=null)
         {
-            ContinueDialogue();
+            if(canContinue)
+            {
+                ContinueDialogue();
+            }
+            else
+            {
+                EventCenter.Instance.EventTrigger<Dialogue>("SkipDialogue", currentDialogueGroup.dialogue_list[currentDialogueIndex]);
+            }
         }
     }
 
@@ -37,9 +44,9 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
+
     public void ContinueDialogue()
     {
-        if (!canContinue) return;
         if (currentDialogueGroup != null)
         {
             currentDialogueIndex++;
@@ -47,6 +54,8 @@ public class DialogueManager : Singleton<DialogueManager>
             {
                 EventCenter.Instance.EventTrigger<Dialogue>("EndDialogue", currentDialogueGroup.dialogue_list[currentDialogueIndex-1]);
                 canContinue=false;
+                currentDialogueGroup=null;
+                currentDialogueIndex=0;
                 return;
             }
             EventCenter.Instance.EventTrigger<Dialogue>("ContinueDialogue", currentDialogueGroup.dialogue_list[currentDialogueIndex]);

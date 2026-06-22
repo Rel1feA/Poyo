@@ -21,26 +21,13 @@ public class DialoguePanel : BasePanel
     [SerializeField]
     private float showTextSpeed;
 
-    public E_DialogueObject dialogueType;
+    private Tween currentTween=null;
 
-    private void Start()
-    {
-        InitPanel();
-    }
+    public E_DialogueObject dialogueType;
 
     private void OnEnable()
     {
         InitPanel();
-        EventCenter.Instance.AddListener<Dialogue>("StartDialogue", UpdateText);
-        EventCenter.Instance.AddListener<Dialogue>("ContinueDialogue", UpdateText);
-        EventCenter.Instance.AddListener<Dialogue>("EndDialogue", OnEndDialogue);
-    }
-
-    private void OnDisable()
-    {
-        EventCenter.Instance.RemoveListener<Dialogue>("StartDialogue", UpdateText);
-        EventCenter.Instance.RemoveListener<Dialogue>("ContinueDialogue", UpdateText);
-        EventCenter.Instance.RemoveListener<Dialogue>("EndDialogue", OnEndDialogue);
     }
 
     private void Update()
@@ -75,20 +62,27 @@ public class DialoguePanel : BasePanel
 
     public void UpdateText(Dialogue dialogue)
     {
-        if(dialogueType!=dialogue.dialogueObject)
-        {
-            HidePanel();
-            return;
-        }
+        DialogueManager.Instance.SetCanContinue(false);
+        GetControl<Text>("Text").text = string.Empty;
         AudioManager.Instance.PlayAudio("DialogueTip");
         AudioManager.Instance.PlayAudio("KeyBoard");
-        DialogueManager.Instance.SetCanContinue(false);
-        GetControl<Text>("Text").text=string.Empty;
-        GetControl<Text>("Text").DOText(dialogue.content, showTextSpeed * dialogue.content.Length).SetEase(Ease.Linear).OnComplete(() =>
+        currentTween =GetControl<Text>("Text").DOText(dialogue.content, showTextSpeed * dialogue.content.Length).SetEase(Ease.Linear).OnComplete(() =>
         {
             AudioManager.Instance.StopAudio("KeyBoard");
             DialogueManager.Instance.SetCanContinue(true);
         });
+    }
+
+    public void SkipDoText(Dialogue dialogue)
+    {
+        if (currentTween!=null&&currentTween.IsPlaying())
+        {
+            currentTween.Kill();
+            currentTween=null;
+            GetControl<Text>("Text").text = dialogue.content;
+            AudioManager.Instance.StopAudio("KeyBoard");
+            DialogueManager.Instance.SetCanContinue(true);
+        }
     }
 
     public void ShowPanel()
@@ -106,10 +100,6 @@ public class DialoguePanel : BasePanel
 
     public void OnEndDialogue(Dialogue dialogue)
     {
-        if(dialogue.dialogueObject!=dialogueType)return;
-        rectTransform.DOScale(Vector3.zero, 0.3f).From(Vector3.one * 0.01f).OnComplete(() =>
-        {
-            gameObject.SetActive(false);
-        });
+        HidePanel();
     }
 }

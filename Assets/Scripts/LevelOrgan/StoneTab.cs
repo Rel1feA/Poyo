@@ -32,6 +32,10 @@ public class StoneTab : MonoBehaviour
                 AudioManager.Instance.PlayAudio("StoneTab");
             }
         }
+        if(UIManager.Instance.GetPanel<StoneTextPanel>(textName) != null&&Input.GetMouseButtonDown(0))
+        {
+            CloseStonePanel();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,17 +53,21 @@ public class StoneTab : MonoBehaviour
         {
             isPlayerInTrigger = false;
             tipSprite.SetActive(false);
-            if(UIManager.Instance.GetPanel<StoneTextPanel>(textName)!=null)
-            {
-                UIManager.Instance.HidePanel(textName);
-                AudioManager.Instance.PlayAudio("StoneTab");
-                if(!hasPlayDialogue&&dialogueID!=0)
-                {
-                    DialogueManager.Instance.StartDialogue(dialogueID);
-                    hasPlayDialogue=true;
-                }
-            }
+            CloseStonePanel();
+        }
+    }
 
+    private void CloseStonePanel()
+    {
+        if (UIManager.Instance.GetPanel<StoneTextPanel>(textName) != null)
+        {
+            UIManager.Instance.HidePanel(textName);
+            AudioManager.Instance.PlayAudio("StoneTab");
+            if (!hasPlayDialogue && dialogueID != 0)
+            {
+                DialogueManager.Instance.StartDialogue(dialogueID);
+                hasPlayDialogue = true;
+            }
         }
     }
 }
